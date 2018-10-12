@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ixanq.dao.VisitorDao">
+    <select id="showAll" resultType="Visitor">
+        SELECT * FROM visitor
+    </select>
+
+    <select id="findByName" parameterType="String" resultType="Visitor">
+        SELECT * FROM visitor WHERE name=#{name}
+    </select>
+
+    <insert id="add" parameterType="Visitor">
+        INSERT into visitor(name, password) VALUES (#{name},#{password})
+    </insert>
+
+    <update id="updatePassword" parameterType="Visitor">
+        UPDATE visitor SET password WHERE id=#{id}
+    </update>
+
+</mapper>
