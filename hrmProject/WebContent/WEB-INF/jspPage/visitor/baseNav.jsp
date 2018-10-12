@@ -27,29 +27,27 @@
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Brand</a>
+            <span class="icon-bar" style="color:red">当前用户 ：${sessionScope.visitor.name}</span>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav" id="ul1">
-                <li class="active"><a href="${pageContext.request.contextPath}/WEB-INF/jspPage/lookTheResume.jsp">查看简历 <span class="sr-only">(current)</span></a></li>
-                <li><a href="page2.jsp">浏览招聘信息</a></li>
+                <li class="active"><a href="lookTheResume.jsp">查看简历 <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">浏览招聘信息</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">简历管理 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">填写简历</a></li>
-                        <li><a href="#">查看简历</a></li>
-                        <li><a href="#">修改简历</a></li>
+                        <li><a href="${pageContext.request.contextPath}/WEB-INF/jspPage/visitor/writeResume.jsp">填写简历</a></li>
+                        <li><a href="${pageContext.request.contextPath}/WEB-INF/jspPage/visitor/lookTheResume.jsp">查看简历</a></li>
+                        <li><a href="${pageContext.request.contextPath}/WEB-INF/jspPage/visitor/updateResume.jsp">修改简历</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#">投简历</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
                     </ul>
                 </li>
             </ul>

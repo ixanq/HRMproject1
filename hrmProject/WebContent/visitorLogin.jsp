@@ -63,7 +63,7 @@
     </script>
     
 </head>
-<body bgcolor="#777777">
+<body>
 	  <form action="visitorNav" method="post" >
       <table bgcolor="gray" border="2px" align="center">
         <tr>

@@ -54,7 +54,8 @@ public class VisitorController {
     	   model.addAttribute("nameError","nameError");
     	   return "forward:/visitorLogin.jsp";
        } else if(visitor.getName().equals(visitor2.getName())  &&  visitor.getPassword().equals(visitor2.getPassword())) {
-    	   return "forward:/WEB-INF/jspPage/lookTheResume.jsp";
+    	   model.addAttribute("visitor2", visitor2);
+    	   return "visitor/lookTheResume";
        }else{ //√‹¬Î¥ÌŒÛ
     	   model.addAttribute("visitor2", visitor2);
     	   model.addAttribute("passwordError","passwordError");
