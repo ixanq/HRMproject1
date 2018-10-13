@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ixanq.dao.EmployeeDao">
+
+                                <!--考勤增删改查-->
+    <insert id="addCheckWorkAttendance" parameterType="CheckWorkAttendance">
+        INSERT INTO check_work_attendance(employee_id, begin_work, end_wotk, is_late, is_leave)
+        VALUES (#{employeeID},#{beginWork},#{endWork},#{isLate},#{isLeave})
+    </insert>
+
+    <delete id="deleteCheckWorkAttendance" parameterType="Integer">
+        DELETE FROM check_work_attendance WHERE id=#{id}
+    </delete>
+
+    <update id="updateCheckWorkAttendance" parameterType="CheckWorkAttendance">
+        UPDATE check_work_attendance SET employee_id=#{employeeID} ,begin_work=#{beginWork} ,end_wotk=#{endWork} ,is_late=#{isLate} ,is_leave=#{isLeave}
+    </update>
+
+    <select id="findCheckWorkAttendanceByID" parameterType="Integer" resultType="CheckWorkAttendance">
+        SELECT * from check_work_attendance WHERE id=#{id}
+    </select>
+
+    <select id="findAllCheckWorkAttendance" resultType="CheckWorkAttendance">
+        SELECT * FROM check_work_attendance
+    </select>
+
+</mapper>

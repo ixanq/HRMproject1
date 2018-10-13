@@ -2,6 +2,149 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ixanq.dao.ManagerDao">
+                <!--部门的增删改查-->
+    <insert id="addDepartment" parameterType="Department">
+      INSERT into department(name, work_position_id, employee_id, create_time)
+      VALUES (#{name},#{workPositionId},#{employeeId},#{createTime})
+    </insert>
 
+    <delete id="deleteDepartment" parameterType="Integer">
+        DELETE FROM  department WHERE id=#{id}
+    </delete>
+
+    <update id="updateDepartment" parameterType="Department">
+        UPDATE department SET name=#{name},work_position_id=#{workPositionId},
+        employee_id=#{employeeId},create_time=#{createTime} WHERE id=#{id}
+    </update>
+
+    <select id="findDepartmentbyId" parameterType="Integer" resultType="Department">
+        SELECT * from department where id=#{id}
+    </select>
+
+    <select id="findAllDepartment" resultType="Department">
+        SELECT * from department
+    </select>
+
+
+
+
+                    <!--职位的增删改查-->
+    <insert id="addWorkPosition" parameterType="WorkPosition">
+        INSERT INTO work_position(name, department_id, employee_id, create_time)
+        VALUES (#{name},#{departmentId},#{employeeId},#{createime})
+    </insert>
+
+    <delete id="deleteWorkPosition" parameterType="Integer">
+        DELETE FROM work_position WHERE id=#{id}
+    </delete>
+
+    <update id="updateWorkPosition" parameterType="WorkPosition">
+        UPDATE work_position SET name=#{name},department_id=#{departmentId},employee_id=#{employeeId},create_time=#{createTime}
+        WHERE  id=#{id}
+    </update>
+
+    <select id="findWorkPositionById" parameterType="Integer" resultType="WorkPosition">
+        SELECT * from work_position WHERE id=#{id}
+    </select>
+
+    <select id="findAllWorkPosition" resultType="WorkPosition">
+        SELECT * from work_position
+    </select>
+
+
+
+
+                    <!--员工的增删改查-->
+    <insert id="addEmployee" parameterType="Employee">
+        INSERT INTO employee(name,password, gender, age, degree, email, begin_time,status)
+        VALUES(#{name},#{password},#{gender},#{age},#{degree},#{email},#{beginTime},#{status})
+    </insert>
+
+    <delete id="deleteEmployee" parameterType="Integer">
+        DELETE FROM employee WHERE id=#{id}
+    </delete>
+
+    <update id="updateEmployee" parameterType="Employee">
+        UPDATE employee SET name=#{name},password=#{password} ,gender=#{gender} ,age= #{age},degree=#{degree} ,email= #{email},begin_time=#{beginTime},status=#{status}
+    </update>
+
+    <select id="findEmployeeById" parameterType="Integer" resultType="Employee">
+        select * from employee WHERE id=#{id}
+    </select>
+
+    <select id="findAllEmployee" resultType="Employee">
+        select * from employee
+    </select>
+
+
+                               <!-- 薪资的增删改查-->
+    <insert id="addSalary" parameterType="Salary">
+        INSERT INTO salarys(salary) VALUES (#{salary})
+    </insert>
+
+    <delete id="deleteSalary" parameterType="Integer">
+        DELETE FROM salarys WHERE id=#{id}
+    </delete>
+
+    <update id="updateSalary" parameterType="Salary">
+        UPDATE salarys SET salary=#{salary}
+    </update>
+
+    <select id="findSalaryById" parameterType="Integer" resultType="Salary">
+        SELECT * from salarys WHERE id=#{id}
+    </select>
+
+    <select id="findAllSalary" resultType="Salary">
+        select * from salarys;
+    </select>
+
+
+
+                                <!--考勤增删改查-->
+    <insert id="addCheckWorkAttendance" parameterType="CheckWorkAttendance">
+        INSERT INTO check_work_attendance(employee_id, begin_work, end_wotk, is_late, is_leave)
+        VALUES (#{employeeID},#{beginWork},#{endWork},#{isLate},#{isLeave})
+    </insert>
+
+    <delete id="deleteCheckWorkAttendance" parameterType="Integer">
+        DELETE FROM check_work_attendance WHERE id=#{id}
+    </delete>
+
+    <update id="updateCheckWorkAttendance" parameterType="CheckWorkAttendance">
+        UPDATE check_work_attendance SET employee_id=#{employeeID} ,begin_work=#{beginWork} ,end_wotk=#{endWork} ,is_late=#{isLate} ,is_leave=#{isLeave}
+    </update>
+
+    <select id="findCheckWorkAttendanceByID" parameterType="Integer" resultType="CheckWorkAttendance">
+        SELECT * from check_work_attendance WHERE id=#{id}
+    </select>
+
+    <select id="findAllCheckWorkAttendance" resultType="CheckWorkAttendance">
+        SELECT * FROM check_work_attendance
+    </select>
+
+
+
+
+
+                                      <!--  培训的增删改查-->
+    <insert id="addTrain" parameterType="Train">
+        INSERT INTO train(name, traindate, department)  VALUES (#{name},#{trainTime},#{department})
+    </insert>
+
+    <delete id="deleteTrain" parameterType="Integer">
+        DELETE  FROM train WHERE id=#{id}
+    </delete>
+
+    <update id="updateTrain" parameterType="Train">
+        UPDATE train SET name=#{name} ,traindate=#{trainTime} ,department=#{department}
+    </update>
+
+    <select id="findTrainById" parameterType="Integer" resultType="Train">
+        SELECT * from train WHERE id=#{id}
+    </select>
+
+    <select id="findAllTrain" resultType="Train">
+        SELECT * from train
+    </select>
 
 </mapper>
