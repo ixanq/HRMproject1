@@ -31,4 +31,9 @@ public class VisitorServiceImpl implements VisitorService {
     public void updatePassword(Visitor visitor) {
         visitorDao.updatePassword(visitor);
     }
+
+	@Override
+	public Visitor findByNameAndPassword(Visitor visitor) {
+		return visitorDao.findByNameAndPassword(visitor);
+	}
 }

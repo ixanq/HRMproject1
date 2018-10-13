@@ -41,7 +41,7 @@
             })
         })
 
-       /*  $(function(){
+        $(function(){
             $("form").submit(function(){
                 var name=$("input").eq(0).val();
                 var password1=$("input").eq(1).val();
@@ -59,7 +59,7 @@
                     $(".warning").eq(1).css("display","none");
                 }
             })
-        }) */
+        }) 
     </script>
     
 </head>

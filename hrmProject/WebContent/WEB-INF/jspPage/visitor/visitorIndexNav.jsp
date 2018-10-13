@@ -5,17 +5,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>简历</title>
+<title>Insert title here</title>
 <script src="${pageContext.request.contextPath}/bootstrap/js/jquery-1.7.2.js"></script>
 </head>
 <body>
-<%-- <%@include file="/hrmProject/WebContent/WEB-INF/jspPage/baseNav.jsp.jsp"%> --%>
-<%-- <%@include file="./jspPage/baseNav.jsp"%>  --%>
-
-<%@include file="baseNav.jsp" %>
-<%-- <%@include file="baseNav.jsp"%> <!-- 相同目录下路径不用写 --> --%>
-
-
-我是简历(查看简历)
+<li><a href="writeResume.jsp">填写简历</a></li>
+<%
+	Visitor visitor=(Visitor)request.getAttribute("visitor2");
+	session.setAttribute("visitor", visitor);
+	%>
+	<%-- <%@include file="baseNav.jsp" %> --%>
 </body>
 </html>

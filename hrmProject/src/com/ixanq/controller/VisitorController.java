@@ -37,8 +37,17 @@ public class VisitorController {
      */
     @RequestMapping("visitorRegist")
     public String regist(Visitor visitor, Model model){
-       visitorService.add(visitor);
-       return "forward:/visitorLogin.jsp";
+    	 Visitor visitor2=visitorService.findByName(visitor.getName());
+         if(null==visitor2) {//在数据库不存在,添加数据
+        	 visitorService.add(visitor);
+             return "forward:/visitorLogin.jsp";
+         }else{ //如果数据库中存在，返回原页面
+      	   model.addAttribute("nameExist","nameExist");
+      	   return "forward:/index.jsp";
+         }
+    	
+    	
+      
     }
     
     /**
@@ -49,13 +58,14 @@ public class VisitorController {
      */
     @RequestMapping("visitorNav")
     public String visitorNav(Visitor visitor, Model model){
-       Visitor visitor2=visitorService.findByName(visitor.getName());
+       Visitor visitor2=visitorService.findByName(visitor.getName());//判断名字是否为错误
+       Visitor visitor3=visitorService.findByNameAndPassword(visitor);
        if(null==visitor2) {//名字错误
     	   model.addAttribute("nameError","nameError");
     	   return "forward:/visitorLogin.jsp";
-       } else if(visitor.getName().equals(visitor2.getName())  &&  visitor.getPassword().equals(visitor2.getPassword())) {
+       } else if(null!=visitor3) {//账号密码正确
     	   model.addAttribute("visitor2", visitor2);
-    	   return "visitor/lookTheResume";
+    	   return "visitor/visitorIndexNav";
        }else{ //密码错误
     	   model.addAttribute("visitor2", visitor2);
     	   model.addAttribute("passwordError","passwordError");

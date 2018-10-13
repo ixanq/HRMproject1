@@ -9,6 +9,7 @@
 <html>
   <head>
     <title>注册界面</title>
+	<base href="${pageContext.request.contextPath}/">
     <style>
       .warning{
         color: red;
@@ -31,13 +32,14 @@
                 $.post(url,args,function(data){
                     if(data=="no"){
                         //用户名存在
+                         console.log("用户名已存在");
                         $("#nameWarning").text("账号已存在").css("display","inline");
                         $("#nameWarning ").css("color","red");
                         $(":submit").attr("disabled",true);
                     }else{
+                    	console.log("可以注册");
                     	$("#nameWarning").text("可以注册").css("display","inline");
                         $("#nameWarning ").css("color","green");
-                        //按钮禁用
                         $(":submit").attr("disabled",false);
                     }
                 })
@@ -87,13 +89,13 @@
 
         <tr>
           <td>密&nbsp;码：</td>
-          <td><input id="password1" type="password" name="password"></td>
+				<td><input id="password1" type="password" name="password"></td>`
           <td><span id="password1Warning" class="warning">密码不能为空</span></td>
         </tr>
 
         <tr>
           <td>密码确认：</td>
-          <td><input id="password2" type="password" name="password"></td>
+          <td><input id="password2" type="password"></td>
           <td><span id="password2Warning" class="warning">密码不一致</span></td>
         </tr>
 

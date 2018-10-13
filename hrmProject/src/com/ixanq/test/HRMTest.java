@@ -19,4 +19,11 @@ public class HRMTest {
         Visitor visitor1 = visitorService.findByName("aaa");
         System.out.println(visitor1);
     }
+    
+    @Test
+    public void findByNameAndPassword(){
+    	Visitor visitor=new Visitor("bbb","222");
+    	Visitor visitor1=visitorService.findByNameAndPassword(visitor);
+        System.out.println(visitor1);
+    }
 }

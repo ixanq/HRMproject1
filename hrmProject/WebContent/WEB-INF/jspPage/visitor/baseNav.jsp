@@ -42,7 +42,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">简历管理 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="${pageContext.request.contextPath}/WEB-INF/jspPage/visitor/writeResume.jsp">填写简历</a></li>
+                        <li><a href="">填写简历</a></li>
                         <li><a href="${pageContext.request.contextPath}/WEB-INF/jspPage/visitor/lookTheResume.jsp">查看简历</a></li>
                         <li><a href="${pageContext.request.contextPath}/WEB-INF/jspPage/visitor/updateResume.jsp">修改简历</a></li>
                         <li role="separator" class="divider"></li>
