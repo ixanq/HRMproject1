@@ -7,17 +7,15 @@ public class WorkPosition {
 	private Integer id;
 	private String name;//Ö°Î»Ãû³Æ
 	private Integer departmentId;
-	private Integer  employeeId;
 	private Date createTime;
 
 	public WorkPosition() {
 	}
 
-	public WorkPosition(Integer id, String name, Integer departmentId, Integer employeeId, Date createTime) {
+	public WorkPosition(Integer id, String name, Integer departmentId, Date createTime) {
 		this.id = id;
 		this.name = name;
 		this.departmentId = departmentId;
-		this.employeeId = employeeId;
 		this.createTime = createTime;
 	}
 
@@ -46,14 +44,6 @@ public class WorkPosition {
 		this.departmentId = departmentId;
 	}
 
-	public Integer getEmployeeId() {
-		return employeeId;
-	}
-
-	public void setEmployeeId(Integer employeeId) {
-		this.employeeId = employeeId;
-	}
-
 	public Date getCreateTime() {
 		return createTime;
 	}
@@ -68,7 +58,6 @@ public class WorkPosition {
 				"id=" + id +
 				", name='" + name + '\'' +
 				", departmentId=" + departmentId +
-				", employeeId=" + employeeId +
 				", createTime=" + createTime +
 				'}';
 	}

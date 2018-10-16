@@ -3,7 +3,9 @@ package com.ixanq.test;
 import com.ixanq.dao.ManagerDao;
 import com.ixanq.entity.Department;
 import com.ixanq.entity.Employee;
+import com.ixanq.entity.Manager;
 import com.ixanq.entity.WorkPosition;
+import com.ixanq.service.ManagerService;
 import com.ixanq.service.VisitorService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,10 +23,12 @@ public class ManagerTest {
     private ManagerDao managerDao;
     @Autowired
     private VisitorService visitorService;
+    @Autowired
+    private ManagerService managerService;
 
     @Test
     public void addDepartment(){
-        Department department=new Department("qqq",12,4,new Date());
+        Department department=new Department(-1,"qqq",new Date());
         managerDao.addDepartment(department);
     }
 
@@ -35,7 +39,7 @@ public class ManagerTest {
 
     @Test
     public void updateDepartment(){
-        Department department=new Department(8,"qqq",100,100,new Date());
+        Department department=new Department(8,"qqq",new Date());
         managerDao.updateDepartment(department);
     }
 
@@ -60,6 +64,15 @@ public class ManagerTest {
     public void findAllEmployee(){
         List<Employee> allEmployee = managerDao.findAllEmployee();
         System.out.println(allEmployee);
+    }
+
+    @Test
+    public void adminLogin(){
+        Manager manager = managerService.findAdminByName("admin");
+        Manager manager2=new Manager("zzz","zzz");
+        Manager manager1 = managerService.findAdminByNameAndPassword(manager2);
+        System.out.println(manager);
+        System.out.println(manager1);;
     }
 
 

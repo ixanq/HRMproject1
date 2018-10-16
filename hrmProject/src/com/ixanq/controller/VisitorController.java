@@ -1,6 +1,8 @@
 package com.ixanq.controller;
 
-import com.ixanq.entity.Visitor;
+import com.alibaba.fastjson.JSON;
+import com.ixanq.entity.*;
+import com.ixanq.service.ManagerService;
 import com.ixanq.service.VisitorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,10 +10,15 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.PrintWriter;
+import java.util.List;
+
 @Controller
 public class VisitorController {
     @Autowired
     private VisitorService visitorService;
+    @Autowired
+    private ManagerService managerService;
 
     /**
      * 用异步ajax 验证用户信息存不存在
@@ -52,14 +59,15 @@ public class VisitorController {
     
     /**
      * 游客登陆完后，跳转到游客界面
-     * @param visitor
+     * @param name
+     * @param password
      * @param model
      * @return
      */
     @RequestMapping("visitorNav")
-    public String visitorNav(Visitor visitor, Model model){
-       Visitor visitor2=visitorService.findByName(visitor.getName());//判断名字是否为错误
-       Visitor visitor3=visitorService.findByNameAndPassword(visitor);
+    public String visitorNav(String name,String password, Model model){
+       Visitor visitor2=visitorService.findByName(name);//判断名字是否为错误
+       Visitor visitor3=visitorService.findByNameAndPassword(name,password);
        if(null==visitor2) {//名字错误
     	   model.addAttribute("nameError","nameError");
     	   return "forward:/visitorLogin.jsp";
@@ -72,4 +80,75 @@ public class VisitorController {
     	   return "forward:/visitorLogin.jsp";
        }
     }
+
+
+    /**
+     * 游客查看简历
+     * @return
+     */
+    @RequestMapping("lookTheResume")
+    public String lookTheResume(Model model){
+        List<Resume> allResume = visitorService.findAllResume();
+        if(null==allResume ||allResume.size()==0){//没有简历
+            return "visitor/writeResume";
+        }else{
+            Resume resume = allResume.get(0);
+            Department departmentbyId = managerService.findDepartmentbyId(resume.getDepartmentId());
+            model.addAttribute("departmentbyId",departmentbyId);
+            WorkPosition workPositionById = managerService.findWorkPositionById(resume.getWorkPositionId());
+            model.addAttribute("workPositionById",workPositionById);
+            model.addAttribute("allResume",allResume);
+            return "visitor/lookTheResume";
+        }
+
+    }
+
+    @RequestMapping("findAllWorkPosition")
+    @ResponseBody
+    public void findAllWorkPosition(Integer id, PrintWriter printWriter){
+        List<WorkPosition> workPositionsByDepartmentId = managerService.findWorkPositionByDepartmentId(id);
+        Object json= JSON.toJSON(workPositionsByDepartmentId);
+        printWriter.print(json);
+
+    }
+    /**
+     * 填写简历
+     * @return
+     */
+    @RequestMapping("writeResume")
+    public String addResume(Model model){
+        List<Resume> allResume = visitorService.findAllResume();
+        if(null==allResume ||allResume.size()==0){
+            List<Department> allDepartment = managerService.findAllDepartment();
+            model.addAttribute("allDepartment",allDepartment);
+            return "visitor/writeResume";
+        }else{
+            model.addAttribute("resumeExist","resumeExist");
+            return "visitor/visitorIndexNav";
+        }
+    }
+
+
+    @RequestMapping("writeResumeAndCommit")
+    public String resumeCommit(String name,String gender,Integer age,String politicalStatus,String tel,String email,String lastWork,
+           String salary,Integer departmentId,Integer workPositionId ,String master,String workBackground,String hobby ,Model model){
+        Resume resume = new Resume(name, gender, age, politicalStatus, tel, email, lastWork, salary, departmentId, workPositionId, master, workBackground, hobby);
+        System.out.println(resume);
+       visitorService.addResume(new Resume(name,gender,age,politicalStatus,tel,email,lastWork,salary,departmentId,workPositionId,master,workBackground,hobby));
+       model.addAttribute("addSeccessfully","addSeccessfully");
+        return "visitor/visitorIndexNav";
+    }
+
+    /**
+     * 修改简历
+     * @return
+     */
+    @RequestMapping("updateResume")
+    public String updateResume(){
+        return "visitor/updateResume";
+    }
+
+
+
+
 }

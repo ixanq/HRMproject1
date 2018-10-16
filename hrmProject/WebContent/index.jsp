@@ -15,9 +15,17 @@
         color: red;
         display: none;
       }
+      #submit{
+        background-color: #2aabd2;
+      }
+      #div1{
+        margin: 5px 40%;
+        size: 40px;
+        font-size: 30px;
+      }
 
       #ahref{
-      margin: 0 20 10 70%;
+      margin: 0px 20px 10px 70%;
         background-position: left;
       }
     </style>
@@ -77,9 +85,10 @@
   </head>
   <body bgcolor="#bdb76b">
 
-  <div id="ahref"><a href="#">管理员登录</a></div>
+  <div id="ahref"><a href="adminLogin.jsp">管理员登录</a></div>
 
     <form action="visitorRegist" method="post" >
+      <div id="div1">欢迎注册！</div>
       <table bgcolor="lime" border="2px" align="center">
         <tr>
           <td>用户名：</td>
@@ -100,7 +109,7 @@
         </tr>
 
         <tr>
-          <td colspan="2" style="text-align: center"><input  type="submit" value="注册"></td>
+          <td colspan="2" style="text-align: center"><input id="submit" type="submit" value="注册">&nbsp;&nbsp;返回<a href="visitorLogin.jsp">登录</a></td>
         </tr>
       </table>
     </form>

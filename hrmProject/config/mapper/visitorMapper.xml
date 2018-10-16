@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ixanq.dao.VisitorDao">
+           <!--游客增删改查-->
     <select id="showAll" resultType="Visitor">
         SELECT * FROM visitor
     </select>
@@ -10,7 +11,7 @@
         SELECT * FROM visitor WHERE name=#{name}
     </select>
     
-    <select id="findByNameAndPassword" parameterType="Visitor" resultType="Visitor">
+    <select id="findByNameAndPassword" resultType="Visitor">
         SELECT * FROM visitor WHERE name=#{name} and password=#{password}
     </select>
 
@@ -21,5 +22,16 @@
     <update id="updatePassword" parameterType="Visitor">
         UPDATE visitor SET password WHERE id=#{id}
     </update>
+
+               <!--简历增删改查-->
+    <select id="findAllResume" resultType="Resume">
+        select * from resume
+    </select>
+
+    <insert id="addResume" parameterType="Resume">
+        INSERT INTO resume(name, gender, age, political_status, tel, email, last_work, salary, department_id, work_position_id, master, work_background, hobbies)
+        VALUES (#{name},#{gender},#{age},#{politicalStatus},#{tel},#{email},#{lastWork},#{salary},#{departmentId},#{workPositionId},#{master},#{workBackground},#{hobbies})
+    </insert>
+
 
 </mapper>

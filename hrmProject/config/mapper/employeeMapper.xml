@@ -3,6 +3,14 @@
 
 <mapper namespace="com.ixanq.dao.EmployeeDao">
 
+    <select id="findEmployeeByName" parameterType="String" resultType="Employee">
+        SELECT * from employee WHERE name=#{name}
+    </select>
+
+    <select id="findEmployeeByNameAndPassword"  resultType="Employee">
+        SELECT * from employee WHERE name=#{name} and password=#{password}
+    </select>
+
                                 <!--考勤增删改查-->
     <insert id="addCheckWorkAttendance" parameterType="CheckWorkAttendance">
         INSERT INTO check_work_attendance(employee_id, begin_work, end_wotk, is_late, is_leave)

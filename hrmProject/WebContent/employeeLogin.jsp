@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false"%>
 <html>
 <head>
-    <title>登录界面</title>
+    <title>员工界面</title>
      <style>
        .warning{
             background-color:#222222;
@@ -32,7 +32,7 @@
         $(function(){
             $("input:eq(0)").blur(function(){
                 var name=$("#name").val();
-                var url="${pageContext.request.contextPath}/ajaxCheck";
+                var url="${pageContext.request.contextPath}/ajaxCheckEmployee";
                 var args={"name":name};
                 $.post(url,args,function(data){
                     if(data=="no"){
@@ -82,14 +82,14 @@
     
 </head>
 <body bgcolor="#bdb76b">
-      <div id="ahref"><a href="adminLogin.jsp">管理员登录</a></div>
-      <div class="ahref"><a href="employeeLogin.jsp">员工登录</a></div>
-	  <form action="${pageContext.request.contextPath}/visitorNav" method="post" >
-          <div id="head">游客登录</div>
+    <div id="ahref"><a href="adminLogin.jsp">管理员登录</a></div>
+    <div class="ahref"><a href="visitorLogin.jsp">游客登录</a></div>
+	  <form action="${pageContext.request.contextPath}/employeeNav" method="post" >
+          <div id="head">员工登录</div>
       <table bgcolor="gray" border="2px" align="center">
         <tr>
           <td>用户名：</td>
-          <td><input id="name" type="text" name="name"  value="${requestScope.visitor2.name}"></td>
+          <td><input id="name" type="text" name="name"  value="${requestScope.employee2.name}"></td>
           <c:if test="${requestScope.nameError!=null}">
           <td><span id="nameWarning" class="warning">名字错误</span></td>
          </c:if>

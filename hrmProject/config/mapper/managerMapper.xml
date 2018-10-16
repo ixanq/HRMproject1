@@ -2,10 +2,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.ixanq.dao.ManagerDao">
+               <!-- 管理员信息-->
+    <select id="findAdminByName" resultType="Manager" parameterType="String">
+        SELECT * FROM manager WHERE name=#{name}
+    </select>
+
+    <select id="findAdminByNameAndPassword" resultType="Manager" parameterType="Manager">
+        SELECT * FROM manager WHERE name=#{name} and password=#{password}
+    </select>
+
                 <!--部门的增删改查-->
     <insert id="addDepartment" parameterType="Department">
-      INSERT into department(name, work_position_id, employee_id, create_time)
-      VALUES (#{name},#{workPositionId},#{employeeId},#{createTime})
+      INSERT into department(name,create_time)
+      VALUES (#{name},#{createTime})
     </insert>
 
     <delete id="deleteDepartment" parameterType="Integer">
@@ -13,8 +22,7 @@
     </delete>
 
     <update id="updateDepartment" parameterType="Department">
-        UPDATE department SET name=#{name},work_position_id=#{workPositionId},
-        employee_id=#{employeeId},create_time=#{createTime} WHERE id=#{id}
+        UPDATE department SET name=#{name},create_time=#{createTime} WHERE id=#{id}
     </update>
 
     <select id="findDepartmentbyId" parameterType="Integer" resultType="Department">
@@ -30,8 +38,8 @@
 
                     <!--职位的增删改查-->
     <insert id="addWorkPosition" parameterType="WorkPosition">
-        INSERT INTO work_position(name, department_id, employee_id, create_time)
-        VALUES (#{name},#{departmentId},#{employeeId},#{createime})
+        INSERT INTO work_position(name, department_id,create_time)
+        VALUES (#{name},#{departmentId},#{createime})
     </insert>
 
     <delete id="deleteWorkPosition" parameterType="Integer">
@@ -39,7 +47,7 @@
     </delete>
 
     <update id="updateWorkPosition" parameterType="WorkPosition">
-        UPDATE work_position SET name=#{name},department_id=#{departmentId},employee_id=#{employeeId},create_time=#{createTime}
+        UPDATE work_position SET name=#{name},department_id=#{departmentId},create_time=#{createTime}
         WHERE  id=#{id}
     </update>
 
@@ -49,6 +57,10 @@
 
     <select id="findAllWorkPosition" resultType="WorkPosition">
         SELECT * from work_position
+    </select>
+
+    <select id="findWorkPositionByDepartmentId" parameterType="Integer" resultType="WorkPosition">
+        SELECT * from work_position WHERE department_id=#{id}
     </select>
 
 
@@ -146,5 +158,37 @@
     <select id="findAllTrain" resultType="Train">
         SELECT * from train
     </select>
+
+
+
+                        <!--奖惩增删改查-->
+    <insert id="addReward" parameterType="Reward">
+        insert into reward (reason, money, "time") values (#{reason},#{money},#{time})
+    </insert>
+
+    <delete id="deleteReward" parameterType="Integer">
+        DELETE FROM reward WHERE id=#{id}
+    </delete>
+
+    <update id="updateReward" parameterType="Reward">
+        UPDATE reward SET reason=#{reason} ,money=#{money} ,time=#{time}
+    </update>
+
+    <select id="findRewardById" parameterType="Integer" resultType="Reward">
+        SELECT * FROM reward WHERE id=#{id}
+    </select>
+
+    <select id="findAllReward" resultType="Reward">
+        SELECT * FROM reward
+    </select>
+
+
+
+
+
+
+
+
+
 
 </mapper>

@@ -43,22 +43,26 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <span class="icon-bar" style="color:red">当前用户 ：${sessionScope.visitor.name}</span>
+            <span class="icon-bar" style="color:red">当前管理员 ：${sessionScope.manager.name}</span>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav" id="ul1">
-                <li class="active"><a href="${pageContext.request.contextPath}/lookTheResume">查看简历 <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">浏览招聘信息</a></li>
+                <li class="active"><a href="${pageContext.request.contextPath}/mworkAtendance">查看考勤 <span class="sr-only">(current)</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/mmanageEmployee">员工管理</a></li>
+                <li><a href="${pageContext.request.contextPath}/mmanageDepartment">部门管理</a></li>
+                <li><a href="${pageContext.request.contextPath}/mmanageWorkPosition">职位管理</a></li>
+                <li><a href="${pageContext.request.contextPath}/mmanageResume">招聘管理</a></li>
+                <li><a href="${pageContext.request.contextPath}/mmanageTrain">培训管理</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">简历管理 <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">财务管理 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="${pageContext.request.contextPath}/writeResume">填写简历</a></li>
-                        <li><a href="${pageContext.request.contextPath}/lookTheResume">查看简历</a></li>
-                        <li><a href="${pageContext.request.contextPath}/updateResume">修改简历</a></li>
+                        <li><a href="writeResume"></a></li>
+                        <li><a href="${pageContext.request.contextPath}/mmanageSalary">薪资管理</a></li>
+                        <li><a href="${pageContext.request.contextPath}/mmanageReward">奖惩管理</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">投简历</a></li>
+                        <li><a href="#"></a></li>
                         <li role="separator" class="divider"></li>
                     </ul>
                 </li>

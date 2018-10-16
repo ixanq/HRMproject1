@@ -7,12 +7,13 @@ public class EmployeeInfo {
     private Integer salaryId;
     private Integer rewardId;//奖惩信息
     private Integer checkWorkAttendId;//考勤
-    private String departWork;//部门职位，通过二级联动获取
+    private Integer departmentId;//部门
+    private Integer workPositionId;//职位
 
     public EmployeeInfo() {
     }
 
-    public EmployeeInfo(Integer id, Integer employeeId, Integer trainID, Integer salaryId, Integer rewardId, Integer checkWorkAttendId, String departWork) {
+    public EmployeeInfo(Integer id, Integer employeeId, Integer trainID, Integer salaryId, Integer rewardId, Integer checkWorkAttendId, Integer departmentId, Integer workPositionId) {
 
         this.id = id;
         this.employeeId = employeeId;
@@ -20,7 +21,8 @@ public class EmployeeInfo {
         this.salaryId = salaryId;
         this.rewardId = rewardId;
         this.checkWorkAttendId = checkWorkAttendId;
-        this.departWork = departWork;
+        this.departmentId = departmentId;
+        this.workPositionId = workPositionId;
     }
 
     public Integer getId() {
@@ -72,12 +74,20 @@ public class EmployeeInfo {
         this.checkWorkAttendId = checkWorkAttendId;
     }
 
-    public String getDepartWork() {
-        return departWork;
+    public Integer getDepartmentId() {
+        return departmentId;
     }
 
-    public void setDepartWork(String departWork) {
-        this.departWork = departWork;
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
+    }
+
+    public Integer getWorkPositionId() {
+        return workPositionId;
+    }
+
+    public void setWorkPositionId(Integer workPositionId) {
+        this.workPositionId = workPositionId;
     }
 
     @Override
@@ -89,7 +99,8 @@ public class EmployeeInfo {
                 ", salaryId=" + salaryId +
                 ", rewardId=" + rewardId +
                 ", checkWorkAttendId=" + checkWorkAttendId +
-                ", departWork='" + departWork + '\'' +
+                ", departmentId=" + departmentId +
+                ", workPositionId=" + workPositionId +
                 '}';
     }
 }

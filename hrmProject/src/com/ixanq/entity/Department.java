@@ -6,26 +6,14 @@ import java.util.Date;
 public class Department {
 	private Integer id;
 	private String name;//部门名字
-	private Integer workPositionId;//职位id
-	private Integer employeeId;
 	private Date createTime;
 
 	public Department() {
 	}
 
-	public Department(String name, Integer workPositionId, Integer employeeId, Date createTime) {
-		this.name = name;
-		this.workPositionId = workPositionId;
-		this.employeeId = employeeId;
-		this.createTime = createTime;
-	}
-
-	public Department(Integer id, String name, Integer workPositionId, Integer employeeId, Date createTime) {
-
+	public Department(Integer id, String name, Date createTime) {
 		this.id = id;
 		this.name = name;
-		this.workPositionId = workPositionId;
-		this.employeeId = employeeId;
 		this.createTime = createTime;
 	}
 
@@ -46,22 +34,6 @@ public class Department {
 		this.name = name;
 	}
 
-	public Integer getWorkPositionId() {
-		return workPositionId;
-	}
-
-	public void setWorkPositionId(Integer workPositionId) {
-		this.workPositionId = workPositionId;
-	}
-
-	public Integer getEmployeeId() {
-		return employeeId;
-	}
-
-	public void setEmployeeId(Integer employeeId) {
-		this.employeeId = employeeId;
-	}
-
 	public Date getCreateTime() {
 		return createTime;
 	}
@@ -75,8 +47,6 @@ public class Department {
 		return "Department{" +
 				"id=" + id +
 				", name='" + name + '\'' +
-				", workPositionId=" + workPositionId +
-				", employeeId=" + employeeId +
 				", createTime=" + createTime +
 				'}';
 	}

@@ -22,8 +22,7 @@ public class VisitorTest {
     
     @Test
     public void findByNameAndPassword(){
-    	Visitor visitor=new Visitor("bbb","222");
-    	Visitor visitor1=visitorService.findByNameAndPassword(visitor);
+    	Visitor visitor1=visitorService.findByNameAndPassword("bbb","222");
         System.out.println(visitor1);
     }
 }

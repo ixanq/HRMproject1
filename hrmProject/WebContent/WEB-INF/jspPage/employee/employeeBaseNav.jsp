@@ -29,7 +29,7 @@
                     $("#ul1 li").removeClass("active");
                     $this.parent().addClass("active");  //active表示被选中效果的类名
                 }
-            }) 
+            })
         })
     </script>
 </head>
@@ -43,25 +43,27 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <span class="icon-bar" style="color:red">当前用户 ：${sessionScope.visitor.name}</span>
+            <span class="icon-bar" style="color:red">当前员工 ：${sessionScope.employee.realName}</span>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav" id="ul1">
-                <li class="active"><a href="${pageContext.request.contextPath}/lookTheResume">查看简历 <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">浏览招聘信息</a></li>
-                <li class="dropdown">
+                <li class="active"><a href="${pageContext.request.contextPath}/eeployeeInfoctrl">个人信息 <span class="sr-only">(current)</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/eworkAttandance">考勤记录</a></li>
+                <li><a href="${pageContext.request.contextPath}/edeptWorkPosition">部门职位</a></li>
+                <li><a href="${pageContext.request.contextPath}/etrain">培训</a></li>
+                <%--<li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">简历管理 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="${pageContext.request.contextPath}/writeResume">填写简历</a></li>
-                        <li><a href="${pageContext.request.contextPath}/lookTheResume">查看简历</a></li>
+                        <li><a href="writeResume">填写简历</a></li>
+                        <li><a href="lookTheResume">查看简历</a></li>
                         <li><a href="${pageContext.request.contextPath}/updateResume">修改简历</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#">投简历</a></li>
                         <li role="separator" class="divider"></li>
                     </ul>
-                </li>
+                </li>--%>
             </ul>
             <%--<form class="navbar-form navbar-left">
                 <div class="form-group">

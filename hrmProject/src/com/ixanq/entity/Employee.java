@@ -8,6 +8,7 @@ public class Employee {
 	private String name;//从游客那里获取
 	private String password;//从游客那里获取
 	//以下是从简历中获取
+	private String realName;
 	private String gender;
 	private Integer age;
 	private String degree;//学位
@@ -19,20 +20,11 @@ public class Employee {
 	public Employee() {
 	}
 
-	public Employee(Integer id, String name, String gender, Integer age, String degree, String email, Date beginTime) {
-
-		this.id = id;
-		this.name = name;
-		this.gender = gender;
-		this.age = age;
-		this.degree = degree;
-		this.email = email;
-		this.beginTime = beginTime;
-	}
-	public Employee(Integer id, String name, String password, String gender, Integer age, String degree, String email, Date beginTime, String status) {
+	public Employee(Integer id, String name, String password, String realName, String gender, Integer age, String degree, String email, Date beginTime, String status) {
 		this.id = id;
 		this.name = name;
 		this.password = password;
+		this.realName = realName;
 		this.gender = gender;
 		this.age = age;
 		this.degree = degree;
@@ -64,6 +56,14 @@ public class Employee {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getRealName() {
+		return realName;
+	}
+
+	public void setRealName(String realName) {
+		this.realName = realName;
 	}
 
 	public String getGender() {
@@ -106,10 +106,7 @@ public class Employee {
 		this.beginTime = beginTime;
 	}
 
-
-
 	public String getStatus() {
-
 		return status;
 	}
 
@@ -123,6 +120,7 @@ public class Employee {
 				"id=" + id +
 				", name='" + name + '\'' +
 				", password='" + password + '\'' +
+				", realName='" + realName + '\'' +
 				", gender='" + gender + '\'' +
 				", age=" + age +
 				", degree='" + degree + '\'' +
