@@ -61,4 +61,14 @@ public interface ManagerService {
     public List<Reward> findAllReward();
 
     List<WorkPosition> findWorkPositionByDepartmentId(Integer id);
+
+    List<ResumeForManager> findResumeByStatus(String status);
+
+    List<ResumeForManager> findAllResumeForManager();
+
+    ResumeForManager findResumeById(Integer newId);
+
+    void updateResumeStatusForManager(ResumeForManager resumeById);
+
+    void deleteResumeForManagerById(Integer id);
 }

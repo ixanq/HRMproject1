@@ -1,10 +1,7 @@
 package com.ixanq.test;
 
 import com.ixanq.dao.ManagerDao;
-import com.ixanq.entity.Department;
-import com.ixanq.entity.Employee;
-import com.ixanq.entity.Manager;
-import com.ixanq.entity.WorkPosition;
+import com.ixanq.entity.*;
 import com.ixanq.service.ManagerService;
 import com.ixanq.service.VisitorService;
 import org.junit.Test;
@@ -74,6 +71,21 @@ public class ManagerTest {
         System.out.println(manager);
         System.out.println(manager1);;
     }
+
+    @Test
+    public void findResumeByStatus(){
+        List<ResumeForManager> resumes = managerService.findResumeByStatus("Î´¶Á");
+        System.out.println(resumes);
+
+    }
+
+    @Test
+    public void findAllResumeForManager(){
+        List<ResumeForManager> resumesForManager= managerService.findAllResumeForManager();
+        System.out.println(resumesForManager);
+
+    }
+
 
 
 

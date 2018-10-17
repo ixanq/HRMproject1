@@ -1,5 +1,6 @@
 <%@ page import="com.ixanq.entity.Resume" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.ixanq.entity.Visitor" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" isELIgnored="false"%>
 <!DOCTYPE html>
@@ -30,8 +31,7 @@
 <body>
 <%@include file="baseNav.jsp"%> <!-- 相同目录下路径不用写 -->
 <%
-    List<Resume> allResume = (List<Resume>) request.getAttribute("allResume");
-    Resume resume=allResume.get(0);
+    Resume resume = (Resume) request.getAttribute("resumeByVisitorName");
     request.setAttribute("resume",resume);
 %>
 <div class="head">
@@ -100,7 +100,7 @@
                     </tr>
 
                     <tr>
-                        <td colspan="3" bgcolor="#bdb76b" style="text-align: center"><a href="#">投简历</a></td>
+                        <td colspan="3" bgcolor="#bdb76b" style="text-align: center"><a href="${pageContext.request.contextPath}/sendResume">投简历</a></td>
                         <td colspan="2" bgcolor="#bdb76b" style="text-align: center"><a href="javascript:history.back(-1)">返回</a></td>
                     </tr>
                 </table>

@@ -1,6 +1,7 @@
 package com.ixanq.service;
 
 import com.ixanq.entity.Resume;
+import com.ixanq.entity.ResumeForManager;
 import com.ixanq.entity.Visitor;
 
 import java.util.List;
@@ -15,6 +16,11 @@ public interface VisitorService {
 
 
     public List<Resume> findAllResume();
-
     public void addResume(Resume resume);
+    Resume findResumeByVisitorName(String visitorName);
+
+    void addResumeForManager(ResumeForManager resumeForManager);
+    List<ResumeForManager> findAllResumeForManager();
+
+    void updateResume(Resume resume);
 }

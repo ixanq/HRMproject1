@@ -201,4 +201,29 @@ public class ManagerServiceImpl implements ManagerService {
     public List<WorkPosition> findWorkPositionByDepartmentId(Integer id) {
         return managerDao.findWorkPositionByDepartmentId(id);
     }
+
+    @Override
+    public List<ResumeForManager> findResumeByStatus(String status) {
+        return managerDao.findResumeByStatus(status);
+    }
+
+    @Override
+    public List<ResumeForManager> findAllResumeForManager() {
+        return managerDao.findAllResumeForManager();
+    }
+
+    @Override
+    public ResumeForManager findResumeById(Integer newId) {
+        return managerDao.findResumeById(newId);
+    }
+
+    @Override
+    public void updateResumeStatusForManager(ResumeForManager resumeById) {
+        managerDao.updateResumeStatusForManager(resumeById);
+    }
+
+    @Override
+    public void deleteResumeForManagerById(Integer id) {
+        managerDao.deleteResumeForManagerById(id);
+    }
 }

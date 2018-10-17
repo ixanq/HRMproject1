@@ -2,6 +2,7 @@ package com.ixanq.service.serviceImpl;
 
 import com.ixanq.dao.VisitorDao;
 import com.ixanq.entity.Resume;
+import com.ixanq.entity.ResumeForManager;
 import com.ixanq.entity.Visitor;
 import com.ixanq.service.VisitorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,26 @@ public class VisitorServiceImpl implements VisitorService {
     @Override
     public void addResume(Resume resume) {
         visitorDao.addResume(resume);
+    }
+
+    @Override
+    public Resume findResumeByVisitorName(String visitorName) {
+        return visitorDao.findResumeByVisitorName(visitorName);
+    }
+
+    @Override
+    public void addResumeForManager(ResumeForManager resumeForManager) {
+        visitorDao.addResumeForManager(resumeForManager);
+    }
+
+    @Override
+    public List<ResumeForManager> findAllResumeForManager() {
+        return visitorDao.findAllResumeForManager();
+    }
+
+    @Override
+    public void updateResume(Resume resume) {
+        visitorDao.updateResume(resume);
     }
 
 

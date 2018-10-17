@@ -1,3 +1,4 @@
+<%@ page import="com.ixanq.entity.Visitor" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
@@ -65,6 +66,7 @@
             </title>
         <div class="center">
             <form action="${pageContext.request.contextPath}/writeResumeAndCommit" method="post">
+                <input type="hidden" name="visitorName" value="${sessionScope.visitor.name}">
                 <td width="730" height="800" align="center" valign="top" bgcolor="#00FF99">
                     <table width="730" height="400" border="2px" cellpadding="0" cellspacing="0" bgcolor="#00FFFF">
                         <tr align="center">

@@ -1,6 +1,7 @@
 package com.ixanq.dao;
 
 import com.ixanq.entity.Resume;
+import com.ixanq.entity.ResumeForManager;
 import com.ixanq.entity.Visitor;
 import org.apache.ibatis.annotations.Param;
 
@@ -15,6 +16,10 @@ public interface VisitorDao {
     public void updatePassword(Visitor visitor);
 
     public List<Resume> findAllResume();
-
     void addResume(Resume resume);
+    Resume findResumeByVisitorName(String visitorName);
+    void addResumeForManager(ResumeForManager resumeForManager);
+    List<ResumeForManager> findAllResumeForManager();
+
+    void updateResume(Resume resume);
 }

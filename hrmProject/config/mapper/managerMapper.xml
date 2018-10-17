@@ -182,6 +182,24 @@
         SELECT * FROM reward
     </select>
 
+    <select id="findResumeByStatus" parameterType="String" resultType="ResumeForManager">
+        select * from resume_for_manager WHERE status=#{status}
+    </select>
+    <select id="findAllResumeForManager" resultType="ResumeForManager">
+      select * from resume_for_manager
+    </select>
+    <select id="findResumeById" resultType="ResumeForManager">
+        select * from resume_for_manager where id=#{id}
+    </select>
+    <update id="updateResumeStatusForManager" parameterType="ResumeForManager">
+        UPDATE resume_for_manager SET visitor_name=#{visitorName},name=#{name},gender=#{gender},age=#{age},
+        political_status=#{politicalStatus},tel=#{tel},email=#{email},last_work=#{lastWork},salary=#{salary},
+        department_id=#{departmentId},work_position_id=#{workPositionId},master=#{master},work_background=#{workBackground},
+        hobbies=#{hobbies},status="已读"
+    </update>
+    <delete id="deleteResumeForManagerById" parameterType="Integer">
+        DELETE FROM resume_for_manager WHERE id=#{id}
+    </delete>
 
 
 

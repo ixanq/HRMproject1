@@ -43,7 +43,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <span class="icon-bar" style="color:red">当前用户 ：${sessionScope.visitor.name}</span>
+            <span class="icon-bar" style="color:red">当前用户 ：${sessionScope.visitor.name}<%--<%=session.getId()%>--%></span>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -58,7 +58,7 @@
                         <li><a href="${pageContext.request.contextPath}/lookTheResume">查看简历</a></li>
                         <li><a href="${pageContext.request.contextPath}/updateResume">修改简历</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">投简历</a></li>
+                        <li><a href="${pageContext.request.contextPath}/sendResume">投简历</a></li>
                         <li role="separator" class="divider"></li>
                     </ul>
                 </li>

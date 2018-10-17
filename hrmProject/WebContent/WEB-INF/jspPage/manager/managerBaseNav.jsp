@@ -55,6 +55,19 @@
                 <li><a href="${pageContext.request.contextPath}/mmanageWorkPosition">职位管理</a></li>
                 <li><a href="${pageContext.request.contextPath}/mmanageResume">招聘管理</a></li>
                 <li><a href="${pageContext.request.contextPath}/mmanageTrain">培训管理</a></li>
+                <li><a href="${pageContext.request.contextPath}/lookAndDeleteResume">简历中心</a></li>
+
+                <%--<li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">简历中心 <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="${pageContext.request.contextPath}/lookAndDeleteResume">查看简历</a></li>
+                        <li><a href="${pageContext.request.contextPath}/lookAndDeleteResume">删除简历信息</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#"></a></li>
+                        <li role="separator" class="divider"></li>
+                    </ul>
+                </li>--%>
+
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">财务管理 <span class="caret"></span></a>
                     <ul class="dropdown-menu">

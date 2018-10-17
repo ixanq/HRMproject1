@@ -1,9 +1,9 @@
 package com.ixanq.entity;
 //简历类
-public class Resume {
+public class ResumeForManager {
 	private Integer id;
 	private String visitorName;
-	private String name;//真实姓名
+	private String name;
 	private String gender;
 	private Integer age;
 	private String politicalStatus;//政治面貌
@@ -16,11 +16,13 @@ public class Resume {
 	private String master;//学历
 	private String workBackground;//工作经验
 	private String hobbies;//兴趣爱好
+	private String status;//状态 读/未读
 
-	public Resume() {
+	public ResumeForManager() {
 	}
 
-	public Resume(String visitorName, String name, String gender, Integer age, String politicalStatus, String tel, String email, String lastWork, String salary, Integer departmentId, Integer workPositionId, String master, String workBackground, String hobbies) {
+	public ResumeForManager(String visitorName, String name, String gender, Integer age, String politicalStatus, String tel, String email, String lastWork, String salary, Integer departmentId, Integer workPositionId, String master, String workBackground, String hobbies, String status) {
+
 		this.visitorName = visitorName;
 		this.name = name;
 		this.gender = gender;
@@ -35,9 +37,10 @@ public class Resume {
 		this.master = master;
 		this.workBackground = workBackground;
 		this.hobbies = hobbies;
+		this.status = status;
 	}
 
-	public Resume(Integer id, String visitorName, String name, String gender, Integer age, String politicalStatus, String tel, String email, String lastWork, String salary, Integer departmentId, Integer workPositionId, String master, String workBackground, String hobbies) {
+	public ResumeForManager(Integer id, String visitorName, String name, String gender, Integer age, String politicalStatus, String tel, String email, String lastWork, String salary, Integer departmentId, Integer workPositionId, String master, String workBackground, String hobbies, String status) {
 
 		this.id = id;
 		this.visitorName = visitorName;
@@ -54,6 +57,7 @@ public class Resume {
 		this.master = master;
 		this.workBackground = workBackground;
 		this.hobbies = hobbies;
+		this.status = status;
 	}
 
 	public Integer getId() {
@@ -177,9 +181,17 @@ public class Resume {
 		this.hobbies = hobbies;
 	}
 
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	@Override
 	public String toString() {
-		return "Resume{" +
+		return "ResumeForManager{" +
 				"id=" + id +
 				", visitorName='" + visitorName + '\'' +
 				", name='" + name + '\'' +
@@ -195,6 +207,7 @@ public class Resume {
 				", master='" + master + '\'' +
 				", workBackground='" + workBackground + '\'' +
 				", hobbies='" + hobbies + '\'' +
+				", status='" + status + '\'' +
 				'}';
 	}
 }
