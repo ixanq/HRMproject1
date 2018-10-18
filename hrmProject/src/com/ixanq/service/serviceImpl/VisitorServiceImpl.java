@@ -1,6 +1,7 @@
 package com.ixanq.service.serviceImpl;
 
 import com.ixanq.dao.VisitorDao;
+import com.ixanq.entity.GoInterview;
 import com.ixanq.entity.Resume;
 import com.ixanq.entity.ResumeForManager;
 import com.ixanq.entity.Visitor;
@@ -70,5 +71,13 @@ public class VisitorServiceImpl implements VisitorService {
         visitorDao.updateResume(resume);
     }
 
+    @Override
+    public ResumeForManager findResumeForManagerByAdvertiseId(Integer id) {
+        return visitorDao.findResumeForManagerByAdvertiseId(id);
+    }
 
+    @Override
+    public void addGoInterview(GoInterview goInterview) {
+        visitorDao.addGoInterview(goInterview);
+    }
 }

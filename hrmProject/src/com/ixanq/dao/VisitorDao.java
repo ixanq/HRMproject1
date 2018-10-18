@@ -1,5 +1,6 @@
 package com.ixanq.dao;
 
+import com.ixanq.entity.GoInterview;
 import com.ixanq.entity.Resume;
 import com.ixanq.entity.ResumeForManager;
 import com.ixanq.entity.Visitor;
@@ -21,5 +22,10 @@ public interface VisitorDao {
     void addResumeForManager(ResumeForManager resumeForManager);
     List<ResumeForManager> findAllResumeForManager();
 
+
     void updateResume(Resume resume);
+
+    ResumeForManager findResumeForManagerByAdvertiseId(Integer advertiseId);
+
+    void addGoInterview(GoInterview goInterview);
 }

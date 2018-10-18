@@ -1,5 +1,6 @@
 package com.ixanq.service;
 
+import com.ixanq.entity.GoInterview;
 import com.ixanq.entity.Resume;
 import com.ixanq.entity.ResumeForManager;
 import com.ixanq.entity.Visitor;
@@ -23,4 +24,8 @@ public interface VisitorService {
     List<ResumeForManager> findAllResumeForManager();
 
     void updateResume(Resume resume);
+
+    ResumeForManager findResumeForManagerByAdvertiseId(Integer visitorName);
+
+    void addGoInterview(GoInterview goInterview);
 }

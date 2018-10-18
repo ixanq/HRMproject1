@@ -38,12 +38,20 @@
     </insert>
     <update id="updateResume" parameterType="Resume">
         UPDATE resume SET visitor_name=#{visitorName},name=#{name},gender=#{gender},age=#{age},political_status=#{politicalStatus},tel=#{tel},email=#{email},last_work=#{lastWork},salary=#{salary},
-        department_id=#{departmentId},work_position_id=#{workPositionId},hobbies=#{hobbies} WHERE id=#{id}
+        department_id=#{departmentId},work_position_id=#{workPositionId},work_background=#{workBackground}, hobbies=#{hobbies} WHERE id=#{id}
     </update>
 
     <insert id="addResumeForManager" parameterType="ResumeForManager">
-        INSERT INTO resume_for_manager(visitor_name,name, gender, age, political_status, tel, email, last_work, salary, department_id, work_position_id, master, work_background, hobbies,status)
-        VALUES (#{visitorName},#{name},#{gender},#{age},#{politicalStatus},#{tel},#{email},#{lastWork},#{salary},#{departmentId},#{workPositionId},#{master},#{workBackground},#{hobbies},#{status})
+        INSERT INTO resume_for_manager(advertise_id,visitor_name,name, gender, age, political_status, tel, email, last_work, salary, department_id, work_position_id, master, work_background, hobbies,status)
+        VALUES (#{advertiseId},#{visitorName},#{name},#{gender},#{age},#{politicalStatus},#{tel},#{email},#{lastWork},#{salary},#{departmentId},#{workPositionId},#{master},#{workBackground},#{hobbies},#{status})
+    </insert>
+    <select id="findResumeForManagerByAdvertiseId" parameterType="Integer" resultType="ResumeForManager">
+        select * from resume_for_manager WHERE advertise_id=#{advertiseId}
+    </select>
+
+    <insert id="addGoInterview" parameterType="GoInterview">
+        INSERT INTO go_interview(visitor_name, view_status, pass_status)
+         VALUES (#{visitorName},#{viewStatus},#{passStatus})
     </insert>
 
 

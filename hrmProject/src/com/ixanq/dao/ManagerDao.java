@@ -2,6 +2,7 @@ package com.ixanq.dao;
 
 import com.ixanq.entity.*;
 
+import javax.swing.text.View;
 import java.util.List;
 
 public interface ManagerDao {
@@ -66,7 +67,6 @@ public interface ManagerDao {
 
     List<ResumeForManager> findResumeByStatus(String status);
 
-
     List<ResumeForManager> findAllResumeForManager();
 
     ResumeForManager findResumeById(Integer newId);
@@ -74,5 +74,25 @@ public interface ManagerDao {
     void updateResumeStatusForManager(ResumeForManager resumeById);
 
     void deleteResumeForManagerById(Integer id);
+
+    void addAdvertise(Advertises advertises);
+
+    List<Advertises> finaAllAdvertise();
+
+    Advertises findAdvertisesById(Integer id);
+
+    void deleteAdvertiseById(Integer id);
+
+    void addInterviewforVisitor(Interview interview);
+
+    Interview findInterviewforVisitorByVisitorName(String visitorName);
+
+    List<GoInterview> findGoInterviewByStatus(String viewStatus);
+
+    List<GoInterview> findAllGoInterview();
+
+    GoInterview findGoInterviewByGointerviewId(Integer gointerviewId);
+
+    List<ResumeForManager> findResumeForManagerByVisitorName(String name);
 }
 

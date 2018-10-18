@@ -6,6 +6,7 @@ import com.ixanq.service.ManagerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.View;
 import java.util.List;
 
 @Service("managerService")
@@ -74,7 +75,7 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public void addEmployee(Employee employee) {
-
+        managerDao.addEmployee(employee);
     }
 
     @Override
@@ -225,5 +226,55 @@ public class ManagerServiceImpl implements ManagerService {
     @Override
     public void deleteResumeForManagerById(Integer id) {
         managerDao.deleteResumeForManagerById(id);
+    }
+
+    @Override
+    public void addAdvertise(Advertises advertises) {
+        managerDao.addAdvertise(advertises);
+    }
+
+    @Override
+    public List<Advertises> finaAllAdvertise() {
+        return managerDao.finaAllAdvertise();
+    }
+
+    @Override
+    public Advertises findAdvertisesById(Integer newId) {
+        return managerDao.findAdvertisesById(newId);
+    }
+
+    @Override
+    public void deleteAdvertiseById(Integer id) {
+        managerDao.deleteAdvertiseById(id);
+    }
+
+    @Override
+    public void addInterviewforVisitor(Interview interview) {
+        managerDao.addInterviewforVisitor(interview);
+    }
+
+    @Override
+    public Interview findInterviewforVisitorByVisitorName(String visitorName) {
+        return managerDao.findInterviewforVisitorByVisitorName(visitorName);
+    }
+
+    @Override
+    public List<GoInterview> findGoInterviewByStatus(String viewStatus) {
+        return managerDao.findGoInterviewByStatus(viewStatus);
+    }
+
+    @Override
+    public List<GoInterview> findAllGoInterview() {
+        return managerDao.findAllGoInterview();
+    }
+
+    @Override
+    public GoInterview findGoInterviewByGointerviewId(Integer gointerviewId) {
+        return managerDao.findGoInterviewByGointerviewId(gointerviewId);
+    }
+
+    @Override
+    public List<ResumeForManager>  findResumeForManagerByVisitorName(String name) {
+        return managerDao.findResumeForManagerByVisitorName(name);
     }
 }

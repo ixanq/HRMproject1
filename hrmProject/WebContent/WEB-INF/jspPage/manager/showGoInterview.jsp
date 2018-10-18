@@ -7,7 +7,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>简历中心</title>
+    <title>面试请求</title>
     <style>
         body{
             width: 100%;
@@ -33,7 +33,7 @@
                     var $td=$(this).parent().parent().children();
                     var $tr=$(this).parent().parent();
                     var id=$td[0].innerHTML;
-                    var url="${pageContext.request.contextPath}/ajaxDeleteResumeForManagerById";
+                    var url="${pageContext.request.contextPath}/ajaxDeleteRumeForManagerById";
                     var args={"id":id};
                     $.post(url,args,function(data){
                         if(data=="yes"){
@@ -48,26 +48,28 @@
 <body>
 <%@include file="managerBaseNav.jsp" %>
 <div id="head">
-        <table border="2px"  align="center" style="background-color: green">
+    <table border="2px"  align="center" style="background-color: green">
+        <tr>
+            <td>ID</td>
+            <td>用户</td>
+            <td>查看状态</td>
+            <td>录用状态</td>
+            <td>查看</td>
+            <td>删除</td>
+        </tr>
+        <c:forEach items="${requestScope.goInterviews}" var="goInterview">
             <tr>
-                <td>ID</td>
-                <td>名称</td>
-                <td>状态</td>
-                <td>查看</td>
-                <td>删除</td>
-            </tr>
-            <c:forEach items="${requestScope.resumesForManager}" var="resume">
-                <tr>
-                    <td>${resume.id}</td>
-                    <td>${resume.name}</td>
-                    <td>${resume.status}</td>
-                    <td><a href="${pageContext.request.contextPath}/lookTheResumeDetailsForAdmin?id=${resume.id}">查看</a></td>
-                    <td><a class="delete" href="#">删除</a></td>
+                <td>${goInterview.id}</td>
+                <td>${goInterview.visitorName}</td>
+                <td>${goInterview.viewStatus}</td>
+                <td>${goInterview.passStatus}</td>
+                <td><a href="${pageContext.request.contextPath}/lookTheGoInterviewDetailsForAdmin?id=${goInterview.id}">查看</a></td>
+                <td><a class="delete" href="#">删除</a></td>
 
-                </tr>
-            </c:forEach>
-        </table>
-    </div>
+            </tr>
+        </c:forEach>
+    </table>
+</div>
 </body>
 </html>
 

@@ -77,7 +77,11 @@ public class VisitorController {
        } else if(null!=visitor3) {//’À∫≈√‹¬Î’˝»∑
     	   session.setAttribute("visitor", visitor2);
            System.out.println("session:"+visitor2);
-    	   return "visitor/visitorIndexNav";
+           Interview byVisitorName = managerService.findInterviewforVisitorByVisitorName(visitor2.getName());
+           if(byVisitorName!=null){
+               model.addAttribute("youHaveInterviewMessegess",66);
+           }
+           return "visitor/visitorIndexNav";
        }else{ //√‹¬Î¥ÌŒÛ
     	   model.addAttribute("visitor2", visitor2);
     	   model.addAttribute("passwordError","passwordError");
@@ -195,7 +199,8 @@ public class VisitorController {
      *
      */
     @RequestMapping("sendResume")
-    public String sendResume(HttpSession session,Model model){
+    public String sendResume(String id,HttpSession session,Model model){
+        Integer advertiseId = Integer.valueOf(id);
         Visitor visitor = (Visitor) session.getAttribute("visitor");
         Resume resumeByVisitorName = visitorService.findResumeByVisitorName(visitor.getName());
         if(null==resumeByVisitorName){
@@ -203,16 +208,92 @@ public class VisitorController {
             return "visitor/visitorIndexNav";
         }else{
             Resume r=resumeByVisitorName;
-            ResumeForManager resumeForManager=new ResumeForManager(r.getDepartmentId(),r.getVisitorName(),r.getName(),
+            ResumeForManager resumeForManager=new ResumeForManager(advertiseId,r.getVisitorName(),r.getName(),
                     r.getGender(),r.getAge(),r.getPoliticalStatus(),r.getTel(),r.getEmail(),r.getLastWork(),
                     r.getSalary(),r.getDepartmentId(),r.getWorkPositionId(),r.getMaster(),r.getWorkBackground(),
                     r.getHobbies(),"Œ¥∂¡");
             System.out.println(resumeForManager);
+            ResumeForManager resumeForManager1=visitorService.findResumeForManagerByAdvertiseId(advertiseId);
+            if(resumeForManager1!=null){
+                model.addAttribute("resumeForManagerIsExist","111");
+                return "visitor/visitorIndexNav";
+            }
             visitorService.addResumeForManager(resumeForManager);
             model.addAttribute("sendResumeisSeccessfully","sendResumeisSeccessfully");
             return "visitor/visitorIndexNav";
         }
     }
+
+    @RequestMapping("lookAdvertiseForVisitor")
+    public String manageResume( Model model){
+        List<Advertises> advertises = managerService.finaAllAdvertise();
+        if(advertises==null||advertises.size()==0){
+            model.addAttribute("manageAdvertiseEmpty",11);
+            return "visitor/visitorIndexNav";
+        }else {
+            model.addAttribute("advertises",advertises);
+            return "visitor/advertise";
+        }
+    }
+
+
+    @RequestMapping("lookInterviewForVisitor")
+    public String lookInterviewForVisitor(HttpSession session,Model model){
+        Visitor visitor = (Visitor) session.getAttribute("visitor");
+        Interview interview = managerService.findInterviewforVisitorByVisitorName(visitor.getName());
+        if(interview==null){
+            model.addAttribute("thereAreNoInterviewMesseges",33);
+            return "visitor/visitorIndexNav";
+        }else {
+            model.addAttribute("interview",interview);
+            return "visitor/showInterview";
+        }
+
+    }
+
+    @RequestMapping("lookAdvertiseDetailMasseges")
+    public String lookTheAdvertiseDetailMasseges(String id,Model model) {
+        Integer newId = Integer.valueOf(id);
+        if (newId == null) {
+            model.addAttribute("lookTheAdvertiseDetailMasseges", 11);
+            return "visitor/visitorIndexNav";
+        } else {
+            Advertises advertises = managerService.findAdvertisesById(newId);
+            if (advertises == null) {
+                model.addAttribute("noadvertises", 11);
+                return "visitor/visitorIndexNav";
+            }
+            model.addAttribute("advertises", advertises);
+            return "visitor/showAdvertise";
+        }
+    }
+
+
+    @RequestMapping("gotoInterview")
+    public String gotoInterview(String id,Model model,HttpSession session ){
+        Visitor visitor = (Visitor) session.getAttribute("visitor");
+        Integer interviewId = Integer.valueOf(id);
+        GoInterview goInterview=new GoInterview(visitor.getName(),"Œ¥∂¡","¥˝∂®");
+        visitorService.addGoInterview(goInterview);
+        return "visitor/visitorIndexNav";
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

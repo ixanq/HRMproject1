@@ -50,6 +50,24 @@
 		<c:if test="${requestScope.sendResumeisSeccessfully!=null}">
 			投递简历成功，请耐心等待面试官回应。。。
 		</c:if>
+		<c:if test="${requestScope.sendResumeisSeccessfully!=null}">
+			管理员有点懒，暂时还没有招聘信息
+		</c:if>
+		<c:if test="${requestScope.resumeForManagerIsExist!=null}">
+			这个职位您已经投过简历，请换一个职位试一试
+		</c:if>
+		<c:if test="${requestScope.youHaveInterviewMessegess!=null}">
+			您有面试邀请，请前往在查看
+		</c:if>
+		<c:if test="${requestScope.thereAreNoInterviewMesseges!=null}">
+			暂未发现面试邀请
+		</c:if>
+		<c:if test="${requestScope.lookTheAdvertiseDetailMasseges!=null}">
+			暂未发现面试邀请
+		</c:if>
+		<c:if test="${requestScope.noadvertises!=null}">
+			暂未发现面试邀请
+		</c:if>
 
 	</div>
 </body>

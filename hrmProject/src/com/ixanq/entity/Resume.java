@@ -2,7 +2,7 @@ package com.ixanq.entity;
 //简历类
 public class Resume {
 	private Integer id;
-	private String visitorName;
+	private String visitorName;//账号
 	private String name;//真实姓名
 	private String gender;
 	private Integer age;

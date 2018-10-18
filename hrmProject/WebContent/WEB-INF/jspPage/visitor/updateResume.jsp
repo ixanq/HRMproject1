@@ -169,7 +169,7 @@
                     <tr>
                         <td align="center" bgcolor="#00FFFF">工作经验</td>
                         <td colspan="4" bgcolor="#00FFFF">
-                            <input type="text" id="workBackbround" name="workBackbround" value="${requestScope.resumeByVisitorName.workBackground}" style="width: 600px;height: 60px" ></input>
+                            <input type="text" id="workBackground" name="workBackground" value="${requestScope.resumeByVisitorName.workBackground}" style="width: 600px;height: 60px" ></input>
                         </td>
                     </tr>
                     <tr>
@@ -181,7 +181,7 @@
 
                     <tr>
                         <td colspan="3" bgcolor="#bdb76b" style="text-align: center"><input type="submit" value="确认修改"></td>
-                        <td colspan="2" bgcolor="#bdb76b" style="text-align: center"><a href="#">返回</a></td>
+                        <td colspan="2" bgcolor="#bdb76b" style="text-align: center"><a href="javascript:history.back(-1)">返回</a></td>
                     </tr>
                 </table>
             </td>

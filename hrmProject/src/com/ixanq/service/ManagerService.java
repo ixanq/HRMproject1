@@ -2,6 +2,7 @@ package com.ixanq.service;
 
 import com.ixanq.entity.*;
 
+import javax.swing.text.View;
 import java.util.List;
 
 public interface ManagerService {
@@ -71,4 +72,24 @@ public interface ManagerService {
     void updateResumeStatusForManager(ResumeForManager resumeById);
 
     void deleteResumeForManagerById(Integer id);
+
+    void addAdvertise(Advertises advertises);
+
+    List<Advertises> finaAllAdvertise();
+
+    Advertises findAdvertisesById(Integer newId);
+
+    void deleteAdvertiseById(Integer id);
+
+    void addInterviewforVisitor(Interview interview);
+
+    Interview findInterviewforVisitorByVisitorName(String visitorName);
+
+    List<GoInterview> findGoInterviewByStatus(String viewStatus);
+
+    List<GoInterview> findAllGoInterview();
+
+    GoInterview findGoInterviewByGointerviewId(Integer gointerviewId);
+
+    List<ResumeForManager>  findResumeForManagerByVisitorName(String name);
 }

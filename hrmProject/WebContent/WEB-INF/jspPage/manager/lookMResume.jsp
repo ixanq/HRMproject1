@@ -30,26 +30,19 @@
     </style>
     <script src="${pageContext.request.contextPath}/bootstrap/js/jquery-1.7.2.js"></script>
     <script>
+
         $(function(){
             var id=$("input:hidden").val();
             var url="${pageContext.request.contextPath}/alterResumeStatus";
             var args={"id":id};
             $.post(url,args,function(data){
-                if(data=="no"){
-                    //用户名存在
-                    console.log("账号存在");
-                    $("#nameWarning1").text("is OK！").css("display","inline");
-                    $("#nameWarning").text("").css("display","inline");
-                    $("#nameWarning1 ").css("color","lime");
-                    $(":submit").attr("disabled",false);
-                }else{
-                    console.log("账号不存在");
-                    $("#nameWarning1").text("该账号不存在").css("display","inline");
-                    $("#nameWarning").text("").css("display","inline");
-                    $("#nameWarning1 ").css("color","red");
-                    //按钮禁用
-                    $(":submit").attr("disabled",true);
-                }
+                console.log("111");
+            })
+        })
+
+        $(function(){
+            $(".interview").click(function(){
+                $("form").show();
             })
         })
     </script>
@@ -127,11 +120,33 @@
                 </tr>
 
                 <tr>
-                    <td colspan="3" bgcolor="#bdb76b" style="text-align: center"><a href="#">面试邀请</a></td>
+                    <td colspan="3" bgcolor="#bdb76b" style="text-align: center"><a href="#" class="interview">面试邀请</a></td>
                     <td colspan="2" bgcolor="#bdb76b" style="text-align: center"><a href="javascript:history.back(-1)">返回</a></td>
                 </tr>
             </table>
         </td>
+
+
+        <form hidden action="${pageContext.request.contextPath}/interviewforVisitor" method="post">
+            <table width="650" border="2px" style="background-color:#00FFFF; ">
+                <input type="hidden" name="visitorName" value="${resume.visitorName}">
+                <input type="hidden" name="advertiseId" value="${resume.advertiseId}">
+               <tr>
+                   <td>
+                       面试时间
+                   </td>
+                   <td>
+                       <input type="date" name="viewTime">
+                   </td>
+               </tr>
+
+                <tr>
+                    <td colspan="2" style="text-align: center">
+                        <input type="submit" value="确认">
+                    </td>
+                </tr>
+            </table>
+        </form>
     </div>
 </div>
 </body>

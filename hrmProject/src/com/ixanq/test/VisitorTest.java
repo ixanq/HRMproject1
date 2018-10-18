@@ -1,5 +1,6 @@
 package com.ixanq.test;
 
+import com.ixanq.entity.Resume;
 import com.ixanq.entity.ResumeForManager;
 import com.ixanq.entity.Visitor;
 import com.ixanq.service.VisitorService;
@@ -29,8 +30,15 @@ public class VisitorTest {
 
     @Test
     public void addResumeForManager(){
-        ResumeForManager resumeForManager=new ResumeForManager(1,"111","张三","男",26,"共青团员","17333334455","234213423@qq.com","程序员","7000-9000",11,6,"本科","本科","hahahahaahha","未读");
+        ResumeForManager resumeForManager=new ResumeForManager(1,"111","张三","男",26,"共青团员","17333334455","234213423@qq.com","程序员","7000-9000",11,6,"本科","无","hahahahaahha","未读");
         visitorService.addResumeForManager(resumeForManager);
         System.out.println(resumeForManager);
+    }
+
+    @Test
+    public void updateResume(){
+        Resume resume=new Resume(1,"111","张三","男",26,"共青团员","17333334455","234213423@qq.com","程序员","7000-9000",11,6,"本科","无","hahahahaahha");
+        visitorService.updateResume(resume);
+        System.out.println(resume);
     }
 }

@@ -31,16 +31,50 @@
 <%@include file="managerBaseNav.jsp" %>
     <div id="addseccessfuly">
         <c:if test="${requestScope.thereAreMesseges!=null}">
-            您有未读简历，请前往阅读
+            您有未读简历，请前往阅读<br>
         </c:if>
         <c:if test="${requestScope.thereIsNoMesseges!=null}">
-            您暂时未收到简历信息，请填写招聘信息
+            您暂时未收到简历信息，请填写招聘信息<br>
         </c:if>
         <c:if test="${requestScope.messegesIsDelete!=null}">
-            招聘信息被删光了，请进行其他操作
+            招聘信息被删光了，请进行其他操作<br>
         </c:if>
         <c:if test="${requestScope.empityResumeMasseges!=null}">
-            没有招聘信息，请进行其他操作
+            没有招聘信息，请进行其他操作<br>
+        </c:if>
+        <c:if test="${requestScope.addAdvertiseAndCommit!=null}">
+            招聘信息添加成功！<br>
+        </c:if>
+        <c:if test="${requestScope.manageAdvertiseEmpty!=null}">
+            您还没有添加招聘信息，请前往添加<br>
+        </c:if>
+        <c:if test="${requestScope.lookTheAdvertiseDetailMasseges!=null}">
+            您还没有添加招聘信息，请前往添加<br>
+        </c:if>
+        <c:if test="${requestScope.noadvertises!=null}">
+            您还没有添加招聘信息，请前往添加<br>
+        </c:if>
+        <c:if test="${requestScope.visitorViewxist!=null}">
+            您已经邀请过当前用户，不能再次邀请面试<br>
+        </c:if>
+        <c:if test="${requestScope.visitorViewSeccessfully!=null}">
+           面试邀请成功，请等待游客答复。<br>
+        </c:if>
+        <c:if test="${requestScope.thereAregoInterviewsMesseges!=null}">
+            有面试请求，请前往录用。<br>
+        </c:if>
+        <c:if test="${requestScope.goInterviewsMessegesEmpty!=null}">
+            暂时没有面试请求<br>
+        </c:if>
+        <c:if test="${requestScope.nogoInterview!=null}">
+            暂时没有面试请求<br>
+        </c:if>
+
+        <c:if test="${requestScope.NochangeToEmployee!=null}">
+            暂时没有暂时没有该员工信息<br>
+        </c:if>
+        <c:if test="${requestScope.changeToEmployeeSeccessfully!=null}">
+            录用成功<br>
         </c:if>
 
 

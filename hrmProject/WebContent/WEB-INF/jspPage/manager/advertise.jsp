@@ -1,13 +1,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="com.ixanq.entity.Visitor"%>
-<%@ page import="com.ixanq.entity.Manager" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" isELIgnored="false"%>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>简历中心</title>
+    <title>招聘信息</title>
     <style>
         body{
             width: 100%;
@@ -33,10 +32,10 @@
                     var $td=$(this).parent().parent().children();
                     var $tr=$(this).parent().parent();
                     var id=$td[0].innerHTML;
-                    var url="${pageContext.request.contextPath}/ajaxDeleteResumeForManagerById";
+                    var url="${pageContext.request.contextPath}/ajaxDeleteAdvertiseById";
                     var args={"id":id};
                     $.post(url,args,function(data){
-                        if(data=="yes"){
+                        if(data=="deleteSeccessfully"){
                             $tr.remove();
                         }
                     })
@@ -48,26 +47,32 @@
 <body>
 <%@include file="managerBaseNav.jsp" %>
 <div id="head">
-        <table border="2px"  align="center" style="background-color: green">
+    <table border="2px"  align="center" style="background-color: green">
+        <tr>
+            <td>ID</td>
+            <td>招聘名称</td>
+            <td>薪资</td>
+            <td>需要人数</td>
+            <td>查看</td>
+            <td>删除</td>
+        </tr>
+        <c:forEach items="${requestScope.advertises}" var="advertise">
             <tr>
-                <td>ID</td>
-                <td>名称</td>
-                <td>状态</td>
-                <td>查看</td>
-                <td>删除</td>
-            </tr>
-            <c:forEach items="${requestScope.resumesForManager}" var="resume">
-                <tr>
-                    <td>${resume.id}</td>
-                    <td>${resume.name}</td>
-                    <td>${resume.status}</td>
-                    <td><a href="${pageContext.request.contextPath}/lookTheResumeDetailsForAdmin?id=${resume.id}">查看</a></td>
-                    <td><a class="delete" href="#">删除</a></td>
+                <td>${advertise.id}</td>
+                <td>${advertise.advertiseName}</td>
+                <td>${advertise.salary}</td>
+                <td>${advertise.needPersonNumber}</td>
+                <td><a href="${pageContext.request.contextPath}/lookTheAdvertiseDetailMasseges?id=${advertise.id}">查看详情</a></td>
+                <td><a class="delete" href="#">删除</a></td>
+               <%-- <td><a  href="&lt;%&ndash;${pageContext.request.contextPath}/uploadAdvertiseToNet?id=${advertise.id}&ndash;%&gt;#">发布</a></td>--%>
 
-                </tr>
-            </c:forEach>
-        </table>
-    </div>
+            </tr>
+        </c:forEach>
+        <tr>
+            <td colspan="6"><a href="${pageContext.request.contextPath}/addAdvertisesforAdmin">添加新的招聘信息</a></td>
+        </tr>
+    </table>
+</div>
 </body>
 </html>
 

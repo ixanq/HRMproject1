@@ -2,6 +2,7 @@ package com.ixanq.entity;
 //简历类
 public class ResumeForManager {
 	private Integer id;
+	private Integer advertiseId;//招聘信息
 	private String visitorName;
 	private String name;
 	private String gender;
@@ -21,8 +22,9 @@ public class ResumeForManager {
 	public ResumeForManager() {
 	}
 
-	public ResumeForManager(String visitorName, String name, String gender, Integer age, String politicalStatus, String tel, String email, String lastWork, String salary, Integer departmentId, Integer workPositionId, String master, String workBackground, String hobbies, String status) {
+	public ResumeForManager(Integer advertiseId, String visitorName, String name, String gender, Integer age, String politicalStatus, String tel, String email, String lastWork, String salary, Integer departmentId, Integer workPositionId, String master, String workBackground, String hobbies, String status) {
 
+		this.advertiseId = advertiseId;
 		this.visitorName = visitorName;
 		this.name = name;
 		this.gender = gender;
@@ -40,9 +42,10 @@ public class ResumeForManager {
 		this.status = status;
 	}
 
-	public ResumeForManager(Integer id, String visitorName, String name, String gender, Integer age, String politicalStatus, String tel, String email, String lastWork, String salary, Integer departmentId, Integer workPositionId, String master, String workBackground, String hobbies, String status) {
+	public ResumeForManager(Integer id, Integer advertiseId, String visitorName, String name, String gender, Integer age, String politicalStatus, String tel, String email, String lastWork, String salary, Integer departmentId, Integer workPositionId, String master, String workBackground, String hobbies, String status) {
 
 		this.id = id;
+		this.advertiseId = advertiseId;
 		this.visitorName = visitorName;
 		this.name = name;
 		this.gender = gender;
@@ -67,6 +70,14 @@ public class ResumeForManager {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Integer getAdvertiseId() {
+		return advertiseId;
+	}
+
+	public void setAdvertiseId(Integer advertiseId) {
+		this.advertiseId = advertiseId;
 	}
 
 	public String getVisitorName() {
@@ -193,6 +204,7 @@ public class ResumeForManager {
 	public String toString() {
 		return "ResumeForManager{" +
 				"id=" + id +
+				", advertiseId=" + advertiseId +
 				", visitorName='" + visitorName + '\'' +
 				", name='" + name + '\'' +
 				", gender='" + gender + '\'' +

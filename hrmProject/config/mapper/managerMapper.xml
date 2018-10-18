@@ -201,9 +201,40 @@
         DELETE FROM resume_for_manager WHERE id=#{id}
     </delete>
 
+    <insert id="addAdvertise" parameterType="Advertises">
+        INSERT INTO  advertises(advertise_name, salary, need_person_number, advertise_descreption)
+        VALUES (#{advertiseName},#{salary},#{needPersonNumber},#{advertiseDescreption})
+    </insert>
+    <select id="finaAllAdvertise" resultType="Advertises">
+        SELECT * FROM advertises
+    </select>
+    <select id="findAdvertisesById" parameterType="Integer" resultType="Advertises">
+        SELECT * FROM advertises WHERE id=#{id}
+    </select>
+    <delete id="deleteAdvertiseById" parameterType="Integer">
+        DELETE FROM advertises WHERE id=#{id}
+    </delete>
 
+    <insert id="addInterviewforVisitor" parameterType="Interview">
+        INSERT INTO interview(visitor_name, advertise_id,view_time)  VALUES (#{visitorName},#{advertiseId},#{viewTime})
+    </insert>
+    <select id="findInterviewforVisitorByVisitorName" parameterType="String" resultType="Interview">
+        SELECT * FROM interview WHERE visitor_name=#{visitorName}
+    </select>
 
+    <select id="findGoInterviewByStatus" parameterType="String" resultType="GoInterview">
+        SELECT * FROM go_interview WHERE view_status=#{viewStatus}
+    </select>
 
+    <select id="findAllGoInterview" resultType="GoInterview">
+        SELECT * FROM go_interview
+    </select>
+
+    <select id="findGoInterviewByGointerviewId" parameterType="Integer" resultType="GoInterview">
+        SELECT * FROM go_interview WHERE id=#{gointerviewId}
+    </select>
+
+    <select id="findResumeForManagerByVisitorName" parameterType="String" resultType="ResumeForManager"
 
 
 

@@ -100,7 +100,7 @@
                     </tr>
 
                     <tr>
-                        <td colspan="3" bgcolor="#bdb76b" style="text-align: center"><a href="${pageContext.request.contextPath}/sendResume">投简历</a></td>
+                        <td colspan="3" bgcolor="#bdb76b" style="text-align: center"><a href="${pageContext.request.contextPath}/lookAdvertiseForVisitor">查看招聘信息</a></td>
                         <td colspan="2" bgcolor="#bdb76b" style="text-align: center"><a href="javascript:history.back(-1)">返回</a></td>
                     </tr>
                 </table>
