@@ -50,7 +50,7 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public void addWorkPosition(WorkPosition workPosition) {
-
+        managerDao.addWorkPosition(workPosition);
     }
 
     @Override
@@ -276,5 +276,45 @@ public class ManagerServiceImpl implements ManagerService {
     @Override
     public List<ResumeForManager>  findResumeForManagerByVisitorName(String name) {
         return managerDao.findResumeForManagerByVisitorName(name);
+    }
+
+    @Override
+    public void updateGoInterview(GoInterview goInterview1) {
+        managerDao.updateGoInterview(goInterview1);
+    }
+
+    @Override
+    public EmployeeInfo findEmployeeInfoByworkPositionId(Integer workPositionId) {
+        return managerDao.findEmployeeInfoByworkPositionId(workPositionId);
+    }
+
+    @Override
+    public EmployeeInfo findEmployeeInfoByDepartmentId(Integer departmentId) {
+        return managerDao.findEmployeeInfoByDepartmentId(departmentId);
+    }
+
+    @Override
+    public List<EmployeeInfo> findAllEmployeeInfo() {
+        return managerDao.findAllEmployeeInfo();
+    }
+
+    @Override
+    public Employee findEmployeeByVisitorName(String name) {
+        return managerDao.findEmployeeByVisitorName(name);
+    }
+
+    @Override
+    public void addEmployeeInfo(EmployeeInfo employeeInfo) {
+        managerDao.addEmployeeInfo(employeeInfo);
+    }
+
+    @Override
+    public EmployeeInfo findEmployeeInfoByEmployeeId(Integer employeeId) {
+        return managerDao.findEmployeeInfoByEmployeeId(employeeId);
+    }
+
+    @Override
+    public void updateEmployeeInfo(EmployeeInfo eInfo) {
+        managerDao.updateEmployeeInfo(eInfo);
     }
 }

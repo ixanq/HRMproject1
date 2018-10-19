@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>填写招聘信息</title>
+    <title>招聘信息</title>
     <style>
         .head{
             width: 100%;
@@ -71,6 +71,9 @@
                     <tr>
                         <td>职位描述</td>
                         <td>${requestScope.advertises.advertiseDescreption}</td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"><a href="javaScript:history.back(-1);">返回</a></td>
                     </tr>
 
 

@@ -11,10 +11,12 @@ import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -94,35 +96,31 @@ public class ManagerController {
 
     /**
      * 管理员员工管理界面
-     * @param manager
      * @param model
      * @return
      */
     @RequestMapping("mmanageEmployee")
-    public String manageEmployee(Manager manager, Model model){
+    public String manageEmployee( Model model){
+        List<Employee> employees = managerService.findAllEmployee();
+        model.addAttribute("employees",employees);
         return "manager/employee";
     }
 
     /**
      * 管理员部门管理界面
-     * @param manager
      * @param model
      * @return
      */
     @RequestMapping("mmanageDepartment")
-    public String manageDepartment(Manager manager, Model model){
-        return "manager/department";
-    }
-
-    /**
-     * 管理员职位管理界面
-     * @param manager
-     * @param model
-     * @return
-     */
-    @RequestMapping("mmanageWorkPosition")
-    public String manageWorkAtendance(Manager manager, Model model){
-        return "manager/workPosition";
+    public String manageDepartment(Model model){
+        List<Department> allDepartment = managerService.findAllDepartment();
+       /* if(allDepartment==null||allDepartment.size()==0){
+            model.addAttribute("mmanageDepartmentEmpty",11);
+            return "manager/managerIndexNav";
+        }else {*/
+            model.addAttribute("allDepartment",allDepartment);
+            return "manager/department";
+        /*}*/
     }
 
     /**
@@ -311,7 +309,11 @@ public class ManagerController {
 
 
     @RequestMapping("changeToEmployee")
-    public String changeToEmployee(String name,Model model){
+    public String changeToEmployee(String id,String name,Model model){
+        Integer goInterviewId = Integer.valueOf(id);
+        GoInterview g= managerService.findGoInterviewByGointerviewId(goInterviewId);
+        GoInterview goInterview1=new GoInterview(g.getId(),g.getVisitorName(),"已查看","已录用");
+        managerService.updateGoInterview(goInterview1);
         List<ResumeForManager>  resumeForManagers=managerService.findResumeForManagerByVisitorName(name);
         if(resumeForManagers==null||resumeForManagers.size()==0){
             model.addAttribute("NochangeToEmployee",11);
@@ -320,14 +322,106 @@ public class ManagerController {
         ResumeForManager r=resumeForManagers.get(0);
         Visitor visitor = visitorService.findByName(r.getVisitorName());
         Employee employee=new Employee(-1,visitor.getName(),visitor.getPassword(),r.getName(),r.getGender(),r.getAge(),
-                r.getMaster(),r.getEmail(),new Date(),"上班");
+                r.getMaster(),r.getEmail(),new Date(),"在职",r.getWorkPositionId());
         System.out.println(employee);
         managerService.addEmployee(employee);
+        Employee employee1=managerService.findEmployeeByVisitorName(visitor.getName());
+        EmployeeInfo employeeInfo=new EmployeeInfo(-1,employee1.getId(),-1,-1,-1,-1,r.getWorkPositionId(),r.getDepartmentId());
+        managerService.addEmployeeInfo(employeeInfo);
         model.addAttribute("changeToEmployeeSeccessfully",44);
         return "manager/managerIndexNav";
     }
 
 
+    @RequestMapping("refuseToChangeEmployee")
+    public String refuseToChangeEmployee(String id,Model model){
+        Integer goInterviewId = Integer.valueOf(id);
+        GoInterview g= managerService.findGoInterviewByGointerviewId(goInterviewId);
+        GoInterview goInterview1=new GoInterview(g.getId(),g.getVisitorName(),"已查看","未录用");
+        managerService.updateGoInterview(goInterview1);
+        model.addAttribute("updaterefuseToChangeEmployee",33);
+        return "manager/managerIndexNav";
+    }
+
+
+    @RequestMapping("lookDepartmentWorkPosirion")
+    public String lookDepartmentWorkPosirion(String id,Model model){
+        Integer departmentId = Integer.valueOf(id);
+        List<WorkPosition> workPositions = managerService.findWorkPositionByDepartmentId(departmentId);
+        model.addAttribute("workPositions",workPositions);
+        return "manager/workPosition";
+    }
+
+    @RequestMapping("addworkPositionForDepartment")
+    public String addworkPositionForDepartment(String name, Integer departmentId, Model model, RedirectAttributes attr){
+       WorkPosition workPosition=new WorkPosition(-1,name,departmentId,new Date());
+       managerService.addWorkPosition(workPosition);
+       attr.addAttribute("id",departmentId.toString());
+        return "redirect:/lookDepartmentWorkPosirion";
+    }
+
+    @RequestMapping("deleteWorkPositionForDepartmen")
+    public String deleteWorkPositionForDepartmen(String id, Model model){
+        Integer workPositionId = Integer.valueOf(id);
+        EmployeeInfo employeeInfo=managerService.findEmployeeInfoByworkPositionId(workPositionId);
+        if(employeeInfo!=null){
+            model.addAttribute("deleteWorkPositionForDepartmen",11);
+        }else{
+            model.addAttribute("deleteWorkPositionForDepartmenOk",11);
+
+        }
+        return "manager/managerIndexNav";
+    }
+
+
+    @RequestMapping("addDepartmentToDB")
+    public String addDepartmentToDB(String name,Model model){
+        Department department=new Department(-1,name,new Date());
+        managerService.addDepartment(department);
+        return "redirect:/mmanageDepartment";
+    }
+
+    @RequestMapping("deleteDepartmentById")
+    public String deleteDepartmentById(String id,Model model){
+        Integer departmentId = Integer.valueOf(id);
+        EmployeeInfo employeeInfo=managerService.findEmployeeInfoByDepartmentId(departmentId);
+        if(employeeInfo!=null){
+            model.addAttribute("deleteDepartmentByIdFalse",333);
+            return "manager/managerIndexNav";
+        }
+        managerService.deleteDepartment(departmentId);
+        return "redirect:/mmanageDepartment";
+    }
+
+
+    @RequestMapping("updateEmployeeDepartmentMesseges")
+    public String updateEmployeeDepartmentMesseges(String id,String workPositionId,Model model) {
+        Integer employeeId = Integer.valueOf(id);
+        Integer newWorkPositionId = Integer.valueOf(workPositionId);
+        WorkPosition workPosition = managerService.findWorkPositionById(newWorkPositionId);//员工部门职位信息
+        model.addAttribute("workPosition", workPosition);
+
+        if (workPosition != null) {
+            Department department = managerService.findDepartmentbyId(workPosition.getDepartmentId());//员工部门信息
+            model.addAttribute("department", department);
+        }
+        List<Department> allDepartment = managerService.findAllDepartment();//所有部门
+        model.addAttribute("allDepartment", allDepartment);
+        Employee employee = managerService.findEmployeeById(employeeId);//员工信息
+        model.addAttribute("employee", employee);
+        return "manager/updateEmployeeDept";
+    }
+
+    @RequestMapping("updateEmployeeAndCommit")
+    public String updateEmployeeAndCommit(Integer employeeId,Integer departmentId,Integer workPositionId,Model model){
+        Employee e = managerService.findEmployeeById(employeeId);
+        managerService.updateEmployee(new Employee(e.getId(),e.getName(),e.getPassword(),e.getRealName(),e.getGender(),e.getAge()
+                ,e.getDegree(),e.getEmail(),e.getBeginTime(),e.getStatus(),workPositionId));
+        EmployeeInfo eInfo=managerService.findEmployeeInfoByEmployeeId(employeeId);
+        managerService.updateEmployeeInfo(new EmployeeInfo(eInfo.getId(),eInfo.getEmployeeId(),eInfo.getTrainId(),eInfo.getSalaryId(),eInfo.getRewardId(),
+                eInfo.getCheckworkattendId(),departmentId,workPositionId));
+        return "redirect:/mmanageDepartment";
+    }
 
 
 

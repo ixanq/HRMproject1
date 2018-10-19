@@ -39,7 +39,7 @@
                     <!--职位的增删改查-->
     <insert id="addWorkPosition" parameterType="WorkPosition">
         INSERT INTO work_position(name, department_id,create_time)
-        VALUES (#{name},#{departmentId},#{createime})
+        VALUES (#{name},#{departmentId},#{createTime})
     </insert>
 
     <delete id="deleteWorkPosition" parameterType="Integer">
@@ -68,8 +68,8 @@
 
                     <!--员工的增删改查-->
     <insert id="addEmployee" parameterType="Employee">
-        INSERT INTO employee(name,password, gender, age, degree, email, begin_time,status)
-        VALUES(#{name},#{password},#{gender},#{age},#{degree},#{email},#{beginTime},#{status})
+        INSERT INTO employee(name,password,real_name, gender, age, degree, email, begin_time,status,work_position_id)
+        VALUES(#{name},#{password},#{realName},#{gender},#{age},#{degree},#{email},#{beginTime},#{status}#{workPositionId})
     </insert>
 
     <delete id="deleteEmployee" parameterType="Integer">
@@ -77,7 +77,7 @@
     </delete>
 
     <update id="updateEmployee" parameterType="Employee">
-        UPDATE employee SET name=#{name},password=#{password} ,gender=#{gender} ,age= #{age},degree=#{degree} ,email= #{email},begin_time=#{beginTime},status=#{status}
+        UPDATE employee SET name=#{name},password=#{password},real_name=#{realName} ,gender=#{gender} ,age= #{age},degree=#{degree} ,email= #{email},begin_time=#{beginTime},status=#{status},work_position_id=#{workPositionId}
     </update>
 
     <select id="findEmployeeById" parameterType="Integer" resultType="Employee">
@@ -234,10 +234,40 @@
         SELECT * FROM go_interview WHERE id=#{gointerviewId}
     </select>
 
-    <select id="findResumeForManagerByVisitorName" parameterType="String" resultType="ResumeForManager"
+    <select id="findResumeForManagerByVisitorName" parameterType="String" resultType="ResumeForManager">
+        SELECT * FROM resume_for_manager WHERE visitor_name=#{name}
+    </select>
+
+    <update id="updateGoInterview" parameterType="GoInterview">
+        UPDATE go_interview SET visitor_name=#{visitorName},view_status=#{viewStatus},pass_status=#{passStatus} WHERE id=#{id}
+    </update>
+
+    <select id="findEmployeeInfoByworkPositionId" parameterType="Integer" resultType="EmployeeInfo">
+        SELECT * FROM  employeeinfo WHERE workposition_id=#{workPositionId}
+    </select>
+    <select id="findEmployeeInfoByDepartmentId" parameterType="Integer" resultType="EmployeeInfo">
+        SELECT * FROM  employeeinfo WHERE department_id=#{departmentId}
+    </select>
+    <select id="findEmployeeInfoByEmployeeId" parameterType="Integer" resultType="EmployeeInfo">
+        SELECT * FROM  employeeinfo WHERE employee_id=#{employeeId}
+    </select>
 
 
+    <select id="findAllEmployeeInfo" resultType="EmployeeInfo">
+        SELECT * FROM  employeeinfo
+    </select>
 
+    <select id="findEmployeeByVisitorName" resultType="Employee" parameterType="String">
+        SELECT * from employee WHERE name=#{name}
+    </select>
+
+    <insert id="addEmployeeInfo" parameterType="EmployeeInfo">
+        INSERT INTO employeeinfo(id,employee_id, train_id, salary_id, reward_id, checkworkattend_id, department_id, workposition_id)
+        VALUES (#{id},#{employeeId},#{trainID},#{salaryId},#{rewardId},#{checkWorkAttendId},#{departmentId},#{workPositionId})
+    </insert>
+    <update id="updateEmployeeInfo" parameterType="EmployeeInfo">
+        UPDATE employeeinfo SET employee_id=#{employeeId},train_id=#{trainId},salary_id=#{salaryId},reward_id=#{rewardId},checkworkattend_id=#{checkWorkAttendId},department_id=#{departmentId},workposition_id=#{workPositionId} WHERE id=#{id}
+    </update>
 
 
 </mapper>

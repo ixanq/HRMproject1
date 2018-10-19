@@ -2,6 +2,7 @@ package com.ixanq.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.ixanq.entity.*;
+import com.ixanq.service.EmployeeService;
 import com.ixanq.service.ManagerService;
 import com.ixanq.service.VisitorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ public class VisitorController {
     private VisitorService visitorService;
     @Autowired
     private ManagerService managerService;
+    @Autowired
+    private EmployeeService employeeService;
 
 
     /**
@@ -69,7 +72,12 @@ public class VisitorController {
      */
     @RequestMapping("visitorNav")
     public String visitorNav(String name,String password, Model model,HttpSession session){
-       Visitor visitor2=visitorService.findByName(name);//ÅÐ¶ÏÃû×ÖÊÇ·ñÎª´íÎó
+        Employee employeeByNameAndPassword = employeeService.findEmployeeByNameAndPassword(name, password);
+        if(employeeByNameAndPassword!=null){
+            model.addAttribute("typeError","typeError");
+            return "forward:/visitorLogin.jsp";
+        }
+        Visitor visitor2=visitorService.findByName(name);//ÅÐ¶ÏÃû×ÖÊÇ·ñÎª´íÎó
        Visitor visitor3=visitorService.findByNameAndPassword(name,password);
        if(null==visitor2) {//Ãû×Ö´íÎó
     	   model.addAttribute("nameError","nameError");

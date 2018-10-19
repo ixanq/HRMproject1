@@ -76,7 +76,18 @@
         <c:if test="${requestScope.changeToEmployeeSeccessfully!=null}">
             录用成功<br>
         </c:if>
-
+        <c:if test="${requestScope.updaterefuseToChangeEmployee!=null}">
+            操作成功<br>
+        </c:if>
+        <c:if test="${requestScope.deleteWorkPositionForDepartmen!=null}">
+            该职位下存在用户，不能删除<br>
+        </c:if>
+        <c:if test="${requestScope.deleteWorkPositionForDepartmenOk!=null}">
+            职位删除成功<br>
+        </c:if>
+        <c:if test="${requestScope.deleteDepartmentByIdFalse!=null}">
+            该部门下存在用户，不能删除<br>
+        </c:if>
 
 
     </div>

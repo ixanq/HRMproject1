@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class EmployeeController {
 
@@ -39,14 +41,14 @@ public class EmployeeController {
      * @return
      */
     @RequestMapping("employeeNav")
-    public String visitorNav(String name,String password, Model model){
+    public String visitorNav(String name, String password, Model model, HttpSession employeeSession){
         Employee employee2=employeeService.findEmployeeByName(name);//ÅĞ¶ÏÃû×ÖÊÇ·ñÎª´íÎó
         Employee employee3=employeeService.findEmployeeByNameAndPassword(name,password);
         if(null==employee2) {//Ãû×Ö´íÎó
             model.addAttribute("nameError","nameError");
             return "forward:/employeeLogin.jsp";
         } else if(null!=employee3) {//ÕËºÅÃÜÂëÕıÈ·
-            model.addAttribute("employee2", employee2);
+            employeeSession.setAttribute("employee",employee2);
             return "employee/employeeIndexNav";
         }else{ //ÃÜÂë´íÎó
             model.addAttribute("employee2", employee2);

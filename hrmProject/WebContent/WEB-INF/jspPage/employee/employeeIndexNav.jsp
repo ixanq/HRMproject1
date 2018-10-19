@@ -18,10 +18,11 @@
 <script src="${pageContext.request.contextPath}/bootstrap/js/jquery-1.7.2.js"></script>
 </head>
 <body>
-<%
-	Employee employee=(Employee)request.getAttribute("employee2");
-	session.setAttribute("employee", employee);
-	%>
 	 <%@include file="employeeBaseNav.jsp" %>
+
+
+
+
+
 </body>
 </html>

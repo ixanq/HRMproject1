@@ -16,11 +16,27 @@ public class Employee {
 
 	private Date  beginTime;//入职时间
 	private String status;//是否离职
+	private Integer workPositionId;
 
 	public Employee() {
 	}
 
-	public Employee(Integer id, String name, String password, String realName, String gender, Integer age, String degree, String email, Date beginTime, String status) {
+	public Employee(String name, String password, String realName, String gender, Integer age, String degree, String email, Date beginTime, String status, Integer workPositionId) {
+
+		this.name = name;
+		this.password = password;
+		this.realName = realName;
+		this.gender = gender;
+		this.age = age;
+		this.degree = degree;
+		this.email = email;
+		this.beginTime = beginTime;
+		this.status = status;
+		this.workPositionId = workPositionId;
+	}
+
+	public Employee(Integer id, String name, String password, String realName, String gender, Integer age, String degree, String email, Date beginTime, String status, Integer workPositionId) {
+
 		this.id = id;
 		this.name = name;
 		this.password = password;
@@ -31,6 +47,7 @@ public class Employee {
 		this.email = email;
 		this.beginTime = beginTime;
 		this.status = status;
+		this.workPositionId = workPositionId;
 	}
 
 	public Integer getId() {
@@ -114,6 +131,14 @@ public class Employee {
 		this.status = status;
 	}
 
+	public Integer getWorkPositionId() {
+		return workPositionId;
+	}
+
+	public void setWorkPositionId(Integer workPositionId) {
+		this.workPositionId = workPositionId;
+	}
+
 	@Override
 	public String toString() {
 		return "Employee{" +
@@ -127,6 +152,7 @@ public class Employee {
 				", email='" + email + '\'' +
 				", beginTime=" + beginTime +
 				", status='" + status + '\'' +
+				", workPositionId=" + workPositionId +
 				'}';
 	}
 }

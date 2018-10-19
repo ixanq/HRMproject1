@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="com.ixanq.entity.Visitor"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" isELIgnored="false"%>
@@ -5,7 +6,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>部门</title>
+    <title>部门管理</title>
     <style>
         body{
             width: 100%;
@@ -13,11 +14,64 @@
             background-image: url("/logo/backgrond.jpg");
             background-repeat: repeat;
         }
+        #head{
+            width: 40%;
+            margin: 20px auto;
+            text-align: center;
+            font-size: 18px;
+            text-decoration-color: #677985;
+            background-color: #67b168;
+        }
+        tr,td{
+            text-align: center;
+        }
     </style>
-    <script src="${pageContext.request.contextPath}/bootstrap/js/jquery-1.7.2.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}\bootstrap\js\jquery-1.7.2.js"></script>
+    <script>
+        $(function(){
+            $(".add").click(function(){
+                $("form").show();
+            })
+        })
+    </script>
 </head>
 <body>
 <%@include file="managerBaseNav.jsp" %>
-部门
+<div id="head">
+    <table border="2px"  align="center" style="background-color: green">
+        <tr>
+            <td>ID</td>
+            <td>部门名称</td>
+            <td>查看职位</td>
+            <td>删除部门</td>
+        </tr>
+        <c:forEach items="${requestScope.allDepartment}" var="department">
+            <tr>
+                <td>${department.id}</td>
+                <td>${department.name}</td>
+                <td><a href="${pageContext.request.contextPath}/lookDepartmentWorkPosirion?id=${department.id}">查看职位</a></td>
+                <td><a href="${pageContext.request.contextPath}/deleteDepartmentById?id=${department.id}">删除部门</a></td>
+
+            </tr>
+        </c:forEach>
+        <tr>
+            <td colspan="4"><a  class="add">添加部门</a></td>
+        </tr>
+    </table>
+            <br><br><br>
+    <form hidden action="${pageContext.request.contextPath}/addDepartmentToDB" method="post">
+        <table width="35%" border="2px" cellpadding="0" cellspacing="0" style="background-color: #00aFFF">
+            <tr>
+                <td>部门名称：</td>
+                <td><input type="text" name="name" ></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="确认"></td>
+            </tr>
+        </table>
+    </form>
+    </td>
+</div>
 </body>
 </html>
+

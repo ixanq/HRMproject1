@@ -84,6 +84,14 @@
 <body bgcolor="#bdb76b">
       <div id="ahref"><a href="adminLogin.jsp">管理员登录</a></div>
       <div class="ahref"><a href="employeeLogin.jsp">员工登录</a></div>
+
+      <div style="width: 50%;margin: 5px auto;background-color:green;font-size: 26">
+          <c:if test="${requestScope.typeError!=null}">
+              当前账号已经是员工，请前往员工登录界面。<br>
+              或者换个其他账号试试
+          </c:if>
+      </div>
+
 	  <form action="${pageContext.request.contextPath}/visitorNav" method="post" >
           <div id="head">游客登录</div>
       <table bgcolor="gray" border="2px" align="center">

@@ -51,8 +51,8 @@
             <ul class="nav navbar-nav" id="ul1">
                 <li class="active"><a href="${pageContext.request.contextPath}/mworkAtendance">查看考勤 <span class="sr-only">(current)</span></a></li>
                 <li><a href="${pageContext.request.contextPath}/mmanageEmployee">员工管理</a></li>
-                <li><a href="${pageContext.request.contextPath}/mmanageDepartment">部门管理</a></li>
-                <li><a href="${pageContext.request.contextPath}/mmanageWorkPosition">职位管理</a></li>
+                <li><a href="${pageContext.request.contextPath}/mmanageDepartment">部门职位管理</a></li>
+               <%-- <li><a href="${pageContext.request.contextPath}/mmanageWorkPosition">职位管理</a></li>--%>
 
                 <%--<li><a href="${pageContext.request.contextPath}/manageAdvertise">招聘管理</a></li>--%>
 

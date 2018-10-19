@@ -94,5 +94,21 @@ public interface ManagerDao {
     GoInterview findGoInterviewByGointerviewId(Integer gointerviewId);
 
     List<ResumeForManager> findResumeForManagerByVisitorName(String name);
+
+    void updateGoInterview(GoInterview goInterview1);
+
+    EmployeeInfo findEmployeeInfoByworkPositionId(Integer workPositionId);
+
+    EmployeeInfo findEmployeeInfoByDepartmentId(Integer departmentId);
+
+    List<EmployeeInfo> findAllEmployeeInfo();
+
+    Employee findEmployeeByVisitorName(String name);
+
+    void addEmployeeInfo(EmployeeInfo employeeInfo);
+
+    EmployeeInfo findEmployeeInfoByEmployeeId(Integer employeeId);
+
+    void updateEmployeeInfo(EmployeeInfo eInfo);
 }
 

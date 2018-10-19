@@ -3,24 +3,35 @@ package com.ixanq.entity;
 public class EmployeeInfo {
     private Integer id;
     private Integer employeeId;//用于查看个人信息
-    private Integer trainID;//培训信息
+    private Integer trainId;//培训信息
     private Integer salaryId;
     private Integer rewardId;//奖惩信息
-    private Integer checkWorkAttendId;//考勤
+    private Integer checkworkattendId;//考勤
     private Integer departmentId;//部门
     private Integer workPositionId;//职位
 
     public EmployeeInfo() {
     }
 
-    public EmployeeInfo(Integer id, Integer employeeId, Integer trainID, Integer salaryId, Integer rewardId, Integer checkWorkAttendId, Integer departmentId, Integer workPositionId) {
+    public EmployeeInfo(Integer employeeId, Integer trainId, Integer salaryId, Integer rewardId, Integer checkworkattendId, Integer departmentId, Integer workPositionId) {
+
+        this.employeeId = employeeId;
+        this.trainId = trainId;
+        this.salaryId = salaryId;
+        this.rewardId = rewardId;
+        this.checkworkattendId = checkworkattendId;
+        this.departmentId = departmentId;
+        this.workPositionId = workPositionId;
+    }
+
+    public EmployeeInfo(Integer id, Integer employeeId, Integer trainId, Integer salaryId, Integer rewardId, Integer checkworkattendId, Integer departmentId, Integer workPositionId) {
 
         this.id = id;
         this.employeeId = employeeId;
-        this.trainID = trainID;
+        this.trainId = trainId;
         this.salaryId = salaryId;
         this.rewardId = rewardId;
-        this.checkWorkAttendId = checkWorkAttendId;
+        this.checkworkattendId = checkworkattendId;
         this.departmentId = departmentId;
         this.workPositionId = workPositionId;
     }
@@ -42,12 +53,12 @@ public class EmployeeInfo {
         this.employeeId = employeeId;
     }
 
-    public Integer getTrainID() {
-        return trainID;
+    public Integer getTrainId() {
+        return trainId;
     }
 
-    public void setTrainID(Integer trainID) {
-        this.trainID = trainID;
+    public void setTrainId(Integer trainId) {
+        this.trainId = trainId;
     }
 
     public Integer getSalaryId() {
@@ -66,12 +77,12 @@ public class EmployeeInfo {
         this.rewardId = rewardId;
     }
 
-    public Integer getCheckWorkAttendId() {
-        return checkWorkAttendId;
+    public Integer getCheckworkattendId() {
+        return checkworkattendId;
     }
 
-    public void setCheckWorkAttendId(Integer checkWorkAttendId) {
-        this.checkWorkAttendId = checkWorkAttendId;
+    public void setCheckworkattendId(Integer checkworkattendId) {
+        this.checkworkattendId = checkworkattendId;
     }
 
     public Integer getDepartmentId() {
@@ -95,10 +106,10 @@ public class EmployeeInfo {
         return "EmployeeInfo{" +
                 "id=" + id +
                 ", employeeId=" + employeeId +
-                ", trainID=" + trainID +
+                ", trainId=" + trainId +
                 ", salaryId=" + salaryId +
                 ", rewardId=" + rewardId +
-                ", checkWorkAttendId=" + checkWorkAttendId +
+                ", checkworkattendId=" + checkworkattendId +
                 ", departmentId=" + departmentId +
                 ", workPositionId=" + workPositionId +
                 '}';
