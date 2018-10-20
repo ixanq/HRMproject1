@@ -14,6 +14,14 @@ public class CheckWorkAttendance {
 	public CheckWorkAttendance() {
 	}
 
+	public CheckWorkAttendance(Integer employeeID, Date beginWork, Date endWork, String isLate, String isLeave) {
+		this.employeeID = employeeID;
+		this.beginWork = beginWork;
+		this.endWork = endWork;
+		this.isLate = isLate;
+		this.isLeave = isLeave;
+	}
+
 	public CheckWorkAttendance(Integer id, Integer employeeID, Date beginWork, Date endWork, String isLate, String isLeave) {
 
 		this.id = id;

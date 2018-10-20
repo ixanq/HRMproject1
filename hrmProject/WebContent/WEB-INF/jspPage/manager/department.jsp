@@ -60,7 +60,7 @@
     </table>
             <br><br><br>
     <form hidden action="${pageContext.request.contextPath}/addDepartmentToDB" method="post">
-        <table width="35%" border="2px" cellpadding="0" cellspacing="0" style="background-color: #00aFFF">
+        <table width="50%" border="2px" cellpadding="0" cellspacing="0" style="background-color: #00aFFF" align="center">
             <tr>
                 <td>部门名称：</td>
                 <td><input type="text" name="name" ></td>

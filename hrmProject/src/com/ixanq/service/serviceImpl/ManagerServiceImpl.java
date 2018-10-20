@@ -55,12 +55,12 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public void deleteWorkPosition(Integer byID) {
-
+        managerDao.deleteWorkPosition(byID);
     }
 
     @Override
     public void updateWorkPosition(WorkPosition workPosition) {
-
+        managerDao.updateWorkPosition(workPosition);
     }
 
     @Override
@@ -95,7 +95,7 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public List<Employee> findAllEmployee() {
-        return null;
+        return managerDao.findAllEmployee();
     }
 
     @Override
@@ -150,7 +150,7 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public void addTrain(Train train) {
-
+        managerDao.addTrain(train);
     }
 
     @Override
@@ -170,12 +170,12 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public List<Train> findAllTrain() {
-        return null;
+        return managerDao.findAllTrain();
     }
 
     @Override
     public void addReward(Reward reward) {
-
+        managerDao.addReward(reward);
     }
 
     @Override
@@ -316,5 +316,20 @@ public class ManagerServiceImpl implements ManagerService {
     @Override
     public void updateEmployeeInfo(EmployeeInfo eInfo) {
         managerDao.updateEmployeeInfo(eInfo);
+    }
+
+    @Override
+    public void deleteGoInterviewById(Integer id) {
+        managerDao.deleteGoInterviewById(id);
+    }
+
+    @Override
+    public void deleteWorkPositionByDepartmentId(Integer departmentId) {
+        managerDao.deleteWorkPositionByDepartmentId(departmentId);
+    }
+
+    @Override
+    public List<Reward> findRewardByEmployeeId(Integer employeeId1) {
+        return managerDao.findRewardByEmployeeId(employeeId1);
     }
 }

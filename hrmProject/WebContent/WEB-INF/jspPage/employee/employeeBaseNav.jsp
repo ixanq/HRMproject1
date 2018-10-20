@@ -50,7 +50,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav" id="ul1">
                 <li class="active"><a href="${pageContext.request.contextPath}/eeployeeInfoctrl">个人信息 <span class="sr-only">(current)</span></a></li>
-                <li><a href="${pageContext.request.contextPath}/eworkAttandance">考勤记录</a></li>
+                <li><a href="${pageContext.request.contextPath}/eworkAttandance">考勤</a></li>
                 <li><a href="${pageContext.request.contextPath}/edeptWorkPosition">部门职位</a></li>
                 <li><a href="${pageContext.request.contextPath}/etrain">培训</a></li>
                 <%--<li class="dropdown">

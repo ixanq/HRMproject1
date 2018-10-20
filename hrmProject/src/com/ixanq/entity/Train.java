@@ -12,14 +12,15 @@ public class Train {
 	public Train() {
 	}
 
-	public Train(Integer id, String name, Date trainTime) {
+	public Train(String name, Date trainTime, String department) {
 
-		this.id = id;
 		this.name = name;
 		this.trainTime = trainTime;
+		this.department = department;
 	}
 
 	public Train(Integer id, String name, Date trainTime, String department) {
+
 		this.id = id;
 		this.name = name;
 		this.trainTime = trainTime;
@@ -51,6 +52,14 @@ public class Train {
 		this.trainTime = trainTime;
 	}
 
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
+	}
+
 	@Override
 	public String toString() {
 		return "Train{" +
@@ -59,13 +68,5 @@ public class Train {
 				", trainTime=" + trainTime +
 				", department='" + department + '\'' +
 				'}';
-	}
-
-	public String getDepartment() {
-		return department;
-	}
-
-	public void setDepartment(String department) {
-		this.department = department;
 	}
 }

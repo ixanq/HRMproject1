@@ -33,4 +33,24 @@
         SELECT * FROM check_work_attendance
     </select>
 
+    <select id="findCheckWorkAttendanceByEIdAndBeginDayLike" resultType="CheckWorkAttendance">
+        SELECT  * FROM check_work_attendance WHERE employee_id=#{eId} and begin_work LIKE #{likeDay}
+    </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </mapper>

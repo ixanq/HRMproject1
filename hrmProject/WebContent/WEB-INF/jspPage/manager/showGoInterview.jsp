@@ -33,7 +33,7 @@
                     var $td=$(this).parent().parent().children();
                     var $tr=$(this).parent().parent();
                     var id=$td[0].innerHTML;
-                    var url="${pageContext.request.contextPath}/ajaxDeleteRumeForManagerById";
+                    var url="${pageContext.request.contextPath}/ajaxDeleteGoInterviewForManagerById";
                     var args={"id":id};
                     $.post(url,args,function(data){
                         if(data=="yes"){

@@ -110,5 +110,11 @@ public interface ManagerDao {
     EmployeeInfo findEmployeeInfoByEmployeeId(Integer employeeId);
 
     void updateEmployeeInfo(EmployeeInfo eInfo);
+
+    void deleteGoInterviewById(Integer id);
+
+    void deleteWorkPositionByDepartmentId(Integer departmentId);
+
+    List<Reward> findRewardByEmployeeId(Integer employeeId1);
 }
 

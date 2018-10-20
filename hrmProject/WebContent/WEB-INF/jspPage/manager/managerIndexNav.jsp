@@ -71,7 +71,7 @@
         </c:if>
 
         <c:if test="${requestScope.NochangeToEmployee!=null}">
-            暂时没有暂时没有该员工信息<br>
+            暂时没有该员工信息<br>
         </c:if>
         <c:if test="${requestScope.changeToEmployeeSeccessfully!=null}">
             录用成功<br>
@@ -87,6 +87,18 @@
         </c:if>
         <c:if test="${requestScope.deleteDepartmentByIdFalse!=null}">
             该部门下存在用户，不能删除<br>
+        </c:if>
+        <c:if test="${requestScope.ajaxDeleteTrainById!=null}">
+            该培训信息不存在<br>
+        </c:if>
+        <c:if test="${requestScope.changeToEmployeeExist!=null}">
+            该用户已经是员工，不能再次录用<br>
+        </c:if>
+        <c:if test="${requestScope.deleteWorkPositionForDepartmen!=null}">
+            该职位下存在员工，无法删除<br>
+        </c:if>
+        <c:if test="${requestScope.addRewardForEmployee!=null}">
+            奖惩信息添加成功<br>
         </c:if>
 
 

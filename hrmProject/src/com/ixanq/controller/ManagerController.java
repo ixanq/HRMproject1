@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.servlet.http.HttpServletRequest;
+
 import javax.servlet.http.HttpSession;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -143,12 +143,15 @@ public class ManagerController {
 
     /**
      * 管理员培训管理界面
-     * @param manager
      * @param model
      * @return
      */
     @RequestMapping("mmanageTrain")
-    public String manageTrain(Manager manager, Model model){
+    public String manageTrain(Model model){
+        List<Train> allTrain = managerService.findAllTrain();
+        model.addAttribute("allTrain",allTrain);
+        List<Department> allDepartment = managerService.findAllDepartment();
+        model.addAttribute("allDepartment",allDepartment);
         return "manager/train";
     }
 
@@ -292,6 +295,14 @@ public class ManagerController {
         }
     }
 
+    @RequestMapping("ajaxDeleteGoInterviewForManagerById")
+    @ResponseBody
+    public String ajaxDeleteGoInterviewForManagerById(Integer id,Model model){
+       managerService.deleteGoInterviewById(id);
+       return "yes";
+    }
+
+
 
     @RequestMapping("lookTheGoInterviewDetailsForAdmin")
     public String lookTheGoInterviewDetailsForAdmin(String id,Model model){
@@ -320,13 +331,19 @@ public class ManagerController {
             return "manager/managerIndexNav";
         }
         ResumeForManager r=resumeForManagers.get(0);
+        System.out.println(r);
         Visitor visitor = visitorService.findByName(r.getVisitorName());
         Employee employee=new Employee(-1,visitor.getName(),visitor.getPassword(),r.getName(),r.getGender(),r.getAge(),
                 r.getMaster(),r.getEmail(),new Date(),"在职",r.getWorkPositionId());
         System.out.println(employee);
-        managerService.addEmployee(employee);
         Employee employee1=managerService.findEmployeeByVisitorName(visitor.getName());
-        EmployeeInfo employeeInfo=new EmployeeInfo(-1,employee1.getId(),-1,-1,-1,-1,r.getWorkPositionId(),r.getDepartmentId());
+        if(employee1!=null){
+            model.addAttribute("changeToEmployeeExist",44);
+            return "manager/managerIndexNav";
+        }
+        managerService.addEmployee(employee);
+        Employee employee2=managerService.findEmployeeByVisitorName(visitor.getName());
+        EmployeeInfo employeeInfo=new EmployeeInfo(-1,employee2.getId(),-1,-1,-1,-1,r.getWorkPositionId(),r.getDepartmentId());
         managerService.addEmployeeInfo(employeeInfo);
         model.addAttribute("changeToEmployeeSeccessfully",44);
         return "manager/managerIndexNav";
@@ -355,22 +372,22 @@ public class ManagerController {
     @RequestMapping("addworkPositionForDepartment")
     public String addworkPositionForDepartment(String name, Integer departmentId, Model model, RedirectAttributes attr){
        WorkPosition workPosition=new WorkPosition(-1,name,departmentId,new Date());
+        System.out.println(workPosition);
        managerService.addWorkPosition(workPosition);
        attr.addAttribute("id",departmentId.toString());
         return "redirect:/lookDepartmentWorkPosirion";
     }
 
     @RequestMapping("deleteWorkPositionForDepartmen")
-    public String deleteWorkPositionForDepartmen(String id, Model model){
-        Integer workPositionId = Integer.valueOf(id);
-        EmployeeInfo employeeInfo=managerService.findEmployeeInfoByworkPositionId(workPositionId);
+    @ResponseBody
+    public String deleteWorkPositionForDepartmen(Integer id, Model model){
+        EmployeeInfo employeeInfo=managerService.findEmployeeInfoByworkPositionId(id);
         if(employeeInfo!=null){
             model.addAttribute("deleteWorkPositionForDepartmen",11);
-        }else{
-            model.addAttribute("deleteWorkPositionForDepartmenOk",11);
-
+            return "manager/managerIndexNav";
         }
-        return "manager/managerIndexNav";
+        managerService.deleteWorkPosition(id);
+        return "ok";
     }
 
 
@@ -389,6 +406,7 @@ public class ManagerController {
             model.addAttribute("deleteDepartmentByIdFalse",333);
             return "manager/managerIndexNav";
         }
+        managerService.deleteWorkPositionByDepartmentId(departmentId);
         managerService.deleteDepartment(departmentId);
         return "redirect:/mmanageDepartment";
     }
@@ -414,6 +432,9 @@ public class ManagerController {
 
     @RequestMapping("updateEmployeeAndCommit")
     public String updateEmployeeAndCommit(Integer employeeId,Integer departmentId,Integer workPositionId,Model model){
+        System.out.println(employeeId);
+        System.out.println(departmentId);
+        System.out.println(workPositionId);
         Employee e = managerService.findEmployeeById(employeeId);
         managerService.updateEmployee(new Employee(e.getId(),e.getName(),e.getPassword(),e.getRealName(),e.getGender(),e.getAge()
                 ,e.getDegree(),e.getEmail(),e.getBeginTime(),e.getStatus(),workPositionId));
@@ -423,8 +444,42 @@ public class ManagerController {
         return "redirect:/mmanageDepartment";
     }
 
+    @RequestMapping("addTrainForDepartment")
+    public String addTrainForDepartment(String name,String trainDate,String department,Model model) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:MM:SS");
+        Date parse = new Date();
+        try {
+            parse = sdf.parse(trainDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        managerService.addTrain(new Train(name, parse, department));
+
+        return "forward:/mmanageTrain";
+    }
 
 
+    @RequestMapping("ajaxDeleteTrainById")
+    @ResponseBody
+    public String ajaxDeleteTrainById(Integer id,Model model){
+        Train train = managerService.findTrainById(id);
+        if(train==null){
+            model.addAttribute("ajaxDeleteTrainById",44);
+            return "manager/managerIndexNav";
+        }else {
+            managerService.deleteTrain(id);
+            return "deleteSeccessfully";
+        }
+    }
+
+    @RequestMapping("addRewardForEmployee")
+    public String addRewardMesseges(String employeeId,String reason,Integer money,Model model){
+        Integer employeeId1 = Integer.valueOf(employeeId);
+        Reward reward=new Reward(-1,employeeId1,reason,money,new Date());
+        managerService.addReward(reward);
+        model.addAttribute("addRewardForEmployee",33);
+        return "manager/managerIndexNav";
+    }
 
 
 

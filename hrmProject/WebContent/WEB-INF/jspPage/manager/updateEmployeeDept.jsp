@@ -1,5 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="com.ixanq.entity.Visitor"%>
+<%@ page import="java.util.List" %>
+<%@ page import="com.ixanq.entity.Department" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" isELIgnored="false"%>
 <!DOCTYPE html>
@@ -15,7 +17,7 @@
             background-repeat: repeat;
         }
         #head{
-            width: 40%;
+            width: 70%;
             margin: 20px auto;
             text-align: center;
             font-size: 18px;
@@ -28,7 +30,7 @@
     <script>
         $(function(){
             $(".update").click(function(){
-                $("#first").hide();
+               /* $("#first").hide();*/
                 $("form").show();
             })
         })
@@ -74,33 +76,38 @@
             <td>员工部门职位</td>
             <td>修改职位</td>
         </tr>
-            <tr>
-                <td>${employee.id}</td>
-                <td>${employee.realName}</td>
+        <tr>
+            <td>${requestScope.employee.id}</td>
+            <td>${requestScope.employee.realName}</td>
+            <td class="first">${requestScope.department.name} &nbsp;&nbsp;${requestScope.workPosition.name}</td>
+            <td><a class="update">修改</a></td>
 
-                <td class="first">${department.name} &nbsp;&nbsp;${workPosition.name}</td>
-
-                <form hidden action="${pageContext.request.contextPath}/updateEmployeeAndCommit" method="post">
-                    <input type="hidden" name="employeeId" value="${employee.id}">
-                <td class="ifUpdaate">
-                    <select id="departmentId" style="width:70px;" name="departmentId" onchange="firstSel()">
-                        <c:forEach items="${requestScope.allDepartment}" var="department">
-                            <option value="${department.id}">${department.name}</option>
-                        </c:forEach>
-
-                    </select>
-                    <select id="workPositionId" name="workPositionId">
-
-                    </select>
-                </td>
-                    <td><input type="submit" value="确认"></td>
-                </form>
-
-                <td><a class="update">修改</a></td>
-                <td><a href="javaScript:history.back(-1);">返回</a></td>
-
-            </tr>
+        </tr>
+        <tr>
+            <td colspan="4"><a href="javaScript:history.back(-1);">返回</a></td>
+        </tr>
     </table>
+   <%-- <%
+        List<Department> departments=(List<Department>)request.getAttribute("allDepartment");
+        departments.get()
+    %>--%>
+    <form hidden action="${pageContext.request.contextPath}/updateEmployeeAndCommit" method="post">
+        <table style="width: 65%;" align="center" bgcolor="lime" border="2px" color="lime">
+            <input type="hidden" name="employeeId" value="${requestScope.employee.id}">
+            <td class="ifUpdaate">
+                <select id="departmentId" style="width:70px;" name="departmentId" onchange="firstSel()">
+                    <c:forEach items="${requestScope.allDepartment}" var="department">
+                        <option value="${department.id}">${department.name}</option>
+                    </c:forEach>
+
+                </select>
+                <select id="workPositionId" name="workPositionId">
+
+                </select>
+            </td>
+            <td><input type="submit" value="确认"></td>
+        </table>
+    </form>
 </div>
 </body>
 </html>

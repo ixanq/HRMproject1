@@ -45,7 +45,9 @@
     <delete id="deleteWorkPosition" parameterType="Integer">
         DELETE FROM work_position WHERE id=#{id}
     </delete>
-
+    <delete id="deleteWorkPositionByDepartmentId" parameterType="Integer">
+        DELETE FROM work_position WHERE department_id=#{departmentId}
+    </delete>
     <update id="updateWorkPosition" parameterType="WorkPosition">
         UPDATE work_position SET name=#{name},department_id=#{departmentId},create_time=#{createTime}
         WHERE  id=#{id}
@@ -69,7 +71,7 @@
                     <!--员工的增删改查-->
     <insert id="addEmployee" parameterType="Employee">
         INSERT INTO employee(name,password,real_name, gender, age, degree, email, begin_time,status,work_position_id)
-        VALUES(#{name},#{password},#{realName},#{gender},#{age},#{degree},#{email},#{beginTime},#{status}#{workPositionId})
+        VALUES(#{name},#{password},#{realName},#{gender},#{age},#{degree},#{email},#{beginTime},#{status},#{workPositionId})
     </insert>
 
     <delete id="deleteEmployee" parameterType="Integer">
@@ -163,7 +165,7 @@
 
                         <!--奖惩增删改查-->
     <insert id="addReward" parameterType="Reward">
-        insert into reward (reason, money, "time") values (#{reason},#{money},#{time})
+        insert into reward (employee_id,reason, money, "time") values (#{employeeId},#{reason},#{money},#{time})
     </insert>
 
     <delete id="deleteReward" parameterType="Integer">
@@ -171,11 +173,14 @@
     </delete>
 
     <update id="updateReward" parameterType="Reward">
-        UPDATE reward SET reason=#{reason} ,money=#{money} ,time=#{time}
+        UPDATE reward SET employee_id=#{employeeId},reason=#{reason} ,money=#{money} ,time=#{time}
     </update>
 
     <select id="findRewardById" parameterType="Integer" resultType="Reward">
         SELECT * FROM reward WHERE id=#{id}
+    </select>
+    <select id="findRewardByEmployeeId" parameterType="Integer" resultType="Reward">
+        SELECT * FROM reward WHERE employee_id=#{employeeId1}
     </select>
 
     <select id="findAllReward" resultType="Reward">
@@ -213,6 +218,7 @@
     </select>
     <delete id="deleteAdvertiseById" parameterType="Integer">
         DELETE FROM advertises WHERE id=#{id}
+        DELETE FROM advertises WHERE id=#{id}
     </delete>
 
     <insert id="addInterviewforVisitor" parameterType="Interview">
@@ -241,6 +247,9 @@
     <update id="updateGoInterview" parameterType="GoInterview">
         UPDATE go_interview SET visitor_name=#{visitorName},view_status=#{viewStatus},pass_status=#{passStatus} WHERE id=#{id}
     </update>
+    <delete id="deleteGoInterviewById" parameterType="Integer">
+        DELETE  FROM go_interview WHERE id=#{id}
+    </delete>
 
     <select id="findEmployeeInfoByworkPositionId" parameterType="Integer" resultType="EmployeeInfo">
         SELECT * FROM  employeeinfo WHERE workposition_id=#{workPositionId}
@@ -263,10 +272,10 @@
 
     <insert id="addEmployeeInfo" parameterType="EmployeeInfo">
         INSERT INTO employeeinfo(id,employee_id, train_id, salary_id, reward_id, checkworkattend_id, department_id, workposition_id)
-        VALUES (#{id},#{employeeId},#{trainID},#{salaryId},#{rewardId},#{checkWorkAttendId},#{departmentId},#{workPositionId})
+        VALUES (#{id},#{employeeId},#{trainId},#{salaryId},#{rewardId},#{checkworkattendId},#{departmentId},#{workPositionId})
     </insert>
     <update id="updateEmployeeInfo" parameterType="EmployeeInfo">
-        UPDATE employeeinfo SET employee_id=#{employeeId},train_id=#{trainId},salary_id=#{salaryId},reward_id=#{rewardId},checkworkattend_id=#{checkWorkAttendId},department_id=#{departmentId},workposition_id=#{workPositionId} WHERE id=#{id}
+        UPDATE employeeinfo SET employee_id=#{employeeId},train_id=#{trainId},salary_id=#{salaryId},reward_id=#{rewardId},checkworkattend_id=#{checkworkattendId},department_id=#{departmentId},workposition_id=#{workPositionId} WHERE id=#{id}
     </update>
 
 

@@ -4,6 +4,7 @@ import com.ixanq.entity.CheckWorkAttendance;
 import com.ixanq.entity.Employee;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 public interface EmployeeDao {
@@ -17,4 +18,7 @@ public interface EmployeeDao {
     public void updateCheckWorkAttendance(CheckWorkAttendance checkWorkAttendance);
     public CheckWorkAttendance findCheckWorkAttendanceByID(Integer byId);
     public List<CheckWorkAttendance> findAllCheckWorkAttendance();
+
+    CheckWorkAttendance findCheckWorkAttendanceByEIdAndBeginDayLike(@Param("eId")Integer eId,@Param("likeDay") String likeDay);
+
 }
