@@ -372,4 +372,24 @@ public class ManagerServiceImpl implements ManagerService {
     public List<CheckWorkAttendance> findAllCheckWorkAttendanceByEIdMonthYear(Integer id, Integer month1, Integer year1) {
         return managerDao.findAllCheckWorkAttendanceByEIdMonthYear(id,month1,year1);
     }
+
+    @Override
+    public List<Reconsider> findAllReconsider() {
+        return managerDao.findAllReconsider();
+    }
+
+    @Override
+    public List<Reconsider> findAllReconsiderMessegess() {
+        return managerDao.findAllReconsiderMessegess();
+    }
+
+    @Override
+    public Reconsider findReconsiderById(Integer id) {
+        return managerDao.findReconsiderById(id);
+    }
+
+    @Override
+    public void deleteReconsiderById(Integer id) {
+        managerDao.deleteReconsiderById(id);
+    }
 }

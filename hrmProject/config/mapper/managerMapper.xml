@@ -303,5 +303,18 @@
         UPDATE employeeinfo SET employee_id=#{employeeId},train_id=#{trainId},salary_id=#{salaryId},reward_id=#{rewardId},checkworkattend_id=#{checkworkattendId},department_id=#{departmentId},workposition_id=#{workPositionId} WHERE id=#{id}
     </update>
 
+    <select id="findAllReconsider" resultType="Reconsider">
+        SELECT * FROM reconsider
+    </select>
+
+    <select id="findAllReconsiderMessegess" resultType="Reconsider">
+        SELECT  * FROM  reconsider
+    </select>
+    <select id="findReconsiderById" parameterType="Integer" resultType="Reconsider">
+        SELECT  * FROM  reconsider WHERE id=#{id}
+    </select>
+    <delete id="deleteReconsiderById" parameterType="Integer">
+        DELETE  FROM  reconsider WHERE id=#{id}
+    </delete>
 
 </mapper>

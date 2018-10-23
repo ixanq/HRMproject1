@@ -115,6 +115,18 @@
         <c:if test="${requestScope.handelSalarySeccess!=null}">
             发放工资成功<br>
         </c:if>
+        <c:if test="${requestScope.outOfTheEmployeeFromWork!=null}">
+            操作成功，已开除<br>
+        </c:if>
+        <c:if test="${requestScope.thereAreReconsiderMesseges!=null}">
+            您有需要处理的复议内容，请前往处理<br>
+        </c:if>
+        <c:if test="${requestScope.reconsiderManagementEmpty!=null}">
+            暂时没有回馈信息<br>
+        </c:if>
+        <c:if test="${requestScope.ajaxDeleteReconsiderByIdEmpty!=null}">
+            暂时没有回馈信息<br>
+        </c:if>
 
 
 

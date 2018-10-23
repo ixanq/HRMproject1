@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.ixanq.entity.WorkPosition" %>
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -76,7 +77,7 @@
                         <td>${sessionScope.employee.realName}</td>
                         <td>${reward.reason}</td>
                         <td>${reward.money}</td>
-                        <td>${reward.time}</td>
+                        <td><f:formatDate value="${reward.time}"/></td>
                     </tr>
                 </c:forEach>
                 <c:if test="${empty rewards}">

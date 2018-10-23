@@ -49,7 +49,7 @@
             <form action="${pageContext.request.contextPath}/commitTheError" method="post">
                 <table width="55%" style="background-color: #c0a16b">
                     <tr>
-                        <td colspan="3">请输入辅复议内容：</td>
+                        <td colspan="3">请输入复议内容：</td>
                         <td colspan="1"><input type="submit" value="确定"></td>
                     </tr>
                     <tr>

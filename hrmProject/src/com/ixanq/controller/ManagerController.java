@@ -74,6 +74,10 @@ public class ManagerController {
         } else if(null!=manager3) {//账号密码正确
             List<ResumeForManager> resumes=managerService.findResumeByStatus("未读");
             List<GoInterview> goInterviews=managerService.findGoInterviewByStatus("未读");
+            List<Reconsider> reconsiders= managerService.findAllReconsider();
+            if(null!=reconsiders&&reconsiders.size()!=0){
+                model.addAttribute("thereAreReconsiderMesseges",55);
+            }
             if(null!=resumes&&resumes.size()!=0){
                 model.addAttribute("thereAreMesseges","thereAreMesseges");
             }
@@ -93,26 +97,16 @@ public class ManagerController {
 
     /**
      * 管理员考勤界面
-     * @param manager
      * @param model
      * @return
      */
     @RequestMapping("mworkAtendance")
-    public String workAtendance(Manager manager, Model model){
+    public String workAtendance( Model model){
+        List<Employee> employees = managerService.findAllEmployee();
+        model.addAttribute("employees",employees);
         return "manager/workAttandance";
     }
 
-    /**
-     * 管理员员工管理界面
-     * @param model
-     * @return
-     */
-    @RequestMapping("mmanageEmployee")
-    public String manageEmployee( Model model){
-        List<Employee> employees = managerService.findAllEmployee();
-        model.addAttribute("employees",employees);
-        return "manager/employee";
-    }
 
     /**
      * 管理员部门管理界面
@@ -140,7 +134,7 @@ public class ManagerController {
             return "manager/managerIndexNav";
         }else {
             model.addAttribute("advertises",advertises);
-        return "manager/advertise";
+            return "manager/advertise";
         }
     }
 
@@ -183,7 +177,7 @@ public class ManagerController {
             return "manager/managerIndexNav";
         }else{
             model.addAttribute("resumesForManager",resumesForManager);
-        return "manager/showResume";
+            return "manager/showResume";
         }
     }
 
@@ -250,7 +244,7 @@ public class ManagerController {
                 return "manager/managerIndexNav";
             }
             model.addAttribute("advertises",advertises);
-        return "manager/showAdvertise";
+            return "manager/showAdvertise";
         }
 
     }
@@ -272,7 +266,7 @@ public class ManagerController {
             model.addAttribute("visitorViewxist",88);
             return "manager/managerIndexNav";
         }
-       managerService.addInterviewforVisitor(interview);
+        managerService.addInterviewforVisitor(interview);
         model.addAttribute("visitorViewSeccessfully",99);
         return "manager/managerIndexNav";
     }
@@ -292,8 +286,8 @@ public class ManagerController {
     @RequestMapping("ajaxDeleteGoInterviewForManagerById")
     @ResponseBody
     public String ajaxDeleteGoInterviewForManagerById(Integer id,Model model){
-       managerService.deleteGoInterviewById(id);
-       return "yes";
+        managerService.deleteGoInterviewById(id);
+        return "yes";
     }
 
 
@@ -366,10 +360,10 @@ public class ManagerController {
 
     @RequestMapping("addworkPositionForDepartment")
     public String addworkPositionForDepartment(String name, Integer departmentId, Model model, RedirectAttributes attr){
-       WorkPosition workPosition=new WorkPosition(-1,name,departmentId,new Date());
+        WorkPosition workPosition=new WorkPosition(-1,name,departmentId,new Date());
         System.out.println(workPosition);
-       managerService.addWorkPosition(workPosition);
-       attr.addAttribute("id",departmentId.toString());
+        managerService.addWorkPosition(workPosition);
+        attr.addAttribute("id",departmentId.toString());
         return "redirect:/lookDepartmentWorkPosirion";
     }
 
@@ -483,47 +477,128 @@ public class ManagerController {
     }
 
 
-     @RequestMapping("mmanageSalary")
+    @RequestMapping("mmanageSalary")
     public String manageSalary(String employeeId, Model model){
-         Integer employeeId1 = Integer.valueOf(employeeId);
-         Calendar c = Calendar.getInstance();
-         int year = c.get(Calendar.YEAR);
-         int month = c.get(Calendar.MONTH)+1;
-         int date = c.get(Calendar.DATE);
-         System.out.println(year+" "+month+" "+date);
-         if(date>10){
-             model.addAttribute("cantbehandelSalary",date);
-             return "manager/managerIndexNav";
-         }
-         String monthLike="";
-         if(month==1){
-             year = c.get(Calendar.YEAR)-1;//当年减去一年
-             monthLike="%"+year+"-12%";//如果是第二年一月份，则发放第一年12月份的的工资
-             month=12;
-         }else{
-             monthLike="%"+year+"-"+(month-1)+"%";
-             month=month-1;
-         }
-         Salary salary=managerService.findSalaryByEIdAndByYearAndByMonth(employeeId1,year,month);
-         if(salary!=null){//已经发放过
-             model.addAttribute("salaryHasHandeled",99);
-             return "manager/managerIndexNav";
-         }
-         List<Reward> rewards = managerService.findRewardByEmployeeIdAndByMonthLike(employeeId1,monthLike);
-         List<CheckWorkAttendance> attendances=managerService.findAllCheckWorkAttendanceByEIdAndByMonth(employeeId1,monthLike);
-         Integer TotalSalary=0;
-         for(Reward r:rewards){
-             TotalSalary+=r.getMoney();
-         }
-         Integer eSalary=attendances.size()*250+TotalSalary;//员工总工资
-         Salary salary1=new Salary(eSalary,employeeId1,month,year,attendances.size());
-         managerService.addSalary(salary1);
-         model.addAttribute("handelSalarySeccess",55);
+        Integer employeeId1 = Integer.valueOf(employeeId);
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH)+1;
+        int date = c.get(Calendar.DATE);
+        System.out.println(year+" "+month+" "+date);
+        if(date>10){
+            model.addAttribute("cantbehandelSalary",date);
+            return "manager/managerIndexNav";
+        }
+        String monthLike="";
+        if(month==1){
+            year = c.get(Calendar.YEAR)-1;//当年减去一年
+            monthLike="%"+year+"-12%";//如果是第二年一月份，则发放第一年12月份的的工资
+            month=12;
+        }else{
+            monthLike="%"+year+"-"+(month-1)+"%";
+            month=month-1;
+        }
+        Salary salary=managerService.findSalaryByEIdAndByYearAndByMonth(employeeId1,year,month);
+        if(salary!=null){//已经发放过
+            model.addAttribute("salaryHasHandeled",99);
+            return "manager/managerIndexNav";
+        }
+        List<Reward> rewards = managerService.findRewardByEmployeeIdAndByMonthLike(employeeId1,monthLike);
+        List<CheckWorkAttendance> attendances=managerService.findAllCheckWorkAttendanceByEIdAndByMonth(employeeId1,monthLike);
+        Integer TotalSalary=0;
+        for(Reward r:rewards){
+            TotalSalary+=r.getMoney();
+        }
+        Integer eSalary=attendances.size()*250+TotalSalary;//员工总工资
+        Salary salary1=new Salary(eSalary,employeeId1,month,year,attendances.size());
+        managerService.addSalary(salary1);
+        model.addAttribute("handelSalarySeccess",55);
         return "manager/managerIndexNav";
 
     }
 
+    @RequestMapping("lookThisDetailsAttandance")
+    public String lookThisDetailsAttandance(Integer employeeId,Integer month,Integer year,Model model){
+        Employee employee = managerService.findEmployeeById(employeeId);
+        if(month==null||year==null){
+            Calendar c=Calendar.getInstance();
+            year=c.get(Calendar.YEAR);
+            month=c.get(Calendar.MONTH)+1;//当前月
+            month=month-1;//上个月
+        }
+        List<CheckWorkAttendance> attendances=managerService.findAllCheckWorkAttendanceByEIdMonthYear(employee.getId(),month,year);
+        model.addAttribute("attendances",attendances);
+        model.addAttribute("employee",employee);
+        return "manager/attandanceDetails";
+    }
 
+    @RequestMapping("lookThisDetailsSalary")
+    public String lookThisDetailsSalary(Integer employeeId,Integer month,Integer year,Model model){
+        Employee employee = managerService.findEmployeeById(employeeId);
+        if(month==null||year==null){
+            Calendar c=Calendar.getInstance();
+            year=c.get(Calendar.YEAR);
+            month=c.get(Calendar.MONTH)+1;//当前月
+            month=month-1;//上个月
+        }
+        List<Salary> salaries=managerService.findSalaryByEmployeeId(employee.getId(),month,year);
+        model.addAttribute("salaries",salaries);
+        model.addAttribute("employee",employee);
+        return "manager/salaryDetails";
+    }
 
+    @RequestMapping("mmanageEmployee")
+    public String manageEmployee( Model model){
+        List<Employee> employees = managerService.findAllEmployee();
+        model.addAttribute("employees",employees);
+        return "manager/employee";
+    }
+
+    @RequestMapping("lookThisDetailsRewards")
+    public String lookThisDetailsRewards(Integer employeeId,Integer month,Integer year,Model model){
+        Employee employee = managerService.findEmployeeById(employeeId);
+        if(month==null||year==null){
+            Calendar c=Calendar.getInstance();
+            year=c.get(Calendar.YEAR);
+            month=c.get(Calendar.MONTH)+1;//当前月
+            month=month-1;//上个月
+        }
+        List<Reward> rewards=managerService.findAllRewardByEId(employee.getId(),month,year);
+        model.addAttribute("rewards",rewards);
+        model.addAttribute("employee",employee);
+        return "manager/rewardDetails";
+    }
+
+    @RequestMapping("outOfTheEmployeeFromWork")
+    public String outOfTheEmployeeFromWork(Integer employeeId,  Model model){
+        Employee e = managerService.findEmployeeById(employeeId);
+        Employee employee1=new Employee(e.getId(),e.getName(),e.getPassword(),e.getRealName(),
+                e.getGender(),e.getAge(),e.getDegree(),e.getEmail(),e.getBeginTime(),"离职",e.getWorkPositionId());
+        managerService.updateEmployee(employee1);
+        model.addAttribute("outOfTheEmployeeFromWork",44);
+        return "manager/managerIndexNav";
+    }
+
+    @RequestMapping("reconsiderManagement")
+    public String reconsiderManagement(Model model){
+        List<Reconsider> reconsiders=managerService.findAllReconsiderMessegess();
+        if(reconsiders.size()==0){
+            model.addAttribute("reconsiderManagementEmpty",22);
+            return "manager/managerIndexNav";
+        }
+        model.addAttribute("reconsiders",reconsiders);
+        return "manager/reconsiderDetails";
+    }
+
+    @RequestMapping("ajaxDeleteReconsiderById")
+    @ResponseBody
+    public String ajaxDeleteReconsiderById(Integer id){
+        Reconsider reconsider=managerService.findReconsiderById(id);
+        if(reconsider==null){
+            return "false";
+        }
+        managerService.deleteReconsiderById(id);
+        return "seccess";
+    }
 
 }

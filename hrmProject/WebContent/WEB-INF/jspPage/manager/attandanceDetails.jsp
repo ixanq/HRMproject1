@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="com.ixanq.entity.WorkPosition" %>
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" isELIgnored="false"%>
@@ -39,14 +40,15 @@
     </script>
 </head>
 <body>
-<%@include file="employeeBaseNav.jsp" %>
+<%@include file="managerBaseNav.jsp" %>
 <div class="head">
     <title class="center">
         <strong>考勤记录</strong>
     </title>
     <div class="center">
         <td width="50%" align="center" valign="top" bgcolor="#00FF99">
-            <form action="${pageContext.request.contextPath}/personalCheckWorkAttandanceMessegess">
+            <form action="${pageContext.request.contextPath}/lookThisDetailsAttandance">
+                <input type="hidden" name="employeeId" value="${requestScope.employee.id}">
                 <table width="55%" style="background-color: #c0a16b">
                     <tr>
                         <td><input type="number" name="year" placeholder="yyyy">年</td>
@@ -74,9 +76,9 @@
                 <c:forEach items="${requestScope.attendances}" var="attendance">
                     <tr>
                         <td>${attendance.id}</td>
-                        <td>${sessionScope.employee.realName}</td>
-                        <td><f:formatDate value="${attendance.beginWork}" pattern="yyyy-MM-dd HH:MM:ss"/></td>
-                        <td><f:formatDate value="${attendance.endWork}" pattern="yyyy-MM-dd HH:MM:ss"/></td>
+                        <td>${requestScope.employee.realName}</td>
+                        <td><f:formatDate value="${attendance.beginWork}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+                        <td><f:formatDate value="${attendance.endWork}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
                         <td>${attendance.isLate}</td>
                         <td>${attendance.isLeave}</td>
                     </tr>

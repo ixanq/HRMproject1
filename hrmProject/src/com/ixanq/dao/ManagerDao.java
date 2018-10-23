@@ -134,5 +134,13 @@ public interface ManagerDao {
     List<Reward> findAllRewardByEId(@Param("eId") Integer eId,@Param("month1") Integer month1, @Param("year1") Integer year1);
 
     List<CheckWorkAttendance> findAllCheckWorkAttendanceByEIdMonthYear(@Param("id") Integer id,@Param("month1") Integer month1,@Param("year1") Integer year1);
+
+    List<Reconsider> findAllReconsider();
+
+    List<Reconsider> findAllReconsiderMessegess();
+
+    Reconsider findReconsiderById(Integer id);
+
+    void deleteReconsiderById(Integer id);
 }
 

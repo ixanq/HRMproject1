@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="com.ixanq.entity.Visitor" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" isELIgnored="false"%>
 <!DOCTYPE html>
@@ -28,9 +27,7 @@
     <script src="${pageContext.request.contextPath}/bootstrap/js/jquery-1.7.2.js"></script>
 
     <script>
-        $(function() {
-            $("#workPosition").hide(); //初始化的时候第二个下拉列表隐藏
-        });
+
         function firstSel() {//如果第一个下拉列表的值改变则调用此方法
             var orderTypeId = $("#departmentId").val();//得到第一个下拉列表的值
             if(orderTypeId!=null && "" != orderTypeId){
@@ -103,8 +100,8 @@
                         <td width="100" bgcolor="#00FFFF"><input type="text" id="name" name="name" value="${requestScope.resumeByVisitorName.name}"></td>
                         <td width="97" align="center" bgcolor="#00FFFF">性别</td>
                         <td width="100" bgcolor="#00FFFF">
-                            <input type="radio" name="gender" value="男" checked />男
-                            <input type="radio" name="gender" value="女" />女 </td>
+                            <input type="radio" name="gender" value="男" <c:if test="${requestScope.resumeByVisitorName.gender eq '男'}">checked</c:if> />男
+                            <input type="radio" name="gender" value="女" <c:if test="${requestScope.resumeByVisitorName.gender eq '女'}">checked</c:if>/>女 </td>
                         <td colspan="2" rowspan="5" align="center" valign="middle" bgcolor="#00FFFF">
                             <img src="/logo/touxiang.png" style="width: 120px;height:150px" alt="照片">
                         </td>
@@ -115,9 +112,9 @@
                         <td align="center" bgcolor="#00FFFF">政治面貌</td>
                         <td bgcolor="#00FFFF">
                             <select name="politicalStatus" id="politicalStatus">
-                                <option value="普通群众">普通群众</option>
-                                <option value="共青团员" selected>共青团员</option>
-                                <option value="党员">党员</option>
+                                <option value="普通群众" <c:if test="${requestScope.resumeByVisitorName.politicalStatus eq '普通群众'}">selected</c:if>>普通群众</option>
+                                <option value="共青团员" <c:if test="${requestScope.resumeByVisitorName.politicalStatus eq '共青团员'}">selected</c:if>>共青团员</option>
+                                <option value="党员" <c:if test="${requestScope.resumeByVisitorName.politicalStatus eq '党员'}">selected</c:if>>党员</option>
                             </select>
 
                         </td>
@@ -134,10 +131,10 @@
                         <td align="center" bgcolor="#00FFFF">期望薪资</td>
                         <td bgcolor="#00FFFF">
                             <select name="salary" id="salary">
-                                <option value="3000-5000">3000-5000</option>
-                                <option value="5000-6000">5000-6000</option>
-                                <option value="6000-7000" selected>6000-7000</option>
-                                <option value="7000-9000">7000-9000</option>
+                                <option value="3000-5000" <c:if test="${requestScope.resumeByVisitorName.salary eq '3000-5000'}">selected</c:if>>3000-5000</option>
+                                <option value="5000-6000" <c:if test="${requestScope.resumeByVisitorName.salary eq '5000-6000'}">selected</c:if>>5000-6000</option>
+                                <option value="6000-7000" <c:if test="${requestScope.resumeByVisitorName.salary eq '6000-7000'}">selected</c:if>>6000-7000</option>
+                                <option value="7000-9000" <c:if test="${requestScope.resumeByVisitorName.salary eq '7000-9000'}">selected</c:if>>7000-9000</option>
                             </select>
                         </td>
                     </tr>
@@ -147,21 +144,23 @@
                         <td  bgcolor="#00FFFF">
                             <select id="departmentId" style="width:70px;" name="departmentId" onchange="firstSel()">
                             <c:forEach items="${requestScope.allDepartment}" var="department">
-                                <option value="${department.id}">${department.name}</option>
+                                <option value="${department.id}" <c:if test="${requestScope.resumeByVisitorName.departmentId eq department.id}">selected</c:if>>${department.name}</option>
                             </c:forEach>
 
                         </select>
                             <select id="workPositionId" name="workPositionId">
-
+                                <option value="${requestScope.workPosition.id}">${requestScope.workPosition.name}</option>
                             </select>
+
+
                         </td>
                         <td align="center" bgcolor="#00FFFF">学历</td>
                         <td bgcolor="#00FFFF">
                             <select name="master" id="master">
-                                <option value="大专">大专</option>
-                                <option value="本科">本科</option>
-                                <option value="硕士">硕士</option>
-                                <option value="博士">博士</option>
+                                <option value="大专" <c:if test="${requestScope.resumeByVisitorName.master eq '大专'}">selected</c:if>>大专</option>
+                                <option value="本科" <c:if test="${requestScope.resumeByVisitorName.master eq '本科'}">selected</c:if>>本科</option>
+                                <option value="硕士" <c:if test="${requestScope.resumeByVisitorName.master eq '硕士'}">selected</c:if>>硕士</option>
+                                <option value="博士" <c:if test="${requestScope.resumeByVisitorName.master eq '博士'}">selected</c:if>>博士</option>
                             </select>
                         </td>
                     </tr>

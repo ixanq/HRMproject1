@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="com.ixanq.entity.WorkPosition" %>
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" isELIgnored="false"%>
@@ -7,7 +7,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>考勤记录</title>
+    <title>工资详情</title>
     <style>
         body{
             width: 100%;
@@ -39,14 +39,15 @@
     </script>
 </head>
 <body>
-<%@include file="employeeBaseNav.jsp" %>
+<%@include file="managerBaseNav.jsp" %>
 <div class="head">
     <title class="center">
-        <strong>考勤记录</strong>
+        <strong>薪资信息</strong>
     </title>
     <div class="center">
         <td width="50%" align="center" valign="top" bgcolor="#00FF99">
-            <form action="${pageContext.request.contextPath}/personalCheckWorkAttandanceMessegess">
+            <form action="${pageContext.request.contextPath}/lookThisDetailsSalary">
+                <input type="hidden" name="employeeId" value="${requestScope.employee.id}">
                 <table width="55%" style="background-color: #c0a16b">
                     <tr>
                         <td><input type="number" name="year" placeholder="yyyy">年</td>
@@ -59,35 +60,33 @@
         <td width="730" height="800" align="center" valign="top" bgcolor="#00FF99">
             <table width="730" height="400" border="2px" cellpadding="0" cellspacing="0" style="background-color: #00aFFF">
                 <tr align="center">
-                    <td colspan="6" bgcolor="#00FFFF"><strong>考勤记录</strong></td>
+                    <td colspan="6" bgcolor="#00FFFF"><strong>薪资信息</strong></td>
                 </tr>
 
                 <tr>
                     <td>ID</td>
                     <td>员工名称</td>
-                    <td>上班时间</td>
-                    <td>下班时间</td>
-                    <td>迟到</td>
-                    <td>早退</td>
+                    <td>薪资</td>
+                    <td>考勤天数</td>
+                    <td>时间</td>
                 </tr>
 
-                <c:forEach items="${requestScope.attendances}" var="attendance">
+                <c:forEach items="${requestScope.salaries}" var="salary">
                     <tr>
-                        <td>${attendance.id}</td>
-                        <td>${sessionScope.employee.realName}</td>
-                        <td><f:formatDate value="${attendance.beginWork}" pattern="yyyy-MM-dd HH:MM:ss"/></td>
-                        <td><f:formatDate value="${attendance.endWork}" pattern="yyyy-MM-dd HH:MM:ss"/></td>
-                        <td>${attendance.isLate}</td>
-                        <td>${attendance.isLeave}</td>
+                        <td>${salary.id}</td>
+                        <td>${requestScope.employee.realName}</td>
+                        <td>${salary.salary}</td>
+                        <td>${salary.workDay}</td>
+                        <td>${salary.year}-${salary.month}</td>
                     </tr>
                 </c:forEach>
-                <c:if test="${empty attendances}">
+                <c:if test="${empty salaries}">
                     <tr>
-                        <td colspan="6">暂无信息</td>
+                        <td colspan="5">暂无信息</td>
                     </tr>
                 </c:if>
                 <tr>
-                    <td colspan="6"><a href="javaScript:history.back(-1);">返回</a></td>
+                    <td colspan="5"><a href="javaScript:history.back(-1);">返回</a></td>
                 </tr>
             </table>
         </td>

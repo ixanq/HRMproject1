@@ -102,7 +102,12 @@ public class EmployeeController {
     }
 
     @RequestMapping("eworkAttandance")
-    public String workAttandance(Model model){
+    public String workAttandance(Model model,HttpSession session){
+        Employee employee= (Employee) session.getAttribute("employee");
+        if("¿Î÷∞".equals(employee.getStatus())){
+            model.addAttribute("isNotInWork",33);
+            return "employee/employeeIndexNav";
+        }
         return "employee/workAttandance";
     }
 

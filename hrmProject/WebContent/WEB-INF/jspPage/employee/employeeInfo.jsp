@@ -1,6 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="com.ixanq.entity.Visitor"%>
-<%@ page import="com.ixanq.entity.Employee" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" isELIgnored="false"%>
 <!DOCTYPE html>
@@ -68,7 +67,7 @@
                 <td>应聘职位：</td>
                 <td>${requestScope.department.name}&nbsp;${requestScope.position.name}</td>
                 <td>入职时间：</td>
-                <td>${requestScope.employee1.beginTime}</td>
+                <td><f:formatDate value="${requestScope.employee1.beginTime}"/></td>
 
             </tr>
             

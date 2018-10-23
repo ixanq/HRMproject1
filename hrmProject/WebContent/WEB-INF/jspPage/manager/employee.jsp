@@ -62,7 +62,7 @@
                 <td><a href="${pageContext.request.contextPath}/updateEmployeeDepartmentMesseges?id=${employee.id}&&workPositionId=${employee.workPositionId}">修改部门职位</a></td>
                 <td><a class="addReward">添加奖惩</a></td>
                 <td><a href="${pageContext.request.contextPath}/mmanageSalary?employeeId=${employee.id}">发工资</a></td>
-                <td><a href="${pageContext.request.contextPath}/outOfTheEmployeeFromWork?id=${employee.id}">开除</a></td>
+                <td><a href="${pageContext.request.contextPath}/outOfTheEmployeeFromWork?employeeId=${employee.id}">开除</a></td>
 
             </tr>
         </c:forEach>

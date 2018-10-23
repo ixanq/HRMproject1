@@ -197,6 +197,8 @@ public class VisitorController {
         }else{
             model.addAttribute("resumeByVisitorName",resumeByVisitorName);
             List<Department> allDepartment = managerService.findAllDepartment();
+            WorkPosition workPosition = managerService.findWorkPositionById(resumeByVisitorName.getWorkPositionId());
+            model.addAttribute("workPosition",workPosition);
             model.addAttribute("allDepartment",allDepartment);
             return "visitor/updateResume";
         }

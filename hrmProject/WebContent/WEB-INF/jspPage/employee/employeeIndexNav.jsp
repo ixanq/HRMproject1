@@ -43,6 +43,9 @@
 		 <c:if test="${requestScope.commitTheErrorSeccess!=null}">
 			 复议已提交<br>
 		 </c:if>
+         <c:if test="${requestScope.isNotInWork!=null}">
+             您已不是本公司员工，不能打卡<br>
+         </c:if>
 
 	 </div>
 

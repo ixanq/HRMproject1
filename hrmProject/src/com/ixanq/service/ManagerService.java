@@ -131,4 +131,12 @@ public interface ManagerService {
     List<Reward> findAllRewardByEId(Integer id, Integer month, Integer year);
 
     List<CheckWorkAttendance> findAllCheckWorkAttendanceByEIdMonthYear(Integer id, Integer month, Integer year);
+
+    List<Reconsider> findAllReconsider();
+
+    List<Reconsider> findAllReconsiderMessegess();
+
+    Reconsider findReconsiderById(Integer id);
+
+    void deleteReconsiderById(Integer id);
 }
