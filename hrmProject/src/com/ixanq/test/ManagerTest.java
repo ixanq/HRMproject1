@@ -86,6 +86,12 @@ public class ManagerTest {
 
     }
 
+    @Test
+    public void addReward(){
+       managerDao.addReward(new Reward(-1,"ÄãºÃ",200,new Date()));
+
+    }
+
 
 
 

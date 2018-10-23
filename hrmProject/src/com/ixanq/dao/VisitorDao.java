@@ -28,4 +28,6 @@ public interface VisitorDao {
     ResumeForManager findResumeForManagerByAdvertiseId(Integer advertiseId);
 
     void addGoInterview(GoInterview goInterview);
+
+    ResumeForManager findResumeForManagerByAdvertiseIdAndVisitorName(@Param("advertiseId") Integer advertiseId,@Param("name") String name);
 }

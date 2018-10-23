@@ -2,6 +2,8 @@ package com.ixanq.dao;
 
 import com.ixanq.entity.CheckWorkAttendance;
 import com.ixanq.entity.Employee;
+import com.ixanq.entity.EmployeeInfo;
+import com.ixanq.entity.Reconsider;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -19,6 +21,11 @@ public interface EmployeeDao {
     public CheckWorkAttendance findCheckWorkAttendanceByID(Integer byId);
     public List<CheckWorkAttendance> findAllCheckWorkAttendance();
 
-    CheckWorkAttendance findCheckWorkAttendanceByEIdAndBeginDayLike(@Param("eId")Integer eId,@Param("likeDay") String likeDay);
+    CheckWorkAttendance findCheckWorkAttendanceByEIdAndBeginStringDateLike(@Param("eId")Integer eId,@Param("likeDay") String likeDay);
 
+    CheckWorkAttendance findCheckWorkAttendanceByEIdAndEndStringDateLike(@Param("employeeId")Integer employeeId,@Param("likeDay")String likeDay);
+
+    EmployeeInfo findEmployeeInfoByEId(Integer employeeId);
+
+    void addReconsider(Reconsider reconsider);
 }

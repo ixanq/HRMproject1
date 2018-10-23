@@ -2,6 +2,8 @@ package com.ixanq.service;
 
 import com.ixanq.entity.CheckWorkAttendance;
 import com.ixanq.entity.Employee;
+import com.ixanq.entity.EmployeeInfo;
+import com.ixanq.entity.Reconsider;
 
 import java.util.Date;
 import java.util.List;
@@ -15,6 +17,11 @@ public interface EmployeeService {
     public CheckWorkAttendance findCheckWorkAttendanceByID(Integer byId);
     public List<CheckWorkAttendance> findAllCheckWorkAttendance();
 
-    CheckWorkAttendance findCheckWorkAttendanceByEIdAndBeginDayLike(Integer eId,String likeDay);
+    CheckWorkAttendance findCheckWorkAttendanceByEIdAndBeginStringDateLike(Integer eId,String likeDay);
 
+    CheckWorkAttendance findCheckWorkAttendanceByEIdAndEndStringDateLike(Integer employeeId, String likeDay);
+
+    EmployeeInfo findEmployeeInfoByEId(Integer id);
+
+    void addReconsider(Reconsider reconsider);
 }

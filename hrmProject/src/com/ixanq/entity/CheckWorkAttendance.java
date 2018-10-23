@@ -10,6 +10,7 @@ public class CheckWorkAttendance {
 	private Date endWork;//下班时间
 	private String isLate;//是否迟到
 	private String isLeave;//是否早退
+    private String isDeleted;//是否被删
 
 	public CheckWorkAttendance() {
 	}

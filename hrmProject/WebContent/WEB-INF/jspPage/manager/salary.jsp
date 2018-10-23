@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="com.ixanq.entity.Visitor"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" isELIgnored="false"%>
@@ -5,7 +6,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>部门</title>
+    <title>薪资</title>
     <style>
         body{
             width: 100%;
@@ -18,6 +19,23 @@
 </head>
 <body>
 <%@include file="managerBaseNav.jsp" %>
-薪资
+${requestScope.allEmployee}
+    <table>
+        <tr>
+            <td>ID</td>
+            <td>姓名</td>
+            <td>考勤记录</td>
+            <td>发放工资</td>
+        </tr>
+
+        <c:forEach items="${requestScope.allEmployee}" var="employee">
+            <tr>
+                <td>${employee.id}</td>
+                <td>${employee.realName}</td>
+                <td><a href="#">考勤记录</a></td>
+                <td><a href="#">发放工资</a></td>
+            </tr>
+        </c:forEach>
+    </table>
 </body>
 </html>

@@ -6,14 +6,21 @@ import com.ixanq.service.EmployeeService;
 import com.ixanq.service.ManagerService;
 import com.ixanq.service.VisitorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.mock.web.MockHttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpSession;
 import java.io.PrintWriter;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -24,6 +31,12 @@ public class VisitorController {
     private ManagerService managerService;
     @Autowired
     private EmployeeService employeeService;
+
+    @InitBinder
+    public void initBinder(WebDataBinder binder, WebRequest request){
+        DateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
+        binder.registerCustomEditor(Date.class,new CustomDateEditor(dateFormat,true));
+    }
 
 
     /**
@@ -83,6 +96,7 @@ public class VisitorController {
     	   model.addAttribute("nameError","nameError");
     	   return "forward:/visitorLogin.jsp";
        } else if(null!=visitor3) {//’À∫≈√‹¬Î’˝»∑
+           session.removeAttribute("visitor");
     	   session.setAttribute("visitor", visitor2);
            System.out.println("session:"+visitor2);
            Interview byVisitorName = managerService.findInterviewforVisitorByVisitorName(visitor2.getName());
@@ -221,7 +235,7 @@ public class VisitorController {
                     r.getSalary(),r.getDepartmentId(),r.getWorkPositionId(),r.getMaster(),r.getWorkBackground(),
                     r.getHobbies(),"Œ¥∂¡");
             System.out.println(resumeForManager);
-            ResumeForManager resumeForManager1=visitorService.findResumeForManagerByAdvertiseId(advertiseId);
+            ResumeForManager resumeForManager1=visitorService.findResumeForManagerByAdvertiseIdAndVisitorName(advertiseId,visitor.getName());
             if(resumeForManager1!=null){
                 model.addAttribute("resumeForManagerIsExist","111");
                 return "visitor/visitorIndexNav";
@@ -283,6 +297,7 @@ public class VisitorController {
         Integer interviewId = Integer.valueOf(id);
         GoInterview goInterview=new GoInterview(visitor.getName(),"Œ¥∂¡","¥˝∂®");
         visitorService.addGoInterview(goInterview);
+        model.addAttribute("pleaseWaitThegotoInterviewResult",11);
         return "visitor/visitorIndexNav";
     }
 

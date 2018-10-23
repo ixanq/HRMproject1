@@ -34,8 +34,8 @@
             $(".delete").click(function(){
                 if(confirm("确认删除？")){
                     var $td=$(this).parent().parent().children();
-                    var $tr=$(this).parent().parent();
                     var id=$td[0].innerHTML;
+                    var $tr=$(this).parent().parent();
                     var url="${pageContext.request.contextPath}/ajaxDeleteTrainById";
                     var args={"id":id};
                     $.post(url,args,function(data){
@@ -50,59 +50,58 @@
 </head>
 <body>
 <%@include file="managerBaseNav.jsp" %>
-${requestScope.allTrain}
-<div id="head">
-    <table border="2px"  align="center" style="background-color: green">
-        <tr>
-            <td>ID</td>
-            <td>培训名称</td>
-            <td>培训时间</td>
-            <td>培训部门</td>
-            <td>删除</td>
-        </tr>
-        <c:forEach items="${requestScope.allTrain}" var="train">
+    <div id="head">
+        <table border="2px"  align="center" style="background-color: green">
             <tr>
-                <td>${train.id}</td>
-                <td>${train.name}</td>
-                <td>${train.trainTime}</td>
-                <td>${train.department}</td>
-                <td><a class="delete">删除</a></td>
+                <td>ID</td>
+                <td>培训名称</td>
+                <td>培训时间</td>
+                <td>培训部门</td>
+                <td>删除</td>
+            </tr>
+            <c:forEach items="${requestScope.allTrain}" var="train">
+                <tr>
+                    <td>${train.id}</td>
+                    <td>${train.name}</td>
+                    <td>${train.trainTime}</td>
+                    <td>${train.department}</td>
+                    <td><a class="delete">删除</a></td>
 
-            </tr>
-        </c:forEach>
-        <tr>
-            <td colspan="2"><a class="add">添加</a></td>
-            <td colspan="3"><a href="javaScript:history.back()-1;">返回</a></td>
-        </tr>
-    </table>
-
-    <br>
-    <form hidden action="${pageContext.request.contextPath}/addTrainForDepartment" method="post">
-        <table width="75%" border="2px" cellpadding="0" cellspacing="0" style="background-color: #00aFFF">
+                </tr>
+            </c:forEach>
             <tr>
-                <td>名称：</td>
-                <td><input type="text" name="name" ></td>
-            </tr>
-            <tr>
-                <td>名称：</td>
-                <td><input type="text" name="trainDate" placeholder="yyyy-MM-dd HH:MM:ss" ></td>
-            </tr>
-            <tr>
-                <td>部门：</td>
-                <td>
-                    <select id="departmentId" style="width:70px;" name="department">
-                        <c:forEach items="${requestScope.allDepartment}" var="department">
-                            <option value="${department.name}">${department.name}</option>
-                        </c:forEach>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td colspan=""><input type="submit" value="确认"></td>
+                <td colspan="2"><a class="add">添加</a></td>
+                <td colspan="3"><a href="javaScript:history.back()-1;">返回</a></td>
             </tr>
         </table>
-    </form>
-</div>
+
+        <br>
+        <form hidden action="${pageContext.request.contextPath}/addTrainForDepartment" method="post">
+            <table width="75%" border="2px" cellpadding="0" cellspacing="0" style="background-color: #00aFFF">
+                <tr>
+                    <td>名称：</td>
+                    <td><input type="text" name="name" ></td>
+                </tr>
+                <tr>
+                    <td>名称：</td>
+                    <td><input type="text" name="trainDate" placeholder="yyyy-MM-dd HH:MM:ss" ></td>
+                </tr>
+                <tr>
+                    <td>部门：</td>
+                    <td>
+                        <select id="departmentId" style="width:70px;" name="department">
+                            <c:forEach items="${requestScope.allDepartment}" var="department">
+                                <option value="${department.name}">${department.name}</option>
+                            </c:forEach>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan=""><input type="submit" value="确认"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
 </body>
 </html>
 

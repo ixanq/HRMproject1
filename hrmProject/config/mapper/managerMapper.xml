@@ -79,7 +79,8 @@
     </delete>
 
     <update id="updateEmployee" parameterType="Employee">
-        UPDATE employee SET name=#{name},password=#{password},real_name=#{realName} ,gender=#{gender} ,age= #{age},degree=#{degree} ,email= #{email},begin_time=#{beginTime},status=#{status},work_position_id=#{workPositionId}
+        UPDATE employee SET name=#{name},password=#{password},real_name=#{realName} ,gender=#{gender} ,age= #{age},
+        degree=#{degree} ,email= #{email},begin_time=#{beginTime},status=#{status},work_position_id=#{workPositionId} WHERE  id=#{id}
     </update>
 
     <select id="findEmployeeById" parameterType="Integer" resultType="Employee">
@@ -93,7 +94,7 @@
 
                                <!-- 薪资的增删改查-->
     <insert id="addSalary" parameterType="Salary">
-        INSERT INTO salarys(salary) VALUES (#{salary})
+        INSERT INTO salarys(salary, employee_id, month, year,work_day) VALUES (#{salary},#{employeeId},#{month},#{year},#{workDay})
     </insert>
 
     <delete id="deleteSalary" parameterType="Integer">
@@ -101,11 +102,17 @@
     </delete>
 
     <update id="updateSalary" parameterType="Salary">
-        UPDATE salarys SET salary=#{salary}
+        UPDATE salarys SET  salary=#{salary},employee_id=#{employeeId},month=#{month},year=#{year},work_day=#{workDay} WHERE  id=#{id}
     </update>
 
     <select id="findSalaryById" parameterType="Integer" resultType="Salary">
         SELECT * from salarys WHERE id=#{id}
+    </select>
+    <select id="findSalaryByEIdAndByYearAndByMonth" resultType="Salary">
+        SELECT * from salarys WHERE employee_id=#{employeeId1} AND year=#{year} AND month=#{month}
+    </select>
+    <select id="findSalaryByEmployeeId"  resultType="Salary">
+        SELECT * from salarys WHERE employee_id=#{eId} AND month=#{month} AND year=#{year}
     </select>
 
     <select id="findAllSalary" resultType="Salary">
@@ -116,7 +123,7 @@
 
                                 <!--考勤增删改查-->
     <insert id="addCheckWorkAttendance" parameterType="CheckWorkAttendance">
-        INSERT INTO check_work_attendance(employee_id, begin_work, end_wotk, is_late, is_leave)
+        INSERT INTO check_work_attendance(employee_id, begin_work, end_work, is_late, is_leave)
         VALUES (#{employeeID},#{beginWork},#{endWork},#{isLate},#{isLeave})
     </insert>
 
@@ -125,7 +132,7 @@
     </delete>
 
     <update id="updateCheckWorkAttendance" parameterType="CheckWorkAttendance">
-        UPDATE check_work_attendance SET employee_id=#{employeeID} ,begin_work=#{beginWork} ,end_wotk=#{endWork} ,is_late=#{isLate} ,is_leave=#{isLeave}
+        UPDATE check_work_attendance SET employee_id=#{employeeID} ,begin_work=#{beginWork} ,end_work=#{endWork} ,is_late=#{isLate} ,is_leave=#{isLeave} WHERE id=#{id}
     </update>
 
     <select id="findCheckWorkAttendanceByID" parameterType="Integer" resultType="CheckWorkAttendance">
@@ -135,6 +142,15 @@
     <select id="findAllCheckWorkAttendance" resultType="CheckWorkAttendance">
         SELECT * FROM check_work_attendance
     </select>
+    <select id="findCheckWorkAttendanceLikeDate" resultType="CheckWorkAttendance">
+        SELECT * FROM check_work_attendance WHERE begin_work LIKE #{stringMonth1}
+    </select>
+    <select id="findAllCheckWorkAttendanceByEIdAndByMonth" resultType="CheckWorkAttendance">
+        SELECT * FROM check_work_attendance WHERE employee_id=#{employeeId} AND end_work LIKE #{monthLike}
+    </select>
+    <select id="findAllCheckWorkAttendanceByEIdMonthYear" resultType="CheckWorkAttendance">
+        SELECT * FROM check_work_attendance WHERE employee_id=#{id} AND YEAR(end_work)=#{year1} AND MONTH(end_work)=#{month1}
+    </select>
 
 
 
@@ -142,7 +158,7 @@
 
                                       <!--  培训的增删改查-->
     <insert id="addTrain" parameterType="Train">
-        INSERT INTO train(name, traindate, department)  VALUES (#{name},#{trainTime},#{department})
+        INSERT INTO train(name, train_time, department)  VALUES (#{name},#{trainTime},#{department})
     </insert>
 
     <delete id="deleteTrain" parameterType="Integer">
@@ -150,11 +166,15 @@
     </delete>
 
     <update id="updateTrain" parameterType="Train">
-        UPDATE train SET name=#{name} ,traindate=#{trainTime} ,department=#{department}
+        UPDATE train SET name=#{name} ,train_time=#{trainTime} ,department=#{department} WHERE id=#{id}
     </update>
 
     <select id="findTrainById" parameterType="Integer" resultType="Train">
         SELECT * from train WHERE id=#{id}
+    </select>
+
+    <select id="findTrainByDepartmentName" parameterType="String" resultType="Train">
+        SELECT * from train WHERE department=#{department}
     </select>
 
     <select id="findAllTrain" resultType="Train">
@@ -165,7 +185,7 @@
 
                         <!--奖惩增删改查-->
     <insert id="addReward" parameterType="Reward">
-        insert into reward (employee_id,reason, money, "time") values (#{employeeId},#{reason},#{money},#{time})
+        insert into reward (employee_id,reason, money,time) values (#{employeeId},#{reason},#{money},#{time})
     </insert>
 
     <delete id="deleteReward" parameterType="Integer">
@@ -173,7 +193,7 @@
     </delete>
 
     <update id="updateReward" parameterType="Reward">
-        UPDATE reward SET employee_id=#{employeeId},reason=#{reason} ,money=#{money} ,time=#{time}
+        UPDATE reward SET employee_id=#{employeeId},reason=#{reason} ,money=#{money} ,time=#{time} WHERE id=#{id}
     </update>
 
     <select id="findRewardById" parameterType="Integer" resultType="Reward">
@@ -182,9 +202,15 @@
     <select id="findRewardByEmployeeId" parameterType="Integer" resultType="Reward">
         SELECT * FROM reward WHERE employee_id=#{employeeId1}
     </select>
+    <select id="findRewardByEmployeeIdAndByMonthLike"  resultType="Reward">
+        SELECT * FROM reward WHERE employee_id=#{employeeId} AND time LIKE #{monthLike}
+    </select>
 
     <select id="findAllReward" resultType="Reward">
         SELECT * FROM reward
+    </select>
+    <select id="findAllRewardByEId" resultType="Reward">
+        SELECT * FROM reward WHERE employee_id=#{eId} AND YEAR(time)=#{year1} AND MONTH(time)=#{month1}
     </select>
 
     <select id="findResumeByStatus" parameterType="String" resultType="ResumeForManager">
@@ -200,7 +226,7 @@
         UPDATE resume_for_manager SET visitor_name=#{visitorName},name=#{name},gender=#{gender},age=#{age},
         political_status=#{politicalStatus},tel=#{tel},email=#{email},last_work=#{lastWork},salary=#{salary},
         department_id=#{departmentId},work_position_id=#{workPositionId},master=#{master},work_background=#{workBackground},
-        hobbies=#{hobbies},status="已读"
+        hobbies=#{hobbies},status="已读" WHERE id=#{id}
     </update>
     <delete id="deleteResumeForManagerById" parameterType="Integer">
         DELETE FROM resume_for_manager WHERE id=#{id}
@@ -217,7 +243,6 @@
         SELECT * FROM advertises WHERE id=#{id}
     </select>
     <delete id="deleteAdvertiseById" parameterType="Integer">
-        DELETE FROM advertises WHERE id=#{id}
         DELETE FROM advertises WHERE id=#{id}
     </delete>
 
@@ -271,8 +296,8 @@
     </select>
 
     <insert id="addEmployeeInfo" parameterType="EmployeeInfo">
-        INSERT INTO employeeinfo(id,employee_id, train_id, salary_id, reward_id, checkworkattend_id, department_id, workposition_id)
-        VALUES (#{id},#{employeeId},#{trainId},#{salaryId},#{rewardId},#{checkworkattendId},#{departmentId},#{workPositionId})
+        INSERT INTO employeeinfo(employee_id, train_id, salary_id, reward_id, checkworkattend_id, department_id, workposition_id)
+        VALUES (#{employeeId},#{trainId},#{salaryId},#{rewardId},#{checkworkattendId},#{departmentId},#{workPositionId})
     </insert>
     <update id="updateEmployeeInfo" parameterType="EmployeeInfo">
         UPDATE employeeinfo SET employee_id=#{employeeId},train_id=#{trainId},salary_id=#{salaryId},reward_id=#{rewardId},checkworkattend_id=#{checkworkattendId},department_id=#{departmentId},workposition_id=#{workPositionId} WHERE id=#{id}

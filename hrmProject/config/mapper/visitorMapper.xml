@@ -48,6 +48,9 @@
     <select id="findResumeForManagerByAdvertiseId" parameterType="Integer" resultType="ResumeForManager">
         select * from resume_for_manager WHERE advertise_id=#{advertiseId}
     </select>
+    <select id="findResumeForManagerByAdvertiseIdAndVisitorName" resultType="ResumeForManager">
+        select * from resume_for_manager WHERE advertise_id=#{advertiseId} AND  visitor_name=#{name}
+    </select>
 
     <insert id="addGoInterview" parameterType="GoInterview">
         INSERT INTO go_interview(visitor_name, view_status, pass_status)

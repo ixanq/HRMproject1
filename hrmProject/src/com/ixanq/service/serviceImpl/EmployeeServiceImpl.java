@@ -3,6 +3,8 @@ package com.ixanq.service.serviceImpl;
 import com.ixanq.dao.EmployeeDao;
 import com.ixanq.entity.CheckWorkAttendance;
 import com.ixanq.entity.Employee;
+import com.ixanq.entity.EmployeeInfo;
+import com.ixanq.entity.Reconsider;
 import com.ixanq.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,8 +28,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public CheckWorkAttendance findCheckWorkAttendanceByEIdAndBeginDayLike(Integer eId,String likeDay) {
-        return employeeDao.findCheckWorkAttendanceByEIdAndBeginDayLike(eId,likeDay);
+    public CheckWorkAttendance findCheckWorkAttendanceByEIdAndBeginStringDateLike(Integer eId,String likeDay) {
+        return employeeDao.findCheckWorkAttendanceByEIdAndBeginStringDateLike(eId,likeDay);
     }
 
     @Override
@@ -42,7 +44,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public void updateCheckWorkAttendance(CheckWorkAttendance checkWorkAttendance) {
-
+        employeeDao.updateCheckWorkAttendance(checkWorkAttendance);
     }
 
     @Override
@@ -53,5 +55,20 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public List<CheckWorkAttendance> findAllCheckWorkAttendance() {
         return null;
+    }
+
+    @Override
+    public CheckWorkAttendance findCheckWorkAttendanceByEIdAndEndStringDateLike(Integer employeeId, String likeDay) {
+        return employeeDao.findCheckWorkAttendanceByEIdAndEndStringDateLike(employeeId,likeDay);
+    }
+
+    @Override
+    public EmployeeInfo findEmployeeInfoByEId(Integer id) {
+        return employeeDao.findEmployeeInfoByEId(id);
+    }
+
+    @Override
+    public void addReconsider(Reconsider reconsider) {
+        employeeDao.addReconsider(reconsider);
     }
 }

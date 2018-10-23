@@ -95,7 +95,7 @@ public interface ManagerService {
 
     void updateGoInterview(GoInterview goInterview1);
 
-    EmployeeInfo findEmployeeInfoByworkPositionId(Integer workPositionId);
+    List<EmployeeInfo> findEmployeeInfoByworkPositionId(Integer workPositionId);
 
     EmployeeInfo findEmployeeInfoByDepartmentId(Integer departmentId);
 
@@ -114,4 +114,21 @@ public interface ManagerService {
     void deleteWorkPositionByDepartmentId(Integer departmentId);
 
     List<Reward> findRewardByEmployeeId(Integer employeeId1);
+
+    Train findTrainByDepartmentName(String department);
+
+    List<CheckWorkAttendance> findCheckWorkAttendanceLikeDate(String stringMonth1);
+
+    List<CheckWorkAttendance> findAllCheckWorkAttendanceByEIdAndByMonth(Integer employeeId, String monthLike);
+
+    List<Reward> findRewardByEmployeeIdAndByMonthLike(Integer employeeId1, String monthLike);
+
+    Salary findSalaryByEIdAndByYearAndByMonth(Integer employeeId1, int year, int month);
+
+    List<Salary> findSalaryByEmployeeId(Integer id,Integer month,Integer year);
+
+
+    List<Reward> findAllRewardByEId(Integer id, Integer month, Integer year);
+
+    List<CheckWorkAttendance> findAllCheckWorkAttendanceByEIdMonthYear(Integer id, Integer month, Integer year);
 }

@@ -28,4 +28,6 @@ public interface VisitorService {
     ResumeForManager findResumeForManagerByAdvertiseId(Integer visitorName);
 
     void addGoInterview(GoInterview goInterview);
+
+    ResumeForManager findResumeForManagerByAdvertiseIdAndVisitorName(Integer advertiseId, String name);
 }

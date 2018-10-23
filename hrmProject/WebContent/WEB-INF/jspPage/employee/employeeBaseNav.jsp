@@ -45,47 +45,32 @@
             </button>
             <span class="icon-bar" style="color:red">当前员工 ：${sessionScope.employee.realName}</span>
         </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav" id="ul1">
                 <li class="active"><a href="${pageContext.request.contextPath}/eeployeeInfoctrl">个人信息 <span class="sr-only">(current)</span></a></li>
-                <li><a href="${pageContext.request.contextPath}/eworkAttandance">考勤</a></li>
                 <li><a href="${pageContext.request.contextPath}/edeptWorkPosition">部门职位</a></li>
                 <li><a href="${pageContext.request.contextPath}/etrain">培训</a></li>
-                <%--<li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">简历管理 <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="writeResume">填写简历</a></li>
-                        <li><a href="lookTheResume">查看简历</a></li>
-                        <li><a href="${pageContext.request.contextPath}/updateResume">修改简历</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#">投简历</a></li>
-                        <li role="separator" class="divider"></li>
-                    </ul>
-                </li>--%>
+                <li><a href="${pageContext.request.contextPath}/eworkAttandance">考勤</a></li>
+                <li><a href="${pageContext.request.contextPath}/personalSalaryMesseges">个人薪资</a></li>
+                <li><a href="${pageContext.request.contextPath}/personalRewardMessegess">奖惩信息</a></li>
+                <li><a href="${pageContext.request.contextPath}/personalCheckWorkAttandanceMessegess">考勤记录</a></li>
+
+
             </ul>
-            <%--<form class="navbar-form navbar-left">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Search">
-                </div>
-                <button type="submit" class="btn btn-default">Submit</button>
-            </form>--%>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#">反馈</a></li>
+                <li><a href="${pageContext.request.contextPath}/haveErrorInThere">复议</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">设置 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">修改密码</a></li>
-                        <li><a href="#">退出</a></li>
-                        <li><a href="#">其他</a></li>
+                        <li><a href="${pageContext.request.contextPath}/updateEmployeePassword">修改密码</a></li>
+                        <li><a href="${pageContext.request.contextPath}/employeeSignOut">退出</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#"></a></li>
                     </ul>
                 </li>
             </ul>
-        </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
+        </div>
+    </div>
 </nav>
 </body>
 </html>

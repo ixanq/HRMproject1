@@ -30,8 +30,8 @@
             $(".delete").click(function(){
                 if(confirm("确认删除？")){
                     var $td=$(this).parent().parent().children();
-                    var $tr=$(this).parent().parent();
                     var id=$td[0].innerHTML;
+                    var $tr=$(this).parent().parent();
                     var url="${pageContext.request.contextPath}/ajaxDeleteAdvertiseById";
                     var args={"id":id};
                     $.post(url,args,function(data){
@@ -63,8 +63,7 @@
                 <td>${advertise.salary}</td>
                 <td>${advertise.needPersonNumber}</td>
                 <td><a href="${pageContext.request.contextPath}/lookTheAdvertiseDetailMasseges?id=${advertise.id}">查看详情</a></td>
-                <td><a class="delete" href="#">删除</a></td>
-               <%-- <td><a  href="&lt;%&ndash;${pageContext.request.contextPath}/uploadAdvertiseToNet?id=${advertise.id}&ndash;%&gt;#">发布</a></td>--%>
+                <td><a class="delete" >删除</a></td>
 
             </tr>
         </c:forEach>

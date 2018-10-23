@@ -13,7 +13,7 @@
 
                                 <!--考勤增删改查-->
     <insert id="addCheckWorkAttendance" parameterType="CheckWorkAttendance">
-        INSERT INTO check_work_attendance(employee_id, begin_work, end_wotk, is_late, is_leave)
+        INSERT INTO check_work_attendance(employee_id, begin_work, end_work, is_late, is_leave)
         VALUES (#{employeeID},#{beginWork},#{endWork},#{isLate},#{isLeave})
     </insert>
 
@@ -22,7 +22,7 @@
     </delete>
 
     <update id="updateCheckWorkAttendance" parameterType="CheckWorkAttendance">
-        UPDATE check_work_attendance SET employee_id=#{employeeID} ,begin_work=#{beginWork} ,end_wotk=#{endWork} ,is_late=#{isLate} ,is_leave=#{isLeave}
+        UPDATE check_work_attendance SET employee_id=#{employeeID} ,begin_work=#{beginWork} ,end_work=#{endWork} ,is_late=#{isLate} ,is_leave=#{isLeave} WHERE id=#{id}
     </update>
 
     <select id="findCheckWorkAttendanceByID" parameterType="Integer" resultType="CheckWorkAttendance">
@@ -33,9 +33,20 @@
         SELECT * FROM check_work_attendance
     </select>
 
-    <select id="findCheckWorkAttendanceByEIdAndBeginDayLike" resultType="CheckWorkAttendance">
+    <select id="findCheckWorkAttendanceByEIdAndBeginStringDateLike" resultType="CheckWorkAttendance">
         SELECT  * FROM check_work_attendance WHERE employee_id=#{eId} and begin_work LIKE #{likeDay}
     </select>
+    <select id="findCheckWorkAttendanceByEIdAndEndStringDateLike" resultType="CheckWorkAttendance">
+        SELECT  * FROM check_work_attendance WHERE employee_id=#{employeeId} and end_work LIKE #{likeDay}
+    </select>
+
+    <select id="findEmployeeInfoByEId" parameterType="Integer" resultType="EmployeeInfo">
+        SELECT * FROM employeeinfo WHERE employee_id=#{employeeId}
+    </select>
+
+    <insert id="addReconsider" parameterType="Reconsider">
+        INSERT INTO reconsider(employee_id, content, time) VALUES (#{employeeId},#{content},#{time})
+    </insert>
 
 
 

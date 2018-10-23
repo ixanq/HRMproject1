@@ -35,7 +35,7 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public void updateDepartment(Department department) {
-
+        managerDao.updateDepartment(department);
     }
 
     @Override
@@ -80,17 +80,17 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public void deleteEmployee(Integer byID) {
-
+        managerDao.deleteEmployee(byID);
     }
 
     @Override
     public void updateEmployee(Employee employee) {
-
+        managerDao.updateEmployee(employee);
     }
 
     @Override
     public Employee findEmployeeById(Integer byId) {
-        return null;
+        return managerDao.findEmployeeById(byId);
     }
 
     @Override
@@ -100,22 +100,22 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public void addSalary(Salary salary) {
-
+        managerDao.addSalary(salary);
     }
 
     @Override
     public void deleteSalary(Integer byID) {
-
+        managerDao.deleteSalary(byID);
     }
 
     @Override
     public void updateSalary(Salary salary) {
-
+        managerDao.updateSalary(salary);
     }
 
     @Override
     public Salary findSalaryById(Integer byId) {
-        return null;
+        return managerDao.findSalaryById(byId);
     }
 
     @Override
@@ -125,27 +125,27 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public void addCheckWorkAttendance(CheckWorkAttendance checkWorkAttendance) {
-
+        managerDao.addCheckWorkAttendance(checkWorkAttendance);
     }
 
     @Override
     public void deleteCheckWorkAttendance(Integer byID) {
-
+        managerDao.deleteCheckWorkAttendance(byID);
     }
 
     @Override
     public void updateCheckWorkAttendance(CheckWorkAttendance checkWorkAttendance) {
-
+        managerDao.updateCheckWorkAttendance(checkWorkAttendance);
     }
 
     @Override
     public CheckWorkAttendance findCheckWorkAttendanceByID(Integer byId) {
-        return null;
+        return managerDao.findCheckWorkAttendanceByID(byId);
     }
 
     @Override
     public List<CheckWorkAttendance> findAllCheckWorkAttendance() {
-        return null;
+        return managerDao.findAllCheckWorkAttendance();
     }
 
     @Override
@@ -155,17 +155,17 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public void deleteTrain(Integer byID) {
-
+        managerDao.deleteTrain(byID);
     }
 
     @Override
     public void updateTrain(Train train) {
-
+        managerDao.updateTrain(train);
     }
 
     @Override
     public Train findTrainById(Integer byId) {
-        return null;
+        return managerDao.findTrainById(byId);
     }
 
     @Override
@@ -180,22 +180,22 @@ public class ManagerServiceImpl implements ManagerService {
 
     @Override
     public void deleteReward(Integer byID) {
-
+        managerDao.deleteReward(byID);
     }
 
     @Override
     public void updateReward(Reward reward) {
-
+        managerDao.updateReward(reward);
     }
 
     @Override
     public Reward findRewardById(Integer byId) {
-        return null;
+        return managerDao.findRewardById(byId);
     }
 
     @Override
     public List<Reward> findAllReward() {
-        return null;
+        return managerDao.findAllReward();
     }
 
     @Override
@@ -284,7 +284,7 @@ public class ManagerServiceImpl implements ManagerService {
     }
 
     @Override
-    public EmployeeInfo findEmployeeInfoByworkPositionId(Integer workPositionId) {
+    public List<EmployeeInfo> findEmployeeInfoByworkPositionId(Integer workPositionId) {
         return managerDao.findEmployeeInfoByworkPositionId(workPositionId);
     }
 
@@ -331,5 +331,45 @@ public class ManagerServiceImpl implements ManagerService {
     @Override
     public List<Reward> findRewardByEmployeeId(Integer employeeId1) {
         return managerDao.findRewardByEmployeeId(employeeId1);
+    }
+
+    @Override
+    public Train findTrainByDepartmentName(String department) {
+        return managerDao.findTrainByDepartmentName(department);
+    }
+
+    @Override
+    public List<CheckWorkAttendance> findCheckWorkAttendanceLikeDate(String stringMonth1) {
+        return managerDao.findCheckWorkAttendanceLikeDate(stringMonth1);
+    }
+
+    @Override
+    public List<CheckWorkAttendance> findAllCheckWorkAttendanceByEIdAndByMonth(Integer employeeId, String monthLike) {
+        return managerDao.findAllCheckWorkAttendanceByEIdAndByMonth(employeeId,monthLike);
+    }
+
+    @Override
+    public List<Reward> findRewardByEmployeeIdAndByMonthLike(Integer employeeId1, String monthLike) {
+        return managerDao.findRewardByEmployeeIdAndByMonthLike(employeeId1,monthLike);
+    }
+
+    @Override
+    public Salary findSalaryByEIdAndByYearAndByMonth(Integer employeeId1, int year, int month) {
+        return managerDao.findSalaryByEIdAndByYearAndByMonth(employeeId1,year,month);
+    }
+
+    @Override
+    public List<Reward> findAllRewardByEId(Integer eId, Integer month1, Integer year1) {
+        return managerDao.findAllRewardByEId(eId,month1,year1);
+    }
+
+    @Override
+    public List<Salary> findSalaryByEmployeeId(Integer id, Integer month, Integer year) {
+        return managerDao.findSalaryByEmployeeId(id, month, year);
+    }
+
+    @Override
+    public List<CheckWorkAttendance> findAllCheckWorkAttendanceByEIdMonthYear(Integer id, Integer month1, Integer year1) {
+        return managerDao.findAllCheckWorkAttendanceByEIdMonthYear(id,month1,year1);
     }
 }

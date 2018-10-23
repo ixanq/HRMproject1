@@ -80,4 +80,9 @@ public class VisitorServiceImpl implements VisitorService {
     public void addGoInterview(GoInterview goInterview) {
         visitorDao.addGoInterview(goInterview);
     }
+
+    @Override
+    public ResumeForManager findResumeForManagerByAdvertiseIdAndVisitorName(Integer advertiseId, String name) {
+        return visitorDao.findResumeForManagerByAdvertiseIdAndVisitorName(advertiseId,name);
+    }
 }

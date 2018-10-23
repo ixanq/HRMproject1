@@ -1,6 +1,7 @@
 package com.ixanq.controller;
 
 import com.ixanq.entity.*;
+import com.ixanq.service.EmployeeService;
 import com.ixanq.service.ManagerService;
 import com.ixanq.service.VisitorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,15 +9,19 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import javax.servlet.http.HttpSession;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -26,11 +31,13 @@ public class ManagerController {
     private ManagerService managerService;
     @Autowired
     private VisitorService visitorService;
+    @Autowired
+    private EmployeeService employeeService;
 
     @InitBinder
-    public void initBinder(ServletRequestDataBinder binder){
-        binder.registerCustomEditor(Date.class, new CustomDateEditor(new SimpleDateFormat("yyyy-MM-dd"),
-                true));
+    public void initBinder(WebDataBinder binder, WebRequest request){
+        DateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
+        binder.registerCustomEditor(Date.class,new CustomDateEditor(dateFormat,true));
     }
 
 
@@ -73,6 +80,7 @@ public class ManagerController {
             if(null!=goInterviews&&goInterviews.size()!=0){
                 model.addAttribute("thereAregoInterviewsMesseges","thereAregoInterviewsMesseges");
             }
+            managerSession.removeAttribute("manager");
             managerSession.setAttribute("manager",manager2);
             return "manager/managerIndexNav";
         }else{ //密码错误
@@ -114,13 +122,8 @@ public class ManagerController {
     @RequestMapping("mmanageDepartment")
     public String manageDepartment(Model model){
         List<Department> allDepartment = managerService.findAllDepartment();
-       /* if(allDepartment==null||allDepartment.size()==0){
-            model.addAttribute("mmanageDepartmentEmpty",11);
-            return "manager/managerIndexNav";
-        }else {*/
-            model.addAttribute("allDepartment",allDepartment);
-            return "manager/department";
-        /*}*/
+        model.addAttribute("allDepartment",allDepartment);
+        return "manager/department";
     }
 
     /**
@@ -155,25 +158,16 @@ public class ManagerController {
         return "manager/train";
     }
 
-    /**
-     * 管理员培训管理界面
-     * @param manager
-     * @param model
-     * @return
-     */
-    @RequestMapping("mmanageSalary")
-    public String manageSalary(Manager manager, Model model){
-        return "manager/salary";
-    }
+
 
     /**
      * 管理员奖惩管理界面
-     * @param manager
      * @param model
      * @return
      */
-    @RequestMapping("mmanageReward")
-    public String manageReward(Manager manager, Model model){
+    @RequestMapping("lookTheRewardMesseges")
+    public String manageReward(Model model){
+
         return "manager/reward";
     }
 
@@ -333,7 +327,7 @@ public class ManagerController {
         ResumeForManager r=resumeForManagers.get(0);
         System.out.println(r);
         Visitor visitor = visitorService.findByName(r.getVisitorName());
-        Employee employee=new Employee(-1,visitor.getName(),visitor.getPassword(),r.getName(),r.getGender(),r.getAge(),
+        Employee employee=new Employee(visitor.getName(),visitor.getPassword(),r.getName(),r.getGender(),r.getAge(),
                 r.getMaster(),r.getEmail(),new Date(),"在职",r.getWorkPositionId());
         System.out.println(employee);
         Employee employee1=managerService.findEmployeeByVisitorName(visitor.getName());
@@ -343,7 +337,7 @@ public class ManagerController {
         }
         managerService.addEmployee(employee);
         Employee employee2=managerService.findEmployeeByVisitorName(visitor.getName());
-        EmployeeInfo employeeInfo=new EmployeeInfo(-1,employee2.getId(),-1,-1,-1,-1,r.getWorkPositionId(),r.getDepartmentId());
+        EmployeeInfo employeeInfo=new EmployeeInfo(employee2.getId(),-1,-1,-1,-1,r.getWorkPositionId(),r.getDepartmentId());
         managerService.addEmployeeInfo(employeeInfo);
         model.addAttribute("changeToEmployeeSeccessfully",44);
         return "manager/managerIndexNav";
@@ -365,6 +359,7 @@ public class ManagerController {
     public String lookDepartmentWorkPosirion(String id,Model model){
         Integer departmentId = Integer.valueOf(id);
         List<WorkPosition> workPositions = managerService.findWorkPositionByDepartmentId(departmentId);
+        model.addAttribute("departmentId",departmentId);
         model.addAttribute("workPositions",workPositions);
         return "manager/workPosition";
     }
@@ -380,14 +375,14 @@ public class ManagerController {
 
     @RequestMapping("deleteWorkPositionForDepartmen")
     @ResponseBody
-    public String deleteWorkPositionForDepartmen(Integer id, Model model){
-        EmployeeInfo employeeInfo=managerService.findEmployeeInfoByworkPositionId(id);
-        if(employeeInfo!=null){
-            model.addAttribute("deleteWorkPositionForDepartmen",11);
-            return "manager/managerIndexNav";
+    public String deleteWorkPositionForDepartmen(Integer id){
+        List<EmployeeInfo> employeeInfos = managerService.findEmployeeInfoByworkPositionId(id);
+        if(employeeInfos!=null||employeeInfos.size()!=0){
+            return "cantbeDelete";
+        }else{
+            managerService.deleteWorkPosition(id);
+            return "ok";
         }
-        managerService.deleteWorkPosition(id);
-        return "ok";
     }
 
 
@@ -398,17 +393,17 @@ public class ManagerController {
         return "redirect:/mmanageDepartment";
     }
 
-    @RequestMapping("deleteDepartmentById")
-    public String deleteDepartmentById(String id,Model model){
+    @RequestMapping("ajaxdeleteDepartmentById")
+    @ResponseBody
+    public String deleteDepartmentById(Integer id){
         Integer departmentId = Integer.valueOf(id);
         EmployeeInfo employeeInfo=managerService.findEmployeeInfoByDepartmentId(departmentId);
         if(employeeInfo!=null){
-            model.addAttribute("deleteDepartmentByIdFalse",333);
-            return "manager/managerIndexNav";
+            return "false";
         }
         managerService.deleteWorkPositionByDepartmentId(departmentId);
         managerService.deleteDepartment(departmentId);
-        return "redirect:/mmanageDepartment";
+        return "seccess";
     }
 
 
@@ -441,7 +436,8 @@ public class ManagerController {
         EmployeeInfo eInfo=managerService.findEmployeeInfoByEmployeeId(employeeId);
         managerService.updateEmployeeInfo(new EmployeeInfo(eInfo.getId(),eInfo.getEmployeeId(),eInfo.getTrainId(),eInfo.getSalaryId(),eInfo.getRewardId(),
                 eInfo.getCheckworkattendId(),departmentId,workPositionId));
-        return "redirect:/mmanageDepartment";
+        model.addAttribute("updateEmployeeAndCommit1",44);
+        return "manager/managerIndexNav";
     }
 
     @RequestMapping("addTrainForDepartment")
@@ -452,6 +448,11 @@ public class ManagerController {
             parse = sdf.parse(trainDate);
         } catch (ParseException e) {
             e.printStackTrace();
+        }
+        Train train=managerService.findTrainByDepartmentName(department);
+        if(train!=null){
+            model.addAttribute("addTrainForDepartmentExist",33);
+            return "manager/managerIndexNav";
         }
         managerService.addTrain(new Train(name, parse, department));
 
@@ -475,12 +476,52 @@ public class ManagerController {
     @RequestMapping("addRewardForEmployee")
     public String addRewardMesseges(String employeeId,String reason,Integer money,Model model){
         Integer employeeId1 = Integer.valueOf(employeeId);
-        Reward reward=new Reward(-1,employeeId1,reason,money,new Date());
+        Reward reward=new Reward(employeeId1,reason,money,new Date());
         managerService.addReward(reward);
         model.addAttribute("addRewardForEmployee",33);
         return "manager/managerIndexNav";
     }
 
+
+     @RequestMapping("mmanageSalary")
+    public String manageSalary(String employeeId, Model model){
+         Integer employeeId1 = Integer.valueOf(employeeId);
+         Calendar c = Calendar.getInstance();
+         int year = c.get(Calendar.YEAR);
+         int month = c.get(Calendar.MONTH)+1;
+         int date = c.get(Calendar.DATE);
+         System.out.println(year+" "+month+" "+date);
+         if(date>10){
+             model.addAttribute("cantbehandelSalary",date);
+             return "manager/managerIndexNav";
+         }
+         String monthLike="";
+         if(month==1){
+             year = c.get(Calendar.YEAR)-1;//当年减去一年
+             monthLike="%"+year+"-12%";//如果是第二年一月份，则发放第一年12月份的的工资
+             month=12;
+         }else{
+             monthLike="%"+year+"-"+(month-1)+"%";
+             month=month-1;
+         }
+         Salary salary=managerService.findSalaryByEIdAndByYearAndByMonth(employeeId1,year,month);
+         if(salary!=null){//已经发放过
+             model.addAttribute("salaryHasHandeled",99);
+             return "manager/managerIndexNav";
+         }
+         List<Reward> rewards = managerService.findRewardByEmployeeIdAndByMonthLike(employeeId1,monthLike);
+         List<CheckWorkAttendance> attendances=managerService.findAllCheckWorkAttendanceByEIdAndByMonth(employeeId1,monthLike);
+         Integer TotalSalary=0;
+         for(Reward r:rewards){
+             TotalSalary+=r.getMoney();
+         }
+         Integer eSalary=attendances.size()*250+TotalSalary;//员工总工资
+         Salary salary1=new Salary(eSalary,employeeId1,month,year,attendances.size());
+         managerService.addSalary(salary1);
+         model.addAttribute("handelSalarySeccess",55);
+        return "manager/managerIndexNav";
+
+    }
 
 
 

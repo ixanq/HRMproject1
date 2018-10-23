@@ -33,6 +33,24 @@
                 $("form").show();
             })
         })
+        $(function(){
+            $(".delete").click(function(){
+                if(confirm("确认删除？")){
+                    var $td=$(this).parent().parent().children();
+                    var id=$td[0].innerHTML;
+                    var $tr=$(this).parent().parent();
+                    var url="${pageContext.request.contextPath}/ajaxdeleteDepartmentById";
+                    var args={"id":id};
+                    $.post(url,args,function(data){
+                        if(data=="seccess"){
+                            $tr.remove();
+                        }else {
+                            alert("该部门下存在员工，无法删除");
+                        }
+                    })
+                }
+            })
+        })
     </script>
 </head>
 <body>
@@ -50,7 +68,7 @@
                 <td>${department.id}</td>
                 <td>${department.name}</td>
                 <td><a href="${pageContext.request.contextPath}/lookDepartmentWorkPosirion?id=${department.id}">查看职位</a></td>
-                <td><a href="${pageContext.request.contextPath}/deleteDepartmentById?id=${department.id}">删除部门</a></td>
+                <td><a class="delete">删除部门</a></td>
 
             </tr>
         </c:forEach>

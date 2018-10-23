@@ -1,6 +1,7 @@
 package com.ixanq.dao;
 
 import com.ixanq.entity.*;
+import org.apache.ibatis.annotations.Param;
 
 import javax.swing.text.View;
 import java.util.List;
@@ -97,7 +98,7 @@ public interface ManagerDao {
 
     void updateGoInterview(GoInterview goInterview1);
 
-    EmployeeInfo findEmployeeInfoByworkPositionId(Integer workPositionId);
+    List<EmployeeInfo> findEmployeeInfoByworkPositionId(Integer workPositionId);
 
     EmployeeInfo findEmployeeInfoByDepartmentId(Integer departmentId);
 
@@ -116,5 +117,22 @@ public interface ManagerDao {
     void deleteWorkPositionByDepartmentId(Integer departmentId);
 
     List<Reward> findRewardByEmployeeId(Integer employeeId1);
+
+    Train findTrainByDepartmentName(String department);
+
+    List<CheckWorkAttendance> findCheckWorkAttendanceLikeDate(String stringMonth1);
+
+    List<CheckWorkAttendance> findAllCheckWorkAttendanceByEIdAndByMonth(@Param("employeeId") Integer employeeId,@Param("monthLike") String monthLike);
+
+    List<Reward> findRewardByEmployeeIdAndByMonthLike(@Param("employeeId") Integer employeeId,@Param("monthLike") String monthLike);
+
+    Salary findSalaryByEIdAndByYearAndByMonth(@Param("employeeId1") Integer employeeId1,@Param("year") int year,@Param("month") int month);
+
+    List<Salary> findSalaryByEmployeeId(@Param("eId") Integer eId,@Param("month") Integer month,@Param("year") Integer year);
+
+
+    List<Reward> findAllRewardByEId(@Param("eId") Integer eId,@Param("month1") Integer month1, @Param("year1") Integer year1);
+
+    List<CheckWorkAttendance> findAllCheckWorkAttendanceByEIdMonthYear(@Param("id") Integer id,@Param("month1") Integer month1,@Param("year1") Integer year1);
 }
 

@@ -51,6 +51,7 @@
             <td>状态</td>
             <td>修改部门职位</td>
             <td>添加奖惩</td>
+            <td>发工资</td>
             <td>开除</td>
         </tr>
         <c:forEach items="${requestScope.employees}" var="employee">
@@ -59,7 +60,8 @@
                 <td>${employee.realName}</td>
                 <td>${employee.status}</td>
                 <td><a href="${pageContext.request.contextPath}/updateEmployeeDepartmentMesseges?id=${employee.id}&&workPositionId=${employee.workPositionId}">修改部门职位</a></td>
-                <td><a class="addReward" href="${pageContext.request.contextPath}/addRewardMesseges?employeeId=${employee.id}">添加奖惩</a></td>
+                <td><a class="addReward">添加奖惩</a></td>
+                <td><a href="${pageContext.request.contextPath}/mmanageSalary?employeeId=${employee.id}">发工资</a></td>
                 <td><a href="${pageContext.request.contextPath}/outOfTheEmployeeFromWork?id=${employee.id}">开除</a></td>
 
             </tr>
@@ -74,7 +76,7 @@
 
         <input class="inputHidden" type="hidden" name="employeeId"><%--☆☆☆☆☆☆☆☆☆☆☆☆--%>
 
-        <table width="50%" border="2px" cellpadding="0" cellspacing="0" style="background-color: #00aFFF" align="center">
+        <table width="90%" border="2px" cellpadding="0" cellspacing="0" style="background-color: #00aFFF" align="center">
             <tr>
                 <td colspan="2" style="font-size:20px;">奖惩</td>
             </tr>

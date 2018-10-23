@@ -20,7 +20,7 @@ public class EmployeeTest {
     @Test
     public void findCheckWorkAttendanceDayLike(){
         //2017-12-12 12:12:12
-        CheckWorkAttendance workAttendance=employeeDao.findCheckWorkAttendanceByEIdAndBeginDayLike(-1,"%-20 %");
+        CheckWorkAttendance workAttendance=employeeDao.findCheckWorkAttendanceByEIdAndBeginStringDateLike(-1,"%-20 %");
         System.out.println(workAttendance);
     }
 }

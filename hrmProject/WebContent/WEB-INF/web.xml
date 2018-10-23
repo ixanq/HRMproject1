@@ -58,4 +58,8 @@
         </filter-mapping>
 
 
+    <session-config>
+        <session-timeout>1440</session-timeout> <!--24小时-->
+    </session-config>
+
 </web-app>

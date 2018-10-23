@@ -100,6 +100,22 @@
         <c:if test="${requestScope.addRewardForEmployee!=null}">
             奖惩信息添加成功<br>
         </c:if>
+        <c:if test="${requestScope.addTrainForDepartmentExist!=null}">
+            该部门存在培训信息，无法再次添加<br>
+        </c:if>
+        <c:if test="${requestScope.updateEmployeeAndCommit1!=null}">
+            职位修改成功<br>
+        </c:if>
+        <c:if test="${requestScope.cantbehandelSalary!=null}">
+            今天是：${cantbehandelSalary} &nbsp;号。不能发放工资，请在每个月的10号之前发放<br>
+        </c:if>
+        <c:if test="${requestScope.salaryHasHandeled!=null}">
+            该员工已经发过工资不能再次发放<br>
+        </c:if>
+        <c:if test="${requestScope.handelSalarySeccess!=null}">
+            发放工资成功<br>
+        </c:if>
+
 
 
     </div>

@@ -46,6 +46,8 @@
                     $.post(url,args,function(data){
                         if(data=="ok"){
                             $tr.remove();
+                        }else{
+                            alert("该职位下存在员工，不能删除");
                         }
                     })
                 }
@@ -61,7 +63,6 @@
 </head>
 <body>
 <%@include file="managerBaseNav.jsp" %>
-aaa:${requestScope.workPositions.get(0).departmentId}
 <div class="head">
     <title class="center">
         <strong>职位信息</strong>
@@ -104,7 +105,7 @@ aaa:${requestScope.workPositions.get(0).departmentId}
                         <tr>
                             <td>名称：</td>
                             <td><input type="text" name="name" ></td>
-                            <td><input type="hidden" name="departmentId" value="${requestScope.workPositions.get(0).departmentId}"></td>
+                            <td><input type="hidden" name="departmentId" value="${requestScope.departmentId}"></td>
                         </tr>
                         <tr>
                             <td colspan="6"><input type="submit" value="确认"></td>
