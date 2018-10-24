@@ -67,6 +67,10 @@ public class EmployeeController {
             model.addAttribute("nameError","nameError");
             return "forward:/employeeLogin.jsp";
         } else if(null!=employee3) {//账号密码正确
+            if(employee3.getStatus().equals("离职")){
+                model.addAttribute("isLeave","isLeave");
+                return "forward:/employeeLogin.jsp";
+            }
             employeeSession.removeAttribute("employee");
             employeeSession.setAttribute("employee",employee2);
             return "employee/employeeIndexNav";
@@ -137,6 +141,8 @@ public class EmployeeController {
             Employee employee = managerService.findEmployeeById(e.getEmployeeId());
             employees.add(employee);
         }
+        System.out.println(employeeInfos);
+        System.out.println(employees);
         model.addAttribute("employees",employees);
         return "employee/UnderWPEmployeeDetails";
     }
@@ -222,18 +228,18 @@ public class EmployeeController {
             model.addAttribute("youHaveAlreadyLeaveWorkAtendance",11);
             return "employee/workAttandance";
         }else if(beginwork!=null){
-            if(hour>18){
+            if(hour>=18){
                 employeeService.updateCheckWorkAttendance(new CheckWorkAttendance(beginwork.getId(),employee.getId(),beginwork.getBeginWork(),date1,beginwork.getIsLate(),"正常"));
                 model.addAttribute("WorkAtendanceLeveIsInTime",11);
                 return "employee/workAttandance";
-            }else if(hour>14&&hour<=18){
+            }else if(hour>=15&&hour<18){
                 managerService.addReward(new Reward(employee.getId(),"早退"+(18-hour)+"小时",-(18-hour)*20,date1));//早退1小时扣20元
                 employeeService.updateCheckWorkAttendance(new CheckWorkAttendance(beginwork.getId(),employee.getId(),beginwork.getBeginWork(),date1,beginwork.getIsLate(),"早退"));
                 model.addAttribute("WorkLeaveAtendanceIsBefore",(18-hour));
                 return "employee/workAttandance";
             }else{
-                managerService.addReward(new Reward(employee.getId(),"早退"+(18-hour)+"小时",-200,date1));//上午签退扣200
-                employeeService.updateCheckWorkAttendance(new CheckWorkAttendance(beginwork.getId(),employee.getId(),date1,date1,beginwork.getIsLate(),"早退"));
+                managerService.addReward(new Reward(employee.getId(),"早退"+(18-hour)+"小时",-200,date1));//在15点之前签退扣200
+                employeeService.updateCheckWorkAttendance(new CheckWorkAttendance(beginwork.getId(),employee.getId(),date1,date1,beginwork.getIsLate(),"旷工"));
                 model.addAttribute("WorkLeaveAtendanceIsSoEarly",11);
                 return "employee/workAttandance";
             }

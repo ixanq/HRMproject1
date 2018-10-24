@@ -38,6 +38,16 @@
             })
         })
 
+        $(function(){
+            $("form").submit(function(){
+                var name=$("#name").val();
+                var reason=$("#reason").val();
+                if(name==""||reason==""){
+                    alert("内容不能为空");
+                    return false;
+                }
+            })
+        })
     </script>
 </head>
 <body>
@@ -82,11 +92,11 @@
             </tr>
             <tr>
                 <td>原因：</td>
-                <td><input type="text" name="reason" ></td>
+                <td><input type="text" id="reason" name="reason" ></td>
             </tr>
             <tr>
                 <td>奖金:</td>
-                <td colspan="2"><input type="number" name="money"></td>
+                <td colspan="2"><input type="number" id="money" name="money"></td>
             </tr>
             <tr>
                 <td colspan="2"><input type="submit" value="确认"></td>

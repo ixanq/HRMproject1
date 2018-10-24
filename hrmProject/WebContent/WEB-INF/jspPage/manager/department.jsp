@@ -26,7 +26,7 @@
             text-align: center;
         }
     </style>
-    <script type="text/javascript" src="${pageContext.request.contextPath}\bootstrap\js\jquery-1.7.2.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/bootstrap/js/jquery-1.7.2.js"></script>
     <script>
         $(function(){
             $(".add").click(function(){
@@ -48,6 +48,16 @@
                             alert("该部门下存在员工，无法删除");
                         }
                     })
+                }
+            })
+        })
+
+        $(function(){
+            $("form").submit(function(){
+                var name=$("#name").val();
+                if(name==""||name==null){
+                    alert("内容不能为空");
+                    return false;
                 }
             })
         })
@@ -81,7 +91,7 @@
         <table width="50%" border="2px" cellpadding="0" cellspacing="0" style="background-color: #00aFFF" align="center">
             <tr>
                 <td>部门名称：</td>
-                <td><input type="text" name="name" ></td>
+                <td><input type="text" id="name" name="name" ></td>
             </tr>
             <tr>
                 <td colspan="2"><input type="submit" value="确认"></td>

@@ -89,7 +89,14 @@ public class ManagerTest {
     @Test
     public void addReward(){
        managerDao.addReward(new Reward(-1,"ÄãºÃ",200,new Date()));
+    }
 
+    @Test
+    public void findEmployeeInfoByworkPositionId(){
+        List<EmployeeInfo> employeeInfos = managerService.findEmployeeInfoByworkPositionId(16);
+        System.out.println(employeeInfos);
+        List<EmployeeInfo> emp = managerService.findEmployeeInfoByworkPositionId(19);
+        System.out.println(emp);
     }
 
 

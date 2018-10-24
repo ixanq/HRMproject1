@@ -30,7 +30,6 @@
     <script>
         $(function(){
             $(".update").click(function(){
-               /* $("#first").hide();*/
                 $("form").show();
             })
         })
@@ -62,6 +61,17 @@
             }
         };
 
+        $(function(){
+            $("form").submit(function(){
+                var departmentId=$("#departmentId").val();
+                var workPositionId=$("#workPositionId").val();
+                if(departmentId==""||departmentId==null||workPositionId==""||workPositionId==null){
+                    alert("部门职位不能为空");
+                    return false;
+                }
+            })
+        })
+
 
     </script>
 </head>
@@ -87,21 +97,17 @@
             <td colspan="4"><a href="javaScript:history.back(-1);">返回</a></td>
         </tr>
     </table>
-   <%-- <%
-        List<Department> departments=(List<Department>)request.getAttribute("allDepartment");
-        departments.get()
-    %>--%>
     <form hidden action="${pageContext.request.contextPath}/updateEmployeeAndCommit" method="post">
-        <table style="width: 65%;" align="center" bgcolor="lime" border="2px" color="lime">
+        <table style="width: 85%;" align="center" bgcolor="lime" border="2px" color="lime">
             <input type="hidden" name="employeeId" value="${requestScope.employee.id}">
-            <td class="ifUpdaate">
-                <select id="departmentId" style="width:70px;" name="departmentId" onchange="firstSel()">
+            <td class="ifUpdaate" width="300px">
+                <select id="departmentId" style="width:130px;" name="departmentId" onchange="firstSel()">
                     <c:forEach items="${requestScope.allDepartment}" var="department">
                         <option value="${department.id}">${department.name}</option>
                     </c:forEach>
 
                 </select>
-                <select id="workPositionId" name="workPositionId">
+                <select id="workPositionId"style="width:160px;" name="workPositionId">
 
                 </select>
             </td>

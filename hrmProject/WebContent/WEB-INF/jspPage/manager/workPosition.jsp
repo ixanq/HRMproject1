@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.ixanq.entity.WorkPosition" %>
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -59,6 +60,16 @@
                 $("form").show();
             })
         })
+
+        $(function(){
+            $("form").submit(function(){
+                var name=$("#name").val();
+                if(name==""||name==null){
+                    alert("内容不能为空");
+                    return false;
+                }
+            })
+        })
     </script>
 </head>
 <body>
@@ -67,11 +78,6 @@
     <title class="center">
         <strong>职位信息</strong>
     </title>
-   <%-- <%
-        List<WorkPosition> workPositions=( List<WorkPosition>)request.getAttribute("workPositions");
-        Integer departmentId=workPositions.get(0).getDepartmentId();
-        pageContext.setAttribute("departmentId",departmentId);
-    %>--%>
     <div class="center">
             <td width="730" height="800" align="center" valign="top" bgcolor="#00FF99">
                 <table width="730" height="400" border="2px" cellpadding="0" cellspacing="0" style="background-color: #00aFFF">
@@ -90,7 +96,7 @@
                     <tr>
                         <td>${workPosition.id}</td>
                         <td>${workPosition.name}</td>
-                        <td>${workPosition.createTime}</td>
+                        <td><f:formatDate value="${workPosition.createTime}"/></td>
                         <td><a class="delete">删除</a></td>
                     </tr>
                     </c:forEach>
@@ -104,7 +110,7 @@
                     <table width="730" border="2px" cellpadding="0" cellspacing="0" style="background-color: #00aFFF">
                         <tr>
                             <td>名称：</td>
-                            <td><input type="text" name="name" ></td>
+                            <td><input type="text" id="name" name="name" ></td>
                             <td><input type="hidden" name="departmentId" value="${requestScope.departmentId}"></td>
                         </tr>
                         <tr>

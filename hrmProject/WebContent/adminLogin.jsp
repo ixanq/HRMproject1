@@ -84,6 +84,7 @@
 </head>
 <body bgcolor="#bdb76b">
 <div class="ahref"><a href="employeeLogin.jsp">员工登录</a></div>
+<div class="ahref"><a href="visitorLogin.jsp">游客登录</a></div>
 <form action="${pageContext.request.contextPath}/managerNav" method="post" >
     <div id="head">管理员登录</div>
     <table bgcolor="gray" border="2px" align="center">

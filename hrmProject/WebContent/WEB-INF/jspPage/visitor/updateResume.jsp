@@ -70,7 +70,7 @@
                 var workBackground=$("#workBackground").val();
                 var hobby=$("#hobby").val();
                 if( resumeId==""||visitorName==""||name==""||age==""||politicalStatus==""||tel==""||email==""||
-                    lastWork==""||salary==""||departmentId==""||workPositionId==""||master==""||workBackground==""||hobby==""){
+                    lastWork==""||salary==""||departmentId==""||departmentId==null||workPositionId==""||workPositionId==null||master==""||workBackground==""||hobby==""){
                     alert("请填写所有内容，不能为空");
                     return false;
                 }

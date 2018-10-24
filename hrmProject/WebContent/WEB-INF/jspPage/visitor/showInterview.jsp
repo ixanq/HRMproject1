@@ -1,5 +1,6 @@
 <%@ page import="com.ixanq.entity.Visitor" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" isELIgnored="false"%>
 <!DOCTYPE html>
@@ -73,7 +74,7 @@
                     <tr>
                         <td>${requestScope.interview.id}</td>
                         <td>${requestScope.interview.visitorName}</td>
-                        <td>${requestScope.interview.viewTime}</td>
+                        <td><f:formatDate value="${requestScope.interview.viewTime}"/></td>
                         <td><a href="${pageContext.request.contextPath}/gotoInterview?id=${requestScope.interview.id}">面试</a></td>
                         <td><a href="#" class="delete">删除</a></td>
                         <td></td>

@@ -61,7 +61,7 @@
     <div class="center">
         <h2></h2>
         <td width="613" height="800" align="center" valign="top" bgcolor="#00FF99">
-            <table width="650" height="429" border="2px" <%--cellpadding="0" cellspacing="0"--%> bgcolor="#00FFFF">
+            <table width="650" height="429" border="2px"  bgcolor="#00FFFF">
                 <tr align="center">
                     <td colspan="6" bgcolor="#00FFFF"><strong>个人简历</strong></td>
 

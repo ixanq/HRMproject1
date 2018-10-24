@@ -95,7 +95,7 @@
                         <td><a class="delete">删除</a></td>
                     </tr>
                 </c:forEach>
-                <c:if test="${empty reconsider}">
+                <c:if test="${empty reconsiders}">
                     <tr>
                         <td colspan="6">暂无信息</td>
                     </tr>

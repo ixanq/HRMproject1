@@ -191,12 +191,14 @@ public class ManagerController {
         ResumeForManager resumeForManager=managerService.findResumeById(newId);
         System.out.println(resumeForManager);
         if(null==resumeForManager){//Ã»ÓÐ¼òÀú
-            System.out.println("2222");
             model.addAttribute("empityResumeMasseges",333);
             return "manager/managerIndexNav";
         }else{
-            System.out.println("3333");
+            Department departmentbyId = managerService.findDepartmentbyId(resumeForManager.getDepartmentId());
+            WorkPosition workPositionById = managerService.findWorkPositionById(resumeForManager.getWorkPositionId());
             model.addAttribute("resumeForManager",resumeForManager);
+            model.addAttribute("departmentbyId",departmentbyId);
+            model.addAttribute("workPositionById",workPositionById);
             return "manager/lookMResume";
         }
 
@@ -331,7 +333,7 @@ public class ManagerController {
         }
         managerService.addEmployee(employee);
         Employee employee2=managerService.findEmployeeByVisitorName(visitor.getName());
-        EmployeeInfo employeeInfo=new EmployeeInfo(employee2.getId(),-1,-1,-1,-1,r.getWorkPositionId(),r.getDepartmentId());
+        EmployeeInfo employeeInfo=new EmployeeInfo(employee2.getId(),-1,-1,-1,-1,r.getDepartmentId(),r.getWorkPositionId());
         managerService.addEmployeeInfo(employeeInfo);
         model.addAttribute("changeToEmployeeSeccessfully",44);
         return "manager/managerIndexNav";
@@ -371,11 +373,11 @@ public class ManagerController {
     @ResponseBody
     public String deleteWorkPositionForDepartmen(Integer id){
         List<EmployeeInfo> employeeInfos = managerService.findEmployeeInfoByworkPositionId(id);
-        if(employeeInfos!=null||employeeInfos.size()!=0){
-            return "cantbeDelete";
-        }else{
+        if(employeeInfos==null||employeeInfos.size()==0){
             managerService.deleteWorkPosition(id);
             return "ok";
+        }else{
+            return "cantbeDelete";
         }
     }
 
@@ -435,20 +437,20 @@ public class ManagerController {
     }
 
     @RequestMapping("addTrainForDepartment")
-    public String addTrainForDepartment(String name,String trainDate,String department,Model model) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:MM:SS");
+    public String addTrainForDepartment(String name,Date trainDate,String department,Model model) {
+       /* SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:MM:SS");
         Date parse = new Date();
         try {
             parse = sdf.parse(trainDate);
         } catch (ParseException e) {
             e.printStackTrace();
-        }
+        }*/
         Train train=managerService.findTrainByDepartmentName(department);
         if(train!=null){
             model.addAttribute("addTrainForDepartmentExist",33);
             return "manager/managerIndexNav";
         }
-        managerService.addTrain(new Train(name, parse, department));
+        managerService.addTrain(new Train(name, trainDate, department));
 
         return "forward:/mmanageTrain";
     }

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page import="com.ixanq.entity.WorkPosition" %>
 <%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -62,7 +63,7 @@
                     <tr>
                         <td>${workPosition.id}</td>
                         <td>${workPosition.name}</td>
-                        <td>${workPosition.createTime}</td>
+                        <td><f:formatDate value="${workPosition.createTime}"/></td>
                         <td><a  href="${pageContext.request.contextPath}/lookEmployeeUnderworkPosition?workPositionId=${workPosition.id}">查看</a></td>
                     </tr>
                 </c:forEach>

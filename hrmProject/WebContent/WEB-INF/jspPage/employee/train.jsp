@@ -1,3 +1,4 @@
+<%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@page import="com.ixanq.entity.Visitor"%>
 <%@ page import="com.ixanq.entity.Employee" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -28,7 +29,7 @@
 <body>
 <%@include file="employeeBaseNav.jsp" %>
     <div id="head">
-        <table width="80%" border="2px" cellpadding="0" cellspacing="0" style="background-color: #00aFFF">
+        <table align="center" width="80%" border="2px" cellpadding="0" cellspacing="0" style="background-color: #00aFFF">
             <tr>
                 <td>ID：</td>
                 <td>培训名称：</td>
@@ -38,7 +39,7 @@
             <tr>
                 <td>${requestScope.train.id}</td>
                 <td>${requestScope.train.name}</td>
-                <td>${requestScope.train.trainTime}</td>
+                <td><f:formatDate value="${requestScope.train.trainTime}"/></td>
                 <td>${requestScope.train.department}</td>
             </tr>
 
@@ -51,4 +52,3 @@
     </div>
 </body>
 </html>
-train

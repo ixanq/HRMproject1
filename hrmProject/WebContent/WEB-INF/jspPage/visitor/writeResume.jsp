@@ -29,6 +29,29 @@
 
     <script>
         $(function() {
+            $("form").submit(function(){
+                var visitorName=$("#visitorName").val();
+                var name=$("#name").val();
+                var age=$("#age").val();
+                var politicalStatus=$("#politicalStatus").val();
+                var tel=$("#tel").val();
+                var email=$("#email").val();
+                var lastWork=$("#lastWork").val();
+                var salary=$("#salary").val();
+                var departmentId=$("#departmentId").val();
+                var workPositionId=$("#workPositionId").val();
+                var master=$("#master").val();
+                var workBackground=$("#workBackground").val();
+                var hobby=$("#hobby").val();
+                if(visitorName==""||name==""||age==""||politicalStatus==""||tel==""||email==""||
+                    lastWork==""||salary==""||departmentId==""||departmentId==null||workPositionId==""||workPositionId==null||master==""||workBackground==""||hobby==""){
+                    alert("请填写所有内容，不能为空");
+                    return false;
+                }
+            })
+        });
+
+        $(function() {
             $("#workPosition").hide(); //初始化的时候第二个下拉列表隐藏
         });
         function firstSel() {//如果第一个下拉列表的值改变则调用此方法
@@ -55,6 +78,8 @@
                 $("#workPosition").hide();
             }
         };
+
+
     </script>
 </head>
 <body>
@@ -66,7 +91,7 @@
             </title>
         <div class="center">
             <form action="${pageContext.request.contextPath}/writeResumeAndCommit" method="post">
-                <input type="hidden" name="visitorName" value="${sessionScope.visitor.name}">
+                <input type="hidden" name="visitorName" id="visitorName" value="${sessionScope.visitor.name}">
                 <td width="730" height="800" align="center" valign="top" bgcolor="#00FF99">
                     <table width="730" height="400" border="2px" cellpadding="0" cellspacing="0" bgcolor="#00FFFF">
                         <tr align="center">
@@ -86,10 +111,10 @@
                         </tr>
                         <tr>
                             <td align="center" bgcolor="#00FFFF">年龄</td>
-                            <td bgcolor="#00FFFF"><input type="number" name="age" placeholder="请输入年龄"></td>
+                            <td bgcolor="#00FFFF"><input type="number" name="age" id="age" placeholder="请输入年龄"></td>
                             <td align="center" bgcolor="#00FFFF">政治面貌</td>
                             <td bgcolor="#00FFFF">
-                                <select name="politicalStatus" style="width: 170px;">
+                                <select name="politicalStatus" id="politicalStatus" style="width: 170px;">
                                     <option value="普通群众">普通群众</option>
                                     <option value="共青团员">共青团员</option>
                                     <option value="党员">党员</option>
@@ -99,16 +124,16 @@
                         </tr>
                         <tr>
                             <td align="center" bgcolor="#00FFFF">联系方式</td>
-                            <td bgcolor="#00FFFF"><input type="tel" name="tel" placeholder="手机号"></td>
+                            <td bgcolor="#00FFFF"><input type="tel" name="tel" id="tel" placeholder="手机号"></td>
                             <td align="center" bgcolor="#00FFFF">Email</td>
-                            <td align="center" bgcolor="#00FFFF"><input type="email" name="email" placeholder="xxxx.@qq.com"></td>
+                            <td align="center" bgcolor="#00FFFF"><input type="email" name="email" id="email" placeholder="xxxx.@qq.com"></td>
                         </tr>
                         <tr>
                             <td align="center" bgcolor="#00FFFF">上份工作</td>
-                            <td bgcolor="#00FFFF"><input type="text" name="lastWork" placeholder="请输入工作名称或无"></td>
+                            <td bgcolor="#00FFFF"><input type="text" name="lastWork"  id="lastWork" placeholder="请输入工作名称或无"></td>
                             <td align="center" bgcolor="#00FFFF">期望薪资</td>
                             <td bgcolor="#00FFFF">
-                                <select name="salary" style="width: 170px;">
+                                <select name="salary" id="salary" style="width: 170px;">
                                     <option value="3000-5000">3000-5000</option>
                                     <option value="5000-6000">5000-6000</option>
                                     <option value="6000-7000">6000-7000</option>
@@ -133,7 +158,7 @@
                             </td>
                             <td align="center" bgcolor="#00FFFF">学历</td>
                             <td bgcolor="#00FFFF">
-                                <select name="master" style="width: 170px;">
+                                <select name="master"  id="master" style="width: 170px;">
                                     <option value="大专">大专</option>
                                     <option value="本科">本科</option>
                                     <option value="硕士">硕士</option>
@@ -145,13 +170,13 @@
                         <tr>
                             <td align="center" bgcolor="#00FFFF">工作经验</td>
                             <td colspan="4" bgcolor="#00FFFF">
-                                <textarea name="workBackground" style="width: 600px;height: 60px" placeholder="请输入1~150个汉字"></textarea>
+                                <input type="text" name="workBackground" id="workBackground" style="width: 600px;height: 60px" placeholder="请输入工作经验"></input>
                             </td>
                         </tr>
                         <tr>
                             <td align="center" bgcolor="#00FFFF">兴趣爱好</td>
                             <td colspan="4" bgcolor="#00FFFF">
-                                <textarea name="hobby" style="width: 600px;height: 30px" placeholder="请输入兴趣爱好"></textarea>
+                                <input type="text" name="hobby" id="hobby" style="width: 600px;height: 30px" placeholder="请输入兴趣爱好"></input>
                             </td>
                         </tr>
 

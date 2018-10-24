@@ -50,7 +50,7 @@
                 <li class="active"><a href="${pageContext.request.contextPath}/eeployeeInfoctrl">个人信息 <span class="sr-only">(current)</span></a></li>
                 <li><a href="${pageContext.request.contextPath}/edeptWorkPosition">部门职位</a></li>
                 <li><a href="${pageContext.request.contextPath}/etrain">培训</a></li>
-                <li><a href="${pageContext.request.contextPath}/eworkAttandance">考勤</a></li>
+                <li><a href="${pageContext.request.contextPath}/eworkAttandance">考勤打卡</a></li>
                 <li><a href="${pageContext.request.contextPath}/personalSalaryMesseges">个人薪资</a></li>
                 <li><a href="${pageContext.request.contextPath}/personalRewardMessegess">奖惩信息</a></li>
                 <li><a href="${pageContext.request.contextPath}/personalCheckWorkAttandanceMessegess">考勤记录</a></li>

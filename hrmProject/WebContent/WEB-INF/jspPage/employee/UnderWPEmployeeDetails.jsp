@@ -49,7 +49,7 @@
         <td width="730" height="800" align="center" valign="top" bgcolor="#00FF99">
             <table width="730" height="400" border="2px" cellpadding="0" cellspacing="0" style="background-color: #00aFFF">
                 <tr align="center">
-                    <td colspan="6" bgcolor="#00FFFF"><strong>职位信息</strong></td>
+                    <td colspan="6" bgcolor="#00FFFF"><strong>员工通讯录</strong></td>
                 </tr>
 
                 <tr>
