@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
- <link rel="stylesheet" href="${pageContext.request.contextPath}/v1.1/css/bootstrap.min.css">
+    <script src="${pageContext.request.contextPath}/bootstrap/js/jquery-1.7.2.js"></script>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/v1.1/css/bootstrap.min.css">
     <script type="text/javascript" src="${pageContext.request.contextPath}/bootstrap/js/jquery-1.11.0.min.js"></script>
     <script src="${pageContext.request.contextPath}/v1.1/js/Blob.js/Blob.js"></script>
     <script src="${pageContext.request.contextPath}/v1.1/js/FileSaver.js/FileSaver.js"></script>
@@ -19,7 +20,6 @@
             background-repeat: repeat-x;
         }
     </style>
-
 
     <script>
         $(function () {

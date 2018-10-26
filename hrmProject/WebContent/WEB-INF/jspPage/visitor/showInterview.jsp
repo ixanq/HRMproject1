@@ -29,22 +29,6 @@
     <script src="${pageContext.request.contextPath}/bootstrap/js/jquery-1.7.2.js"></script>
     <script>
 
-        $(function(){
-            $(".delete").click(function(){
-                if(confirm("确认删除？")){
-                    var $td=$(this).parent().parent().children();
-                    var $tr=$(this).parent().parent();
-                    var id=$td[0].innerHTML;
-                    var url="${pageContext.request.contextPath}/ajaxDeleteInterviewById";
-                    var args={"id":id};
-                    $.post(url,args,function(data){
-                        if(data=="yes"){
-                            $tr.remove();
-                        }
-                    })
-                }
-            })
-        })
     </script>
 </head>
 <body>
@@ -67,8 +51,6 @@
                         <td>名称</td>
                         <td>面试时间</td>
                         <td>面试</td>
-                        <td>删除</td>
-
                     </tr>
 
                     <tr>
@@ -76,13 +58,12 @@
                         <td>${requestScope.interview.visitorName}</td>
                         <td><f:formatDate value="${requestScope.interview.viewTime}"/></td>
                         <td><a href="${pageContext.request.contextPath}/gotoInterview?id=${requestScope.interview.id}">面试</a></td>
-                        <td><a href="#" class="delete">删除</a></td>
                         <td></td>
 
                     </tr>
 
                     <tr>
-                        <td colspan="5" style="text-align: center;"><a href="javaScript:history.back(-1);">返回</a></td>
+                        <td colspan="4" style="text-align: center;"><a href="javaScript:history.back(-1);">返回</a></td>
 
                     </tr>
 

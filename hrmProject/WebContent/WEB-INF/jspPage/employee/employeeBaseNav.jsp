@@ -38,25 +38,26 @@
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
             <span class="icon-bar" style="color:red">当前员工 ：${sessionScope.employee.realName}</span>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav" id="ul1">
-                <li class="active"><a href="${pageContext.request.contextPath}/eeployeeInfoctrl">个人信息 <span class="sr-only">(current)</span></a></li>
+                <li><a href="${pageContext.request.contextPath}/eeployeeInfoctrl">个人信息 </a></li>
                 <li><a href="${pageContext.request.contextPath}/edeptWorkPosition">部门职位</a></li>
                 <li><a href="${pageContext.request.contextPath}/etrain">培训</a></li>
                 <li><a href="${pageContext.request.contextPath}/eworkAttandance">考勤打卡</a></li>
                 <li><a href="${pageContext.request.contextPath}/personalSalaryMesseges">个人薪资</a></li>
                 <li><a href="${pageContext.request.contextPath}/personalRewardMessegess">奖惩信息</a></li>
                 <li><a href="${pageContext.request.contextPath}/personalCheckWorkAttandanceMessegess">考勤记录</a></li>
-
-
             </ul>
+
+            <form action="${pageContext.request.contextPath}/searchMyFriend" class="navbar-form navbar-left" style="width: 250px;">
+                <div class="form-group" style="width: 120px;">
+                    <input type="text" name="employeeName" style="width: 120px;" class="form-control" placeholder="搜索朋友">
+                </div>
+                <button type="submit" style="align-self: center;" class="btn btn-default">查找</button>
+            </form>
+
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="${pageContext.request.contextPath}/haveErrorInThere">复议</a></li>
                 <li class="dropdown">
@@ -64,8 +65,6 @@
                     <ul class="dropdown-menu">
                         <li><a href="${pageContext.request.contextPath}/updateEmployeePassword">修改密码</a></li>
                         <li><a href="${pageContext.request.contextPath}/employeeSignOut">退出</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="#"></a></li>
                     </ul>
                 </li>
             </ul>

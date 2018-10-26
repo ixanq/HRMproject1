@@ -17,13 +17,9 @@
         }
         .head{
             width: 100%;
-            height: 85%;
-            background-image: url("/logo/backgrond.jpg");
-            background-repeat: repeat;
         }
         .center{
             width: 900px;
-            height: 850px;
             margin:0 auto;
             margin-left:300px ;
         }
@@ -67,8 +63,8 @@
                     <td>员工名称</td>
                     <td>上班时间</td>
                     <td>下班时间</td>
-                    <td>迟到</td>
-                    <td>早退</td>
+                    <td>上班</td>
+                    <td>下班</td>
                 </tr>
 
                 <c:forEach items="${requestScope.attendances}" var="attendance">

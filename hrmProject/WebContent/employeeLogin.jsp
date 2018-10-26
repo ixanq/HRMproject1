@@ -11,6 +11,11 @@
 <head>
     <title>员工界面</title>
      <style>
+         body{
+             width: 100%;
+             background-image: url("/logo/backgrond.jpg");
+             background-repeat: repeat;
+         }
        .warning{
             background-color:#222222;
             color: red;
@@ -21,15 +26,20 @@
            font-size: 30px;
        }
        .ahref,#ahref{
+           width: 150px;
            margin: 0px 20px 10px 70%;
            background-position: left;
+           background-color: darkkhaki;
+           font-size: 20px;
        }
+
          .center{
              width: 50%;
              margin:20px auto;
              text-align: center;
-             font-size: 32px;
+             font-size: 30px;
              background-color: #c0a160;
+             color: red;
          }
 
     </style>
@@ -88,16 +98,16 @@
     </script>
     
 </head>
-<body bgcolor="#bdb76b">
+<body>
     <div id="ahref"><a href="adminLogin.jsp">管理员登录</a></div>
     <div class="ahref"><a href="visitorLogin.jsp">游客登录</a></div>
 	  <form action="${pageContext.request.contextPath}/employeeNav" method="post" >
-          <div class center>
+          <div class="center">
               <c:if test="${requestScope.isLeave!=null}">
                   您已经不是该公司员工，无法登陆！<br>
               </c:if>
           </div>
-          <div id="head">员工登录</div>
+          <div style="background-color: #c0a16b" id="head">员工登录</div>
       <table bgcolor="gray" border="2px" align="center">
         <tr>
           <td>用户名：</td>

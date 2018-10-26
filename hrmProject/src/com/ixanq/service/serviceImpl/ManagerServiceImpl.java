@@ -288,10 +288,10 @@ public class ManagerServiceImpl implements ManagerService {
         return managerDao.findEmployeeInfoByworkPositionId(workPositionId);
     }
 
-    @Override
+   /* @Override
     public EmployeeInfo findEmployeeInfoByDepartmentId(Integer departmentId) {
         return managerDao.findEmployeeInfoByDepartmentId(departmentId);
-    }
+    }*/
 
     @Override
     public List<EmployeeInfo> findAllEmployeeInfo() {
@@ -391,5 +391,15 @@ public class ManagerServiceImpl implements ManagerService {
     @Override
     public void deleteReconsiderById(Integer id) {
         managerDao.deleteReconsiderById(id);
+    }
+
+    @Override
+    public List<Employee> findAllEmployeeRealNameLike(String name) {
+        return managerDao.findAllEmployeeRealNameLike(name);
+    }
+
+    @Override
+    public List<EmployeeInfo> findAllEmployeeInfoByDepartmentId(Integer departmentId) {
+        return managerDao.findAllEmployeeInfoByDepartmentId(departmentId);
     }
 }

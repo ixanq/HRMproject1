@@ -90,6 +90,9 @@
     <select id="findAllEmployee" resultType="Employee">
         select * from employee
     </select>
+    <select id="findAllEmployeeRealNameLike" parameterType="String" resultType="Employee">
+        select * from employee WHERE real_name LIKE #{name}
+    </select>
 
 
                                <!-- 薪资的增删改查-->
@@ -279,9 +282,13 @@
     <select id="findEmployeeInfoByworkPositionId" parameterType="Integer" resultType="EmployeeInfo">
         SELECT * FROM  employeeinfo WHERE workposition_id=#{workPositionId}
     </select>
-    <select id="findEmployeeInfoByDepartmentId" parameterType="Integer" resultType="EmployeeInfo">
+   <!-- <select id="findEmployeeInfoByDepartmentId" parameterType="Integer" resultType="EmployeeInfo">
+        SELECT * FROM  employeeinfo WHERE department_id=#{departmentId}
+    </select>-->
+    <select id="findAllEmployeeInfoByDepartmentId" parameterType="Integer" resultType="EmployeeInfo">
         SELECT * FROM  employeeinfo WHERE department_id=#{departmentId}
     </select>
+
     <select id="findEmployeeInfoByEmployeeId" parameterType="Integer" resultType="EmployeeInfo">
         SELECT * FROM  employeeinfo WHERE employee_id=#{employeeId}
     </select>

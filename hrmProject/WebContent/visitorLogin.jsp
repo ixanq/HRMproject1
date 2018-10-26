@@ -11,6 +11,11 @@
 <head>
     <title>登录界面</title>
      <style>
+         body{
+             width: 100%;
+             background-image: url("/logo/backgrond.jpg");
+             background-repeat: repeat;
+         }
        .warning{
             background-color:#222222;
             color: red;
@@ -21,8 +26,11 @@
            font-size: 30px;
        }
        .ahref,#ahref{
+           width: 150px;
            margin: 0px 20px 10px 70%;
            background-position: left;
+           background-color: darkkhaki;
+           font-size: 20px;
        }
 
     </style>
@@ -81,7 +89,7 @@
     </script>
     
 </head>
-<body bgcolor="#bdb76b">
+<body>
       <div id="ahref"><a href="adminLogin.jsp">管理员登录</a></div>
       <div class="ahref"><a href="employeeLogin.jsp">员工登录</a></div>
 
@@ -93,7 +101,7 @@
       </div>
 
 	  <form action="${pageContext.request.contextPath}/visitorNav" method="post" >
-          <div id="head">游客登录</div>
+          <div style="background-color: #c0a16b" id="head">游客登录</div>
       <table bgcolor="gray" border="2px" align="center">
         <tr>
           <td>用户名：</td>

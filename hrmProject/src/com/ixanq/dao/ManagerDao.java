@@ -3,7 +3,6 @@ package com.ixanq.dao;
 import com.ixanq.entity.*;
 import org.apache.ibatis.annotations.Param;
 
-import javax.swing.text.View;
 import java.util.List;
 
 public interface ManagerDao {
@@ -100,7 +99,7 @@ public interface ManagerDao {
 
     List<EmployeeInfo> findEmployeeInfoByworkPositionId(Integer workPositionId);
 
-    EmployeeInfo findEmployeeInfoByDepartmentId(Integer departmentId);
+   /* EmployeeInfo findEmployeeInfoByDepartmentId(Integer departmentId);*/
 
     List<EmployeeInfo> findAllEmployeeInfo();
 
@@ -142,5 +141,9 @@ public interface ManagerDao {
     Reconsider findReconsiderById(Integer id);
 
     void deleteReconsiderById(Integer id);
+
+    List<Employee> findAllEmployeeRealNameLike(String name);
+
+    List<EmployeeInfo> findAllEmployeeInfoByDepartmentId(Integer departmentId);
 }
 

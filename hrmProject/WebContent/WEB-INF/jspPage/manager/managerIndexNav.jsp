@@ -127,6 +127,9 @@
         <c:if test="${requestScope.ajaxDeleteReconsiderByIdEmpty!=null}">
             暂时没有回馈信息<br>
         </c:if>
+        <c:if test="${requestScope.isAlreadyOutOfFromWork!=null}">
+            该员工已经是离职状态，操作失败<br>
+        </c:if>
 
 
 

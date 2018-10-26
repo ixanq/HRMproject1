@@ -11,6 +11,11 @@
     <title>注册界面</title>
 	<base href="${pageContext.request.contextPath}/">
     <style>
+      body{
+        width: 100%;
+        background-image: url("/logo/backgrond.jpg");
+        background-repeat: repeat;
+      }
       .warning{
         color: red;
         display: none;
@@ -25,8 +30,11 @@
       }
 
       #ahref{
-      margin: 0px 20px 10px 70%;
+        width: 150px;
+        margin: 0px 20px 10px 70%;
         background-position: left;
+        background-color: darkkhaki;
+        font-size: 20px;
       }
     </style>
     <script src="${pageContext.request.contextPath}/bootstrap/js/jquery-1.7.2.js"></script>
@@ -83,12 +91,12 @@
         })
     </script>
   </head>
-  <body bgcolor="#bdb76b">
+  <body>
 
   <div id="ahref"><a href="adminLogin.jsp">管理员登录</a></div>
 
     <form action="visitorRegist" method="post" >
-      <div id="div1">欢迎注册！</div>
+      <div style="background-color: #c0a16b" id="div1">欢迎注册！</div>
       <table bgcolor="lime" border="2px" align="center">
         <tr>
           <td>用户名：</td>

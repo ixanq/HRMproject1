@@ -1,4 +1,3 @@
-<%@ page import="com.ixanq.entity.Visitor" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" isELIgnored="false"%>
@@ -72,7 +71,9 @@
                         <td><a href="${pageContext.request.contextPath}/changeToEmployee?name=${requestScope.goInterview.visitorName}&&id=${requestScope.goInterview.id}">录用</a></td>
                         <td><a href="${pageContext.request.contextPath}/refuseToChangeEmployee?id=${requestScope.goInterview.id}">不录用</a></td>
                     </tr>
-
+                    <tr>
+                        <td colspan="2"><a href="javaScript:history.back(-1);">返回</a></td>
+                    </tr>
 
                 </table>
             </td>

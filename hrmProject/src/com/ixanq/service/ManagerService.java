@@ -97,7 +97,7 @@ public interface ManagerService {
 
     List<EmployeeInfo> findEmployeeInfoByworkPositionId(Integer workPositionId);
 
-    EmployeeInfo findEmployeeInfoByDepartmentId(Integer departmentId);
+   /* EmployeeInfo findEmployeeInfoByDepartmentId(Integer departmentId);*/
 
     List<EmployeeInfo> findAllEmployeeInfo();
 
@@ -139,4 +139,8 @@ public interface ManagerService {
     Reconsider findReconsiderById(Integer id);
 
     void deleteReconsiderById(Integer id);
+
+    List<Employee> findAllEmployeeRealNameLike(String name);
+
+    List<EmployeeInfo> findAllEmployeeInfoByDepartmentId(Integer departmentId);
 }

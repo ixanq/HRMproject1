@@ -1,16 +1,24 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Administrator
-  Date: 2018/10/11
-  Time: 7:40
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false"%>
-<html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <head>
     <title>修改密码</title>
     <base href="${pageContext.request.contextPath}/">
     <style>
+        body{
+            width: 100%;
+            height: 85%;
+            background-image: url("/logo/backgrond.jpg");
+            background-repeat: repeat;
+        }
+        .head{
+            width: 60%;
+            margin: 10px auto;
+            background-color: #c0a16b;
+
+
+        }
         .warning{
             color: red;
             display: none;
@@ -31,37 +39,14 @@
     </style>
     <script src="${pageContext.request.contextPath}/bootstrap/js/jquery-1.7.2.js"></script>
     <script>
-
-       /* $(function(){
-            $("input:eq(0)").blur(function(){
-                var name=$("#name").val();
-                var url="${pageContext.request.contextPath}/ajaxCheck";
-                var args={"name":name};
-                $.post(url,args,function(data){
-                    if(data=="no"){
-                        //用户名存在
-                        console.log("用户名已存在");
-                        $("#nameWarning").text("账号已存在").css("display","inline");
-                        $("#nameWarning ").css("color","red");
-                        $(":submit").attr("disabled",true);
-                    }else{
-                        console.log("可以注册");
-                        $("#nameWarning").text("可以注册").css("display","inline");
-                        $("#nameWarning ").css("color","green");
-                        $(":submit").attr("disabled",false);
-                    }
-                })
-            })
-        })*/
-
         $(function(){
             $("form").submit(function(){
-                var name=$("input").eq(0).val();
-                var password1=$("input").eq(1).val();
-                var password2=$("input").eq(2).val();
+                var password=$("#password").val();
+                var password1=$("#password1").val();
+                var password2=$("#password2").val();
 
-                if(name==""){
-                    $("#nameWarning").text("密码不能为空").css("color","red");
+                if(password==""||password==null){
+                    $("#passwordWarning").text("密码不能为空").css("color","red");
                     $(".warning").eq(0).css("display","inline");
                     return false;
                 }else {
@@ -84,33 +69,39 @@
     </script>
 </head>
 <body bgcolor="#bdb76b">
+    <%@include file="employeeBaseNav.jsp" %>
+    ${requestScope.originPasswordError}
+    <div class="head">
+        <form action="${pageContext.request.contextPath}/updatePWDandCommit" method="post" >
+            <div id="div1">修改密码</div>
+            <table bgcolor="lime" border="2px" align="center">
+                <tr>
+                    <td>原始密码：</td>
+                    <td><input id="password" type="password" name="oPassword"></td>
+                    <td>
+                        <span id="passwordWarning" style="display: inline;" class="warning">
+                            <c:if test="${requestScope.originPasswordError!=null}">密码错误</c:if>
+                        </span>
+                     </td>
+                </tr>
 
-<form action="${pageContext.request.contextPath}/updatePWDandCommit" method="post" >
-    <div id="div1">修改密码</div>
-    <table bgcolor="lime" border="2px" align="center">
-        <tr>
-            <td>原始密码：</td>
-            <td><input id="name" type="text" name="oPassword"></td>
-            <td><span id="nameWarning" class="warning">密码不能为空</span></td>
-        </tr>
+                <tr>
+                    <td>新密码：</td>
+                    <td><input id="password1" type="password" name="password"></td>`
+                    <td><span id="password1Warning" class="warning">新密码不能为空</span></td>
+                </tr>
 
-        <tr>
-            <td>新密码：</td>
-            <td><input id="password1" type="password" name="password"></td>`
-            <td><span id="password1Warning" class="warning">密码不能为空</span></td>
-        </tr>
+                <tr>
+                    <td>密码确认：</td>
+                    <td><input id="password2" type="password"></td>
+                    <td><span id="password2Warning" class="warning">密码不一致</span></td>
+                </tr>
 
-        <tr>
-            <td>密码确认：</td>
-            <td><input id="password2" type="password"></td>
-            <td><span id="password2Warning" class="warning">密码不一致</span></td>
-        </tr>
-
-        <tr>
-            <td colspan="2" style="text-align: center"><input id="submit" type="submit" value="保存修改"></td>
-        </tr>
-    </table>
-</form>
-
+                <tr>
+                    <td colspan="2" style="text-align: center"><input id="submit" type="submit" value="保存修改"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
 </body>
 </html>

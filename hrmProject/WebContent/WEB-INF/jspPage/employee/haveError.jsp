@@ -17,13 +17,10 @@
         }
         .head{
             width: 100%;
-            height: 85%;
-            background-image: url("/logo/backgrond.jpg");
-            background-repeat: repeat;
+
         }
         .center{
             width: 900px;
-            height: 850px;
             margin:0 auto;
             margin-left:300px ;
         }
@@ -34,7 +31,15 @@
     </style>
     <script src="${pageContext.request.contextPath}/bootstrap/js/jquery-1.7.2.js"></script>
     <script>
-
+        $(function(){
+            $("form").submit(function(){
+                var content=$("#content").val();
+                if(content==""){
+                    alert("请填写复议内容");
+                    return false;
+                }
+            })
+        })
 
     </script>
 </head>
@@ -54,7 +59,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <textarea style="width: 50%;height: 25%" name="content" placeholder="请输入复议内容"></textarea>
+                            <textarea style="width: 50%;height: 25%" name="content" id="content" placeholder="请输入复议内容"></textarea>
                         </td>
                     </tr>
                 </table>

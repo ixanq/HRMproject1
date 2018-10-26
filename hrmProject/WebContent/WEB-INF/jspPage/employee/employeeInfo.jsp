@@ -27,6 +27,20 @@
         }
     </style>
     <script src="${pageContext.request.contextPath}/bootstrap/js/jquery-1.7.2.js"></script>
+    <script>
+        $(function(){
+            $("form").submit(function(){
+                var realName=$("#realName").val();
+                var age=$("#age").val();
+                var degree=$("#degree").val();
+                var email=$("#email").val();
+                if(realName==""||age==""||age==null||degree==""||email==""){
+                    alert("内容不能为空");
+                    return false;
+                }
+            })
+        })
+    </script>
 </head>
 <body>
 <%@include file="employeeBaseNav.jsp" %>
@@ -39,7 +53,7 @@
             <input type="hidden" name="employeeId" value="${requestScope.employee1.id}">
             <tr>
                 <td>真实姓名：</td>
-                <td><input type="text" name="realName" value="${requestScope.employee1.realName}"></td>
+                <td><input type="text" id="realName" name="realName" value="${requestScope.employee1.realName}"></td>
 
                 <td>性别：</td>
                 <td>
@@ -50,17 +64,17 @@
 
             <tr>
                 <td>年龄：</td>
-                <td><input type="number" name="age" value="${requestScope.employee1.age}"></td>
+                <td><input type="number" name="age" id="age" value="${requestScope.employee1.age}"></td>
 
                 <td>学历：</td>
-                <td><input type="text" name="degree" value="${requestScope.employee1.degree}"></td>
+                <td><input type="text" name="degree" id="degree" value="${requestScope.employee1.degree}"></td>
             </tr>
 
             <tr>
 
 
                 <td>Email：</td>
-                <td><input type="email" name="email" value="${requestScope.employee1.email}"></td>
+                <td><input type="email" name="email" id="email" value="${requestScope.employee1.email}"></td>
             </tr>
 
             <tr>

@@ -45,6 +45,21 @@
                 $("form").show();
             })
         })
+        $(function(){
+            $("form").submit(function(){
+                var viewTime=$("#viewTime").val();
+                viewTime1=new Date(viewTime.replace("-","/").replace("-","/"));
+                var nowTime=new Date();
+                if(viewTime==""||viewTime==null){
+                    alert("面试时间不能为空");
+                    return false;
+                }
+                if(nowTime>=viewTime1){
+                    alert("时间不能比当前时间靠前");
+                    return false;
+                }
+            })
+        })
     </script>
 </head>
 <body>
@@ -136,7 +151,7 @@
                        面试时间
                    </td>
                    <td>
-                       <input type="date" name="viewTime">
+                       <input type="date" id="viewTime" name="viewTime">
                    </td>
                </tr>
 

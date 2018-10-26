@@ -28,34 +28,8 @@
     <script src="${pageContext.request.contextPath}/bootstrap/js/jquery-1.7.2.js"></script>
 
     <script>
-        $(function() {
-            $("form").submit(function(){
-                var visitorName=$("#visitorName").val();
-                var name=$("#name").val();
-                var age=$("#age").val();
-                var politicalStatus=$("#politicalStatus").val();
-                var tel=$("#tel").val();
-                var email=$("#email").val();
-                var lastWork=$("#lastWork").val();
-                var salary=$("#salary").val();
-                var departmentId=$("#departmentId").val();
-                var workPositionId=$("#workPositionId").val();
-                var master=$("#master").val();
-                var workBackground=$("#workBackground").val();
-                var hobby=$("#hobby").val();
-                if(visitorName==""||name==""||age==""||politicalStatus==""||tel==""||email==""||
-                    lastWork==""||salary==""||departmentId==""||departmentId==null||workPositionId==""||workPositionId==null||master==""||workBackground==""||hobby==""){
-                    alert("请填写所有内容，不能为空");
-                    return false;
-                }
-            })
-        });
-
-        $(function() {
-            $("#workPosition").hide(); //初始化的时候第二个下拉列表隐藏
-        });
         function firstSel() {//如果第一个下拉列表的值改变则调用此方法
-            var orderTypeId = $("#department").val();//得到第一个下拉列表的值
+            var orderTypeId = $("#departmentId").val();//得到第一个下拉列表的值
             if(orderTypeId!=null && "" != orderTypeId){
                 //通过ajax传入后台，把orderTypeName数据传到后端
                 $.ajax({
@@ -69,15 +43,33 @@
                         $.each(data,function(i,n){//循环，i为下标从0开始，n为集合中对应的第i个对象
                             option += "<option value='"+n.id+"'>"+n.name+"</option>"
                         });
-                        $("#workPosition").html(option);//将循环拼接的字符串插入第二个下拉列表
-                        $("#workPosition").show();//把第二个下拉列表展示
+                        $("#workPositionId").html(option);//将循环拼接的字符串插入第二个下拉列表
+                        $("#workPositionId").show();//把第二个下拉列表展示
                     }
-
                 })
-            }else {
-                $("#workPosition").hide();
             }
         };
+
+        $(function() {
+            $("form").submit(function(){
+                var name=$("#name").val();
+                var age=$("#age").val();
+                var politicalStatus=$("#politicalStatus").val();
+                var tel=$("#tel").val();
+                var email=$("#email").val();
+                var lastWork=$("#lastWork").val();
+                var salary=$("#salary").val();
+                var departmentId=$("#departmentId").val();
+                var workPositionId=$("#workPositionId").val();
+                var master=$("#master").val();
+                var workBackground=$("#workBackground").val();
+                var hobby=$("#hobby").val();
+                if(name==""||age==""||age==null||politicalStatus==""||tel==""||tel==null||email==""||lastWork==""||salary==""||departmentId==null||workPositionId==null||master==""||workBackground==""||hobby==""){
+                    alert("请填写所有内容，不能为空");
+                    return false;
+                }
+            })
+        });
 
 
     </script>
@@ -100,7 +92,7 @@
                         </tr>
                         <tr>
                             <td width="300" align="center" bgcolor="#00FFFF">姓名</td>
-                            <td width="100" bgcolor="#00FFFF"><input type="text" name="name" placeholder="请输入真实姓名"></td>
+                            <td width="100" bgcolor="#00FFFF"><input type="text" id="name" name="name" placeholder="请输入真实姓名"></td>
                             <td width="97" align="center" bgcolor="#00FFFF">性别</td>
                             <td width="100" bgcolor="#00FFFF">
                                 <input type="radio" name="gender" value="男" checked />男
@@ -138,7 +130,7 @@
                                     <option value="5000-6000">5000-6000</option>
                                     <option value="6000-7000">6000-7000</option>
                                     <option value="7000-9000">7000-9000</option>
-                                    <option value="9000-13000">7000-9000</option>
+                                    <option value="9000-13000">9000-13000</option>
                                 </select>
                             </td>
                         </tr>
@@ -146,14 +138,13 @@
                         <tr>
                             <td align="center" bgcolor="#00FFFF">应聘职位</td>
                             <td  bgcolor="#00FFFF">
-                                <select id="department" style="width:70px;" name="departmentId" onchange="firstSel()">
+                                <select id="departmentId" style="width:70px;" name="departmentId" onchange="firstSel()">
                                     <c:forEach items="${requestScope.allDepartment}" var="department">
                                          <option value="${department.id}">${department.name}</option>
                                     </c:forEach>
 
                                 </select>
-                                <select id="workPosition" name="workPositionId">
-
+                                <select id="workPositionId" name="workPositionId">
                                 </select>
                             </td>
                             <td align="center" bgcolor="#00FFFF">学历</td>

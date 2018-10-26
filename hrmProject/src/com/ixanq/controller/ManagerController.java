@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +18,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -34,6 +32,11 @@ public class ManagerController {
     @Autowired
     private EmployeeService employeeService;
 
+    /**
+     * 主要用来解决jsp获取的Date类型数据出现类型异常的问题
+     * @param binder
+     * @param request
+     */
     @InitBinder
     public void initBinder(WebDataBinder binder, WebRequest request){
         DateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
@@ -393,8 +396,8 @@ public class ManagerController {
     @ResponseBody
     public String deleteDepartmentById(Integer id){
         Integer departmentId = Integer.valueOf(id);
-        EmployeeInfo employeeInfo=managerService.findEmployeeInfoByDepartmentId(departmentId);
-        if(employeeInfo!=null){
+        List<EmployeeInfo> employeeInfos=managerService.findAllEmployeeInfoByDepartmentId(departmentId);
+        if(employeeInfos.size()>0){
             return "false";
         }
         managerService.deleteWorkPositionByDepartmentId(departmentId);
@@ -486,7 +489,6 @@ public class ManagerController {
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH)+1;
         int date = c.get(Calendar.DATE);
-        System.out.println(year+" "+month+" "+date);
         if(date>10){
             model.addAttribute("cantbehandelSalary",date);
             return "manager/managerIndexNav";
@@ -497,7 +499,7 @@ public class ManagerController {
             monthLike="%"+year+"-12%";//如果是第二年一月份，则发放第一年12月份的的工资
             month=12;
         }else{
-            monthLike="%"+year+"-"+(month-1)+"%";
+            monthLike="%"+year+"-"+(month-1)+"%";//%2018-09%
             month=month-1;
         }
         Salary salary=managerService.findSalaryByEIdAndByYearAndByMonth(employeeId1,year,month);
@@ -574,6 +576,10 @@ public class ManagerController {
     @RequestMapping("outOfTheEmployeeFromWork")
     public String outOfTheEmployeeFromWork(Integer employeeId,  Model model){
         Employee e = managerService.findEmployeeById(employeeId);
+        if("离职".equals(e.getStatus())){
+            model.addAttribute("isAlreadyOutOfFromWork",44);
+            return "manager/managerIndexNav";
+        }
         Employee employee1=new Employee(e.getId(),e.getName(),e.getPassword(),e.getRealName(),
                 e.getGender(),e.getAge(),e.getDegree(),e.getEmail(),e.getBeginTime(),"离职",e.getWorkPositionId());
         managerService.updateEmployee(employee1);
@@ -602,5 +608,4 @@ public class ManagerController {
         managerService.deleteReconsiderById(id);
         return "seccess";
     }
-
 }

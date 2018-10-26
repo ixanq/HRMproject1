@@ -40,14 +40,17 @@
 
         $(function(){
             $("form").submit(function(){
-                var name=$("#name").val();
+                var money=$("#money").val();
                 var reason=$("#reason").val();
-                if(name==""||reason==""){
+                if(money==""||money==null||reason==""){
                     alert("内容不能为空");
                     return false;
                 }
             })
         })
+        function areYouSure() {
+            return confirm("确定开除员工吗？")
+        }
     </script>
 </head>
 <body>
@@ -72,7 +75,7 @@
                 <td><a href="${pageContext.request.contextPath}/updateEmployeeDepartmentMesseges?id=${employee.id}&&workPositionId=${employee.workPositionId}">修改部门职位</a></td>
                 <td><a class="addReward">添加奖惩</a></td>
                 <td><a href="${pageContext.request.contextPath}/mmanageSalary?employeeId=${employee.id}">发工资</a></td>
-                <td><a href="${pageContext.request.contextPath}/outOfTheEmployeeFromWork?employeeId=${employee.id}">开除</a></td>
+                <td><a onclick=" return areYouSure();" href="${pageContext.request.contextPath}/outOfTheEmployeeFromWork?employeeId=${employee.id}">开除</a></td>
 
             </tr>
         </c:forEach>

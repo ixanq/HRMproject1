@@ -16,10 +16,7 @@ public interface EmployeeDao {
     public Employee findEmployeeByNameAndPassword(@Param("name")String name,@Param("password") String password);
                         /*¿¼ÇÚÔöÉ¾¸Ä²é*/
     public void addCheckWorkAttendance(CheckWorkAttendance checkWorkAttendance);
-    public void deleteCheckWorkAttendance(Integer byID);
     public void updateCheckWorkAttendance(CheckWorkAttendance checkWorkAttendance);
-    public CheckWorkAttendance findCheckWorkAttendanceByID(Integer byId);
-    public List<CheckWorkAttendance> findAllCheckWorkAttendance();
 
     CheckWorkAttendance findCheckWorkAttendanceByEIdAndBeginStringDateLike(@Param("eId")Integer eId,@Param("likeDay") String likeDay);
 

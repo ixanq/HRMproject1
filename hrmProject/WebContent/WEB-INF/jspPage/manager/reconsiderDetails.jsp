@@ -17,13 +17,9 @@
         }
         .head{
             width: 100%;
-            height: 85%;
-            background-image: url("/logo/backgrond.jpg");
-            background-repeat: repeat;
         }
         .center{
             width: 900px;
-            height: 850px;
             margin:0 auto;
             margin-left:300px ;
         }
@@ -60,6 +56,17 @@
                 }
             })
         })
+
+        $(function(){
+            $("form").submit(function(){
+                var reason=$("#reason").val();
+                var money=$("#money").val();
+                if(reason==""||money==""||money==null){
+                    alert("内容不能为空");
+                    return false;
+                }
+            })
+        })
     </script>
 </head>
 <body>
@@ -70,8 +77,8 @@
     </title>
     <div class="center">
 
-        <td width="730" height="600" align="center" valign="top" bgcolor="#00FF99">
-            <table width="730" height="400" border="2px" cellpadding="0" cellspacing="0" style="background-color: #00aFFF">
+        <td width="730" height="400" align="center" valign="top" bgcolor="#00FF99">
+            <table width="730" height="300" border="2px" cellpadding="0" cellspacing="0" style="background-color: #00aFFF">
                 <tr align="center">
                     <td colspan="6" bgcolor="#00FFFF"><strong>复议</strong></td>
                 </tr>
@@ -88,7 +95,7 @@
                 <c:forEach items="${requestScope.reconsiders}" var="reconsider">
                     <tr>
                         <td>${reconsider.id}</td>
-                        <td>${requestScope.employeeId}</td>
+                        <td>${reconsider.employeeId}</td>
                         <td>${reconsider.content}</td>
                         <td>${reconsider.time}</td>
                         <td><a class="addReward">补发奖惩</a></td>
@@ -106,7 +113,7 @@
             </table>
         </td>
 
-        <br><br><br>
+        <br>
         <form hidden action="${pageContext.request.contextPath}/addRewardForEmployee" method="post" style="width: 60%;">
 
             <input class="inputHidden" type="hidden" name="employeeId"><%--☆☆☆☆☆☆☆☆☆☆☆☆--%>
@@ -117,11 +124,11 @@
                 </tr>
                 <tr>
                     <td>原因：</td>
-                    <td><input type="text" name="reason" ></td>
+                    <td><input type="text" id="reason" name="reason" ></td>
                 </tr>
                 <tr>
                     <td>奖金:</td>
-                    <td colspan="2"><input type="number" name="money"></td>
+                    <td colspan="2"><input type="number" id="money" name="money"></td>
                 </tr>
                 <tr>
                     <td colspan="2"><input type="submit" value="确认"></td>

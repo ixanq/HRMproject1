@@ -17,13 +17,10 @@
         }
         .head{
             width: 100%;
-            height: 85%;
-            background-image: url("/logo/backgrond.jpg");
-            background-repeat: repeat;
+
         }
         .center{
             width: 900px;
-            height: 850px;
             margin:0 auto;
             margin-left:300px ;
         }
